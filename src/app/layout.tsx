@@ -10,6 +10,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Tudor Crișan | Senior Frontend Developer",
   description: "Senior Frontend Developer with 12 years of experience specializing in React, Next.js, and Vue.js.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

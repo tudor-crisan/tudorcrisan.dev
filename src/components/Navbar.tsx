@@ -12,11 +12,11 @@ export default function Navbar() {
       style={{ height: 'var(--header-height)' }}
     >
       <div className="container-custom h-full flex items-center justify-between">
-        <Link href="/" className="font-bold text-xl tracking-tighter">TUDOR</Link>
-        <div className="flex items-center gap-8 text-sm font-medium text-muted">
-          <Link href="#experience" className="hover:text-foreground transition-colors">Experience</Link>
-          <Link href="#skills" className="hover:text-foreground transition-colors">Skills</Link>
-          <Link href="#contact" className="hover:text-foreground transition-colors">Contact</Link>
+        <Link href="/" className="font-bold text-lg tracking-tighter">TUDOR</Link>
+        <div className="flex items-center gap-1 md:gap-2 text-[13px] font-semibold">
+          <Link href="#experience" className="px-3 py-1.5 rounded-full text-muted hover:text-foreground hover:bg-white/5 transition-all">Experience</Link>
+          <Link href="#skills" className="px-3 py-1.5 rounded-full text-muted hover:text-foreground hover:bg-white/5 transition-all">Skills</Link>
+          <Link href="#contact" className="ml-2 px-5 py-1.5 rounded-full bg-foreground text-background font-bold transition-all hover:opacity-90 active:scale-[0.98]">Contact</Link>
         </div>
       </div>
     </motion.nav>

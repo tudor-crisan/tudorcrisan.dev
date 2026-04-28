@@ -9,24 +9,37 @@ export default function Experience() {
       <div className="container-custom">
         <h2 className="text-muted uppercase text-sm font-bold tracking-[0.2em] mb-16">Work History</h2>
         
-        <div className="space-y-0">
+        <div className="flex flex-col gap-16 md:gap-24">
           {personalInfo.experience.map((exp, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative grid md:grid-cols-[1fr_2fr] gap-12 py-24 border-b border-border hover:bg-white/[0.01] transition-colors"
+              transition={{ delay: index * 0.05 }}
+              className="border-b border-border pb-12 md:pb-16 flex flex-col gap-8"
             >
-              <div className="flex flex-col gap-3">
-                <span className="text-[10px] font-black text-muted uppercase tracking-[0.3em]">{exp.period}</span>
-                <h3 className="text-3xl font-black">{exp.company}</h3>
+              <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                <a 
+                  href={exp.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-lg md:text-xl lg:text-2xl font-black tracking-tight hover:text-primary transition-colors cursor-pointer"
+                >
+                  {exp.company}
+                </a>
+                <span className="inline-block text-[10px] font-black text-muted uppercase tracking-[0.2em] bg-white/5 px-4 py-2 rounded-full border border-white/10 whitespace-nowrap">
+                  {exp.period}
+                </span>
               </div>
               
-              <div>
-                <p className="text-3xl font-bold text-foreground mb-6 leading-tight">{exp.role}</p>
-                <p className="text-muted text-xl max-w-xl leading-relaxed">{exp.description}</p>
+              <div className="max-w-3xl flex flex-col gap-4">
+                <p className="text-xl md:text-2xl font-bold text-foreground leading-tight">
+                  {exp.role}
+                </p>
+                <p className="text-muted text-lg md:text-xl leading-[1.6] font-medium italic">
+                  {exp.description}
+                </p>
               </div>
             </motion.div>
           ))}

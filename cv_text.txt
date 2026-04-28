@@ -1,0 +1,106 @@
+TODORESCU-CRIȘAN TUDOR
+Web developer with 12 years of professional experience in web-app development
+
+Professional summary
+Freelance developer with 12 years of professional experience in web application
+development. Currently focused on React, Next.js, and Tailwind, delivering functional
+prototypes quickly. Previous experience in Vue.js and AngularJS projects, developing
+frontend for complex and scalable platforms.
+
+Recent projects from past 3 years
+
+Personal project (100% built by me) – Web application prototype [2025]
+(React / Next.js / Tailwind CSS)
+Demonstration link: https://caen-prototype.vercel.app
+
+Senior Frontend Developer Expertise [2024] (Vue.js) – www.kartra.com
+(According to public data, Kartra serves around 60,000 users)
+
+Project lead and frontend development responsibilities [2022–2023]
+(Vue3 / TailwindCSS) – www.zidy.com
+(According to public data, Zidy serves approximately 2,000 users)
+
+-- 1 of 4 --
+
+Professional experience
+
+Kartra – Remote Full-Time Employee, GDROMANIA SRL (Romania) |
+Senior Frontend Developer
+(Vue3) https://www.kartra.com | Apr 2024 – Feb 2025
+Worked together with the team on the migration the main platform from Vue2/jQuery to Vue3
+Managed frontend state using Vuex, used Docker for setup, and collaborated in a
+cross-functional SCRUM team (~30 engineers)
+Worked closely with UI/UX designers, backend developers, and DevOps engineers
+Developed frontend for a SaaS platform serving over 60,000 users
+
+Zidy – Remote, subcontracted through firm then direct contract | USA |
+Senior Frontend Developer
+(Vue3, TypeScript, Pinia) https://www.zidy.com | Oct 2022 – May 2023
+Built a scalable and well-structured frontend using Vue3, Pinia, Tailwind, and
+TypeScript
+Integrated with C# microservices hosted on Azure
+Developed the frontend for a SaaS CRM product currently used by approximately 2,000
+users
+
+EvobitsIT – Remote Direct Contract, EVOBITS INFORMATION
+TECHNOLOGY SRL (Romania) | Senior Frontend Developer
+(Vue3) https://www.evobitsit.com | Jun 2022 – Sep 2022
+Developed interfaces for an internal SaaS platform managing dedicated hosting services
+Programmed using Vue3 and the Composition API, producing maintainable code
+
+-- 2 of 4 --
+
+Kartra – Remote Full-Time via Direct Contract (PFA) | USA Client |
+Senior Frontend Developer
+(Vue2) https://www.kartra.com | Mar 2020 – May 2022
+Developed funnel, campaign, and survey builders from scratch
+Contributed to UI structure design for the main modules
+Implemented the frontend using Vue2 and Vuex for a SaaS platform
+Participated in the hiring process for frontend developers
+
+Kronsoft Development SRL – Remote and On-Site | Germany | Senior
+Frontend Developer
+(Angular 2+) https://www.kronsoft.ro | Sep 2019 – Nov 2019
+Implemented frontend interfaces for medical document management systems
+Developed reusable Angular 8+ components
+
+ArtSoft Consult SRL – Full-Time On-Site, Cluj-Napoca (Romania) |
+Frontend Developer
+(AngularJS) https://www.artsoft-consult.ro | Feb 2017 – May 2017
+Developed jQuery and AngularJS interfaces for the company’s outsourcing projects
+
+Freelance via Upwork – Remote | UK Clients | Frontend Developer
+(AngularJS)
+https://www.upwork.com | Jan 2016 – Dec 2016
+Contributed to small and medium SaaS applications for clients from Upwork
+Developed various UI/UX interfaces using AngularJS
+
+-- 3 of 4 --
+
+Pet Kennel Management System – Remote via Upwork | USA Client |
+Full-Stack AngularJS Developer
+https://www.pawsdogdaycare.com | Mar 2014 – May 2015
+Developed the frontend in AngularJS and REST API in PHP/MySQL
+Managed sprints through Redmine, hosted on AWS
+Web startup project for managing pet care, grooming, and related activities
+
+Nordlogic Software SRL – Full-Time On-Site, Cluj-Napoca (Romania) |
+Full-Stack Web Developer
+https://www.nordlogic.com | Dec 2012 – May 2014
+Client projects: MiPiXi, Field-Reporting, Wittos
+Tech stack: HTML, CSS, jQuery, PHP, MySQL
+Gained advanced experience developing complex web applications
+
+Internet Objects SRL – Full-Time On-Site, Cluj-Napoca (Romania) | Full-
+Stack Developer
+Aug 2012 – Nov 2012
+Integrated PayPal payments for the “Resto-In” platform
+Developed a custom CMS in PHP/MySQL for a distributed food delivery network
+First professional teamwork experience in project planning and delivery
+
+Education
+High School – Mathematics & Computer Science (HCC College, Alba Iulia) (2004– 2008)
+Bachelor’s Degree in Programming – “1 Decembrie 1918” University, Alba Iulia (2009– 2012)
+
+-- 4 of 4 --
+
