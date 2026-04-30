@@ -15,7 +15,7 @@ Demonstration link: https://vibesniper-crm.vercel.app/pitch
 
 Wholesale Systems Architect & Consultant [2026]
 (React / Next.js / Tailwind CSS / CRM Automation)
-Demonstration link: https://wholesale-systems.online
+Demonstration link: https://www.wholesale-systems.online/
 
 Cold Calling CRM Dashboard [2026]
 (React / Next.js / Tailwind CSS)

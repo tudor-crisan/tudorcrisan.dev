@@ -31,7 +31,7 @@ export const personalInfo = {
       company: "Wholesale Systems Architect",
       role: "Systems Consultant & Developer",
       period: "2026 - Present",
-      url: "https://wholesale-systems.online",
+      url: "https://www.wholesale-systems.online/",
       description: "Builds custom automation and software systems for high-volume wholesalers. Specialized in SMS deliverability, CRM optimization (API integrations for Podio/REsimpli), and AI lead nurturing systems to eliminate manual follow-up chaos.",
     },
     {
