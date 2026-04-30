@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
+import { personalInfo } from "@/lib/data";
 
 export default function Home() {
   return (
@@ -27,10 +28,11 @@ export default function Home() {
           <p className="text-muted-foreground text-sm font-medium">
             © {new Date().getFullYear()} Tudor Crișan. All rights reserved.
           </p>
-          <div className="flex gap-8">
-            <a href="#experience" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Experience</a>
-            <a href="#skills" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Skills</a>
-            <a href="#contact" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+            <a href={`mailto:${personalInfo.email}`} className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Email</a>
+            <a href={personalInfo.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">WhatsApp</a>
+            <a href={personalInfo.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">LinkedIn</a>
+            <a href={personalInfo.socials.github} target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
           </div>
         </div>
       </footer>

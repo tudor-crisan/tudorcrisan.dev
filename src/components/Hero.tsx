@@ -50,10 +50,12 @@ export default function Hero() {
             className="flex flex-wrap items-center gap-6"
           >
             <a
-              href="#contact"
+              href="https://calendly.com/t2060891/30min?month=2026-04"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-white font-bold transition-all hover:shadow-2xl hover:shadow-primary/20 hover:scale-105 active:scale-95"
             >
-              Get in touch
+              Book a meeting
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a
