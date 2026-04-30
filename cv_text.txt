@@ -9,9 +9,29 @@ frontend for complex and scalable platforms.
 
 Recent projects from past 3 years
 
-Personal project (100% built by me) – Web application prototype [2025]
+Personal project – VibeSniper CRM [2026]
+(React / Next.js / Tailwind CSS)
+Demonstration link: https://vibesniper-crm.vercel.app/pitch
+
+Wholesale Systems Architect & Consultant [2026]
+(React / Next.js / Tailwind CSS / CRM Automation)
+Demonstration link: https://wholesale-systems.online
+
+Cold Calling CRM Dashboard [2026]
+(React / Next.js / Tailwind CSS)
+Demonstration link: https://coldcalling-crm.vercel.app
+
+CTO Outreach Intelligence Dashboard [2026]
+(React / Next.js / Tailwind CSS / Data Enrichment)
+Demonstration link: https://crunchbase-outreach.vercel.app
+
+Personal project – CAEN Search Prototype [2025]
 (React / Next.js / Tailwind CSS)
 Demonstration link: https://caen-prototype.vercel.app
+
+ShutterConnect Management System [2025]
+(React / Vite / Tailwind CSS)
+Demonstration link: https://app.megashoot.ro
 
 Senior Frontend Developer Expertise [2024] (Vue.js) – www.kartra.com
 (According to public data, Kartra serves around 60,000 users)
