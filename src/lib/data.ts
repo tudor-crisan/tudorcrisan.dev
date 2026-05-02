@@ -23,14 +23,14 @@ export const personalInfo = {
     {
       company: "VibeSniper CRM",
       role: "Lead Architect & Developer",
-      period: "2026 - Present",
+      period: "2026",
       url: "https://vibesniper-crm.vercel.app/pitch",
       description: "Architected and built a high-value lead intelligence platform designed for high-stakes outreach. Integrated advanced lead scoring and 'Sniper Intelligence' modules to help users target top-tier founders and CEOs. Built with Next.js, Tailwind CSS, and Framer Motion.",
     },
     {
       company: "Wholesale Systems Architect",
       role: "Systems Consultant & Developer",
-      period: "2026 - Present",
+      period: "2026",
       url: "https://www.wholesale-systems.online/",
       description: "Builds custom automation and software systems for high-volume wholesalers. Specialized in SMS deliverability, CRM optimization (API integrations for Podio/REsimpli), and AI lead nurturing systems to eliminate manual follow-up chaos.",
     },
@@ -49,18 +49,18 @@ export const personalInfo = {
       description: "An intelligent outreach platform integrating Crunchbase data to target high-tier decision makers. Features automated lead scoring, personalized message drafting for Founders/CTOs, and a research-centric UI for deep business intelligence.",
     },
     {
-      company: "CAEN Search Prototype",
-      role: "Lead Architect & Developer",
-      period: "2025",
-      url: "https://caen-prototype.vercel.app",
-      description: "Developed an intelligent search and discovery platform for Romanian CAEN codes, designed to simplify business registration and classification processes. Built with Next.js and Tailwind CSS, featuring high-speed filtering and a modern UX for navigating complex economic activity data.",
-    },
-    {
       company: "ShutterConnect",
       role: "Lead Architect & Developer",
       period: "2025",
       url: "https://app.megashoot.ro",
       description: "A comprehensive management system for professional photographers. Streamlines the entire workflow from shoot scheduling and client communication to digital asset delivery, featuring a high-performance React dashboard and automated client portals.",
+    },
+    {
+      company: "CAEN Prototype",
+      role: "Lead Architect & Developer",
+      period: "2025",
+      url: "https://caen-prototype.vercel.app",
+      description: "Developed an intelligent search and discovery platform for Romanian CAEN codes, designed to simplify business registration and classification processes. Built with Next.js and Tailwind CSS, featuring high-speed filtering and a modern UX for navigating complex economic activity data.",
     },
     {
       company: "Kartra.com",
