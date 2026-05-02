@@ -56,7 +56,7 @@ export const personalInfo = {
       description: "A comprehensive management system for professional photographers. Streamlines the entire workflow from shoot scheduling and client communication to digital asset delivery, featuring a high-performance React dashboard and automated client portals.",
     },
     {
-      company: "Fast Contact Companies",
+      company: "Contact Companies",
       role: "Lead Developer",
       period: "2025",
       url: "https://contact-companies.vercel.app",
