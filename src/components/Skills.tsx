@@ -24,7 +24,7 @@ export default function Skills() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {personalInfo.skills.map((skillGroup, index) => (
             <motion.div
               key={skillGroup.category}
@@ -32,9 +32,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`glass p-8 rounded-3xl glass-hover flex flex-col gap-6 ${
-                index === 0 || index === 3 ? "md:col-span-1 lg:col-span-2" : "md:col-span-1"
-              }`}
+              className="glass p-8 rounded-3xl glass-hover flex flex-col gap-6"
             >
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-2xl bg-primary/10 text-primary">
