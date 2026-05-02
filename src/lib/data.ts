@@ -4,7 +4,7 @@ export const personalInfo = {
   title: "Software Developer and Consultant",
   yearsOfExperience: 12,
   location: "Alba Iulia, Romania",
-  bio: "Software developer and consultant with 12 years of professional experience in web application development. Currently focused on React, Next.js, and Tailwind, delivering functional prototypes quickly. Previous experience in Vue.js and AngularJS projects, developing frontend for complex and scalable platforms.",
+  bio: "Software developer and consultant with almost 20 years of professional experience in web application development. Currently focused on React, Next.js, and Tailwind, delivering functional prototypes quickly. Previous experience in Vue.js and AngularJS projects, developing frontend for complex and scalable platforms.",
   email: "tudor.crisan.webdev@gmail.com",
   socials: {
     linkedin: "https://www.linkedin.com/in/tudor-crisan-0b0ab5404/",
@@ -131,6 +131,13 @@ export const personalInfo = {
       period: "Aug 2012 – Nov 2012",
       url: "https://www.resto-in.com",
       description: "Integrated PayPal payments for the “Resto-In” platform. Developed a custom CMS in PHP/MySQL for a distributed food delivery network. First professional teamwork experience in project planning and delivery.",
+    },
+    {
+      company: "High-school & College Projects",
+      role: "Web Developer",
+      period: "Jan 2007 - Jul 2012",
+      url: "https://www.uab.ro",
+      description: "While in high-school for computer science and college I've developed small projects for local companies in Alba Iulia, from drivers school website, bridge CMS and fireworks online shop, plus others that helped me gained 5 years experience in web development",
     },
   ],
   education: {
