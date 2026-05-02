@@ -137,7 +137,7 @@ export const personalInfo = {
       role: "Web Developer",
       period: "Jan 2007 - Jul 2012",
       url: "https://www.uab.ro",
-      description: "While in high-school for computer science and college I've developed small projects for local companies in Alba Iulia, from drivers school website, bridge CMS and fireworks online shop, plus others that helped me gained 5 years experience in web development",
+      description: "Engineered foundational web applications for regional businesses during computer science education. Deployed custom solutions including a driving school portal, a specialized content management system (CMS), and an e-commerce platform. This independent work established an initial 5-year technical foundation in full-stack web development.",
     },
   ],
   education: {
