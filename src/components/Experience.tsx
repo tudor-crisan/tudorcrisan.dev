@@ -13,7 +13,7 @@ export default function Experience() {
             Work <span className="text-primary-gradient">Experience</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl">
-            A journey through 12 years of building scalable web applications and leading frontend teams.
+            A long journey of almost 20 years of building scalable web applications and leading complex projects.
           </p>
         </div>
 

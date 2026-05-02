@@ -20,7 +20,7 @@ export default function Hero() {
           >
             <Zap size={14} className="text-primary" />
             <span className="text-[10px] font-bold uppercase tracking-widest">
-              Proprietary Software Development (since 2007)
+              Proprietary Software Development - EST. 2007
             </span>
           </motion.div>
 

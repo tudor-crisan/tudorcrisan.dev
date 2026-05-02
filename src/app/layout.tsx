@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Tudor Crișan | Proprietary Software Development (since 2007)",
+  title: "Tudor Crișan | Proprietary Software Development - EST. 2007",
   description: "Software Developer and Consultant with 12 years of professional experience in web application development.",
   icons: {
     icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' fill='none'%3E%3Crect width='32' height='32' rx='8' fill='black'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-weight='900' font-size='16' fill='white' text-anchor='middle'%3ETC.%3C/text%3E%3C/svg%3E",
