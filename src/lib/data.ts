@@ -16,8 +16,8 @@ export const personalInfo = {
   skills: [
     { category: "Core", items: ["React", "Next.js", "Vue.js (Vue 2/3)", "TypeScript", "JavaScript (ES6+)"] },
     { category: "Styling", items: ["Tailwind CSS", "SASS/SCSS", "Styled Components", "CSS Modules"] },
-    { category: "State & Logic", items: ["Pinia", "Vuex", "Redux", "React Context API", "TanStack Query"] },
-    { category: "Tools & Backend", items: ["Node.js", "Express", "REST APIs", "Git", "Docker", "Jest/Cypress"] },
+    { category: "State & Logic", items: ["Pinia", "Vuex", "Redux", "React Context API", "Prisma"] },
+    { category: "Tools & Backend", items: ["Node.js", "REST APIs", "Git", "Vercel", "MongoDB", "Resend", "Antigravity IDE"] },
   ],
   experience: [
     {
