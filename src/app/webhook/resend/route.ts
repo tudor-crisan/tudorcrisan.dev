@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // ---------------------------------------------------------------------------
 // Types matching the Resend webhook payload structure
 // https://resend.com/docs/api-reference/webhooks/introduction
@@ -74,6 +72,7 @@ async function verifySignature(
 // POST /webhook/resend
 // ---------------------------------------------------------------------------
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   const signingSecret = process.env.RESEND_WEBHOOK;
 
   if (!signingSecret) {
