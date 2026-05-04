@@ -26,24 +26,24 @@
 }
 
 .v2 {
-  --background: 225 50% 3%;
-  --foreground: 185 100% 98%;
+  --background: 0 0% 100%;
+  --foreground: 225 50% 5%;
   
-  --primary: 185 100% 50%;
-  --primary-foreground: 225 50% 3%;
+  --primary: 185 100% 45%;
+  --primary-foreground: 0 0% 100%;
   
   --secondary: 45 100% 50%;
-  --secondary-foreground: 225 50% 3%;
+  --secondary-foreground: 225 50% 5%;
   
-  --muted: 225 50% 10%;
-  --muted-foreground: 185 40% 70%;
+  --muted: 185 30% 96%;
+  --muted-foreground: 185 40% 30%;
   
-  --accent: 185 100% 50%;
-  --accent-foreground: 225 50% 3%;
+  --accent: 185 100% 45%;
+  --accent-foreground: 0 0% 100%;
   
-  --border: 185 100% 50% / 0.25;
-  --input: 185 100% 50% / 0.15;
-  --ring: 185 100% 50%;
+  --border: 185 100% 50% / 0.1;
+  --input: 185 100% 50% / 0.05;
+  --ring: 185 100% 45%;
 }
 
 .dark {
@@ -67,9 +67,25 @@
   --ring: 224.3 76.3% 48%;
 }
 
-.v2.dark {
-  --background: 225 60% 2%;
-  --border: 185 100% 50% / 0.3;
+.v2:is(.dark *) {
+  --background: 225 50% 3%;
+  --foreground: 185 100% 98%;
+  
+  --primary: 185 100% 50%;
+  --primary-foreground: 225 50% 3%;
+  
+  --secondary: 45 100% 50%;
+  --secondary-foreground: 225 50% 3%;
+  
+  --muted: 225 50% 10%;
+  --muted-foreground: 185 40% 70%;
+  
+  --accent: 185 100% 50%;
+  --accent-foreground: 225 50% 3%;
+  
+  --border: 185 100% 50% / 0.25;
+  --input: 185 100% 50% / 0.15;
+  --ring: 185 100% 50%;
 }
 
 @theme {
@@ -144,6 +160,14 @@
   }
 
   .v2 .bg-mesh {
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(185, 100%, 50%, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(45, 100%, 50%, 0.03) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(185, 100%, 50%, 0.03) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(225, 100%, 50%, 0.03) 0px, transparent 50%);
+  }
+
+  .v2:is(.dark *) .bg-mesh {
     background-image: 
       radial-gradient(at 0% 0%, hsla(185, 100%, 50%, 0.2) 0px, transparent 50%),
       radial-gradient(at 100% 0%, hsla(45, 100%, 50%, 0.15) 0px, transparent 50%),
