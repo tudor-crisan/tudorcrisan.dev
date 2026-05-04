@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant v2 (&:is(.v2 *));
 
 :root {
   --background: 0 0% 100%;
@@ -25,26 +26,7 @@
   --radius: 1rem;
 }
 
-.v2 {
-  --background: 0 0% 100%;
-  --foreground: 225 50% 5%;
-  
-  --primary: 185 100% 45%;
-  --primary-foreground: 0 0% 100%;
-  
-  --secondary: 45 100% 50%;
-  --secondary-foreground: 225 50% 5%;
-  
-  --muted: 185 30% 96%;
-  --muted-foreground: 185 40% 30%;
-  
-  --accent: 185 100% 45%;
-  --accent-foreground: 0 0% 100%;
-  
-  --border: 185 100% 50% / 0.1;
-  --input: 185 100% 50% / 0.05;
-  --ring: 185 100% 45%;
-}
+/* Moved to end of file for priority */
 
 .dark {
   --background: 0 0% 0%;
@@ -67,26 +49,7 @@
   --ring: 224.3 76.3% 48%;
 }
 
-.v2:is(.dark *) {
-  --background: 225 50% 3%;
-  --foreground: 185 100% 98%;
-  
-  --primary: 185 100% 50%;
-  --primary-foreground: 225 50% 3%;
-  
-  --secondary: 45 100% 50%;
-  --secondary-foreground: 225 50% 3%;
-  
-  --muted: 225 50% 10%;
-  --muted-foreground: 185 40% 70%;
-  
-  --accent: 185 100% 50%;
-  --accent-foreground: 225 50% 3%;
-  
-  --border: 185 100% 50% / 0.25;
-  --input: 185 100% 50% / 0.15;
-  --ring: 185 100% 50%;
-}
+/* Moved to end of file for priority */
 
 @theme {
   --color-background: hsl(var(--background));
@@ -139,16 +102,8 @@
     @apply bg-clip-text text-transparent bg-gradient-to-br from-black via-black/90 to-black/50 dark:from-white dark:via-white/90 dark:to-white/50;
   }
 
-  .v2 .text-gradient {
-    @apply from-primary via-primary/90 to-primary/40;
-  }
-
   .text-primary-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500;
-  }
-
-  .v2 .text-primary-gradient {
-    @apply from-primary via-secondary to-primary;
   }
 
   .bg-mesh {
@@ -159,20 +114,8 @@
       radial-gradient(at 0% 100%, hsla(220, 70%, 50%, 0.1) 0px, transparent 50%);
   }
 
-  .v2 .bg-mesh {
-    background-image: 
-      radial-gradient(at 0% 0%, hsla(185, 100%, 50%, 0.05) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, hsla(45, 100%, 50%, 0.03) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, hsla(185, 100%, 50%, 0.03) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsla(225, 100%, 50%, 0.03) 0px, transparent 50%);
-  }
-
-  .v2:is(.dark *) .bg-mesh {
-    background-image: 
-      radial-gradient(at 0% 0%, hsla(185, 100%, 50%, 0.2) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, hsla(45, 100%, 50%, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, hsla(185, 100%, 50%, 0.15) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsla(225, 100%, 50%, 0.15) 0px, transparent 50%);
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 md:px-12 w-full;
   }
 
   .container-custom {
@@ -211,5 +154,74 @@ html {
 
 .v2 ::-webkit-scrollbar-thumb {
   @apply bg-primary/20 hover:bg-primary/40;
+}
+
+/* V2 Design System - Priority Overrides */
+html.v2 {
+  --background: 0 0% 100%;
+  --foreground: 225 50% 5%;
+  --primary: 185 100% 45%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 45 100% 50%;
+  --secondary-foreground: 225 50% 5%;
+  --muted: 185 30% 96%;
+  --muted-foreground: 185 40% 30%;
+  --accent: 185 100% 45%;
+  --accent-foreground: 0 0% 100%;
+  --border: 185 100% 50% / 0.1;
+  --input: 185 100% 50% / 0.05;
+  --ring: 185 100% 45%;
+}
+
+html.v2.dark,
+html.v2[data-theme='dark'] {
+  --background: 225 50% 3%;
+  --foreground: 185 100% 98%;
+  --primary: 185 100% 50%;
+  --primary-foreground: 225 50% 3%;
+  --secondary: 45 100% 50%;
+  --secondary-foreground: 225 50% 3%;
+  --muted: 225 50% 10%;
+  --muted-foreground: 185 40% 70%;
+  --accent: 185 100% 50%;
+  --accent-foreground: 225 50% 3%;
+  --border: 185 100% 50% / 0.25;
+  --input: 185 100% 50% / 0.15;
+  --ring: 185 100% 50%;
+}
+
+.v2 .text-primary-gradient {
+  background-image: linear-gradient(to right, hsl(185 100% 50%), hsl(45 100% 50%), hsl(185 100% 50%)) !important;
+  @apply bg-clip-text text-transparent;
+}
+
+.v2 .text-gradient {
+  background-image: linear-gradient(to bottom right, hsl(185 100% 50%), hsl(185 100% 50% / 0.9), hsl(185 100% 50% / 0.4)) !important;
+  @apply bg-clip-text text-transparent;
+}
+
+.v2 .bg-mesh {
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(185, 100%, 50%, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(45, 100%, 50%, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(185, 100%, 50%, 0.03) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(225, 100%, 50%, 0.03) 0px, transparent 50%) !important;
+}
+
+.v2.dark .bg-mesh,
+.v2[data-theme='dark'] .bg-mesh {
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(185, 100%, 50%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(45, 100%, 50%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(185, 100%, 50%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(225, 100%, 50%, 0.15) 0px, transparent 50%) !important;
+}
+
+.v2 .glass {
+  @apply bg-primary/5 backdrop-blur-2xl border-primary/20 shadow-[0_0_20px_rgba(185,100,50,0.05)];
+}
+
+.v2 .glass-hover {
+  @apply hover:bg-primary/10 hover:border-primary/40 hover:shadow-[0_0_30px_rgba(185,100,50,0.1)];
 }
 
