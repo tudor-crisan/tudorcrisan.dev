@@ -2,9 +2,9 @@ export const personalInfo = {
   name: "Tudor Crișan",
   fullName: "Todorescu-Crișan Tudor",
   title: "Software Developer and Consultant",
-  yearsOfExperience: 12,
+  yearsOfExperience: 20,
   location: "Alba Iulia, Romania",
-  bio: "Software developer and consultant with almost 20 years of professional experience in web application development. Currently focused on React, Next.js, and Tailwind, delivering functional prototypes quickly. Previous experience in Vue.js and AngularJS projects, developing frontend for complex and scalable platforms.",
+  bio: "Software developer and consultant with 20 years of professional experience in web application development. Currently focused on React, Next.js, and Tailwind, delivering functional prototypes quickly. Previous experience in Vue.js and AngularJS projects, developing frontend for complex and scalable platforms.",
   email: "contact@tudorcrisan.dev",
   socials: {
     linkedin: "https://www.linkedin.com/in/tudor-crisan-0b0ab5404/",
