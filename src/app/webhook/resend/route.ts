@@ -72,7 +72,6 @@ async function verifySignature(
 // POST /webhook/resend
 // ---------------------------------------------------------------------------
 export async function POST(req: NextRequest) {
-  console.log(">>> WEBHOOK RECEIVED");
   const resend = new Resend(process.env.RESEND_API_KEY);
   const signingSecret = process.env.RESEND_WEBHOOK;
 
@@ -105,7 +104,6 @@ export async function POST(req: NextRequest) {
   );
 
   if (!valid) {
-    console.error(">>> INVALID SIGNATURE");
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
@@ -116,8 +114,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  // Only forward events that carry email content
-  if (!payload.type.startsWith("email.")) {
+  // Only forward events for incoming emails to avoid loops
+  if (payload.type !== "email.received") {
     return NextResponse.json({ received: true, forwarded: false });
   }
 
@@ -171,6 +169,5 @@ export async function POST(req: NextRequest) {
     text: textBody,
   });
 
-  console.log(">>> WEBHOOK PROCESSED SUCCESSFULLY");
   return NextResponse.json({ received: true, forwarded: true });
 }
