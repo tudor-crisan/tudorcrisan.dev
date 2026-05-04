@@ -69,7 +69,7 @@ async function verifySignature(
 }
 
 // ---------------------------------------------------------------------------
-// POST /webhook/resend
+// POST /webhook/email-received
 // ---------------------------------------------------------------------------
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
