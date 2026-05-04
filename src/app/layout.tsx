@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Tudor Crișan | Proprietary Software Development",
+        alt: "Modern Web Application Development | Tudor Crișan",
       },
     ],
     locale: "en_US",
