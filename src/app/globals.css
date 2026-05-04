@@ -26,24 +26,24 @@
 }
 
 .v2 {
-  --background: 222 47% 4%;
-  --foreground: 180 100% 98%;
+  --background: 225 50% 3%;
+  --foreground: 185 100% 98%;
   
-  --primary: 186 100% 50%;
-  --primary-foreground: 222 47% 4%;
+  --primary: 185 100% 50%;
+  --primary-foreground: 225 50% 3%;
   
-  --secondary: 51 100% 50%;
-  --secondary-foreground: 222 47% 4%;
+  --secondary: 45 100% 50%;
+  --secondary-foreground: 225 50% 3%;
   
-  --muted: 222 47% 12%;
-  --muted-foreground: 186 30% 60%;
+  --muted: 225 50% 10%;
+  --muted-foreground: 185 40% 70%;
   
-  --accent: 186 100% 50%;
-  --accent-foreground: 222 47% 4%;
+  --accent: 185 100% 50%;
+  --accent-foreground: 225 50% 3%;
   
-  --border: 186 100% 50% / 0.15;
-  --input: 186 100% 50% / 0.1;
-  --ring: 186 100% 50%;
+  --border: 185 100% 50% / 0.25;
+  --input: 185 100% 50% / 0.15;
+  --ring: 185 100% 50%;
 }
 
 .dark {
@@ -68,8 +68,8 @@
 }
 
 .v2.dark {
-  --background: 222 47% 2%;
-  --border: 186 100% 50% / 0.2;
+  --background: 225 60% 2%;
+  --border: 185 100% 50% / 0.3;
 }
 
 @theme {
@@ -145,10 +145,10 @@
 
   .v2 .bg-mesh {
     background-image: 
-      radial-gradient(at 0% 0%, hsla(186, 100%, 50%, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, hsla(51, 100%, 50%, 0.1) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, hsla(186, 100%, 50%, 0.1) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsla(222, 100%, 50%, 0.1) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, hsla(185, 100%, 50%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(45, 100%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(185, 100%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(225, 100%, 50%, 0.15) 0px, transparent 50%);
   }
 
   .container-custom {

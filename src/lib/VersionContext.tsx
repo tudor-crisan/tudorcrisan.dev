@@ -12,12 +12,12 @@ interface VersionContextType {
 const VersionContext = createContext<VersionContextType | undefined>(undefined);
 
 export function VersionProvider({ children }: { children: React.ReactNode }) {
-  const [version, setVersion] = useState<Version>("v1");
+  const [version, setVersion] = useState<Version>("v2");
 
   useEffect(() => {
     const saved = localStorage.getItem("site-version") as Version;
-    if (saved === "v2") {
-      setVersion("v2");
+    if (saved) {
+      setVersion(saved);
     }
   }, []);
 
