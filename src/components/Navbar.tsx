@@ -32,8 +32,11 @@ export default function Navbar() {
           ${scrolled ? "glass shadow-2xl shadow-primary/10" : "bg-transparent"}
         `}
       >
-        <a href="#home" className="text-lg font-black tracking-tighter text-gradient">
-          TC.
+        <a href="#home" className="flex items-center gap-2 group">
+          <span className="text-lg font-black tracking-tighter text-gradient">TC.</span>
+          <span className="hidden v2:flex items-center px-1.5 py-0.5 rounded-sm bg-primary/20 text-[8px] font-black uppercase tracking-tighter text-primary border border-primary/20 v2-glow">
+            VIBE
+          </span>
         </a>
 
         {/* Desktop Nav */}

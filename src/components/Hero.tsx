@@ -30,7 +30,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-8"
           >
-            Crafting <span className="text-primary-gradient">Digital</span> <br />
+            Crafting <span className="text-primary-gradient v2:v2-glow">Digital</span> <br />
             Experiences.
           </motion.h1>
 
@@ -53,14 +53,14 @@ export default function Hero() {
               href="https://calendly.com/t2060891/30min?month=2026-04"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-white font-bold transition-all hover:shadow-2xl hover:shadow-primary/20 hover:scale-105 active:scale-95"
+              className="group flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold transition-all hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 active:scale-95 v2:v2-border-glow"
             >
               Book a meeting
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="#experience"
-              className="px-8 py-4 rounded-full glass font-bold transition-all hover:bg-white/10 active:scale-95"
+              className="px-8 py-4 rounded-full glass font-bold transition-all hover:bg-white/10 active:scale-95 v2:border-primary/30"
             >
               View Work
             </a>
@@ -71,6 +71,7 @@ export default function Hero() {
       {/* Decorative Background Elements */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-full max-w-2xl h-full opacity-20 pointer-events-none select-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute top-1/3 left-2/3 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-secondary blur-[100px] rounded-full opacity-50 v2:block hidden" />
       </div>
     </section>
   );

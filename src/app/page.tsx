@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
+import VersionToggle from "@/components/VersionToggle";
 import { personalInfo } from "@/lib/data";
 
 export default function Home() {
@@ -23,11 +24,15 @@ export default function Home() {
         <Contact />
       </div>
       
-      <footer className="py-20 border-t border-white/5">
+      <footer className="py-20 border-t border-white/5 bg-background/50 backdrop-blur-md relative z-10">
         <div className="container-custom flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-muted-foreground text-sm font-medium">
-            © {new Date().getFullYear()} Tudor Crișan. All rights reserved.
-          </p>
+          <div className="flex flex-col gap-4 items-center md:items-start">
+            <p className="text-muted-foreground text-sm font-medium">
+              © {new Date().getFullYear()} Tudor Crișan. All rights reserved.
+            </p>
+            <VersionToggle />
+          </div>
+          
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
             <a href={`mailto:${personalInfo.email}`} className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Email</a>
             <a href={personalInfo.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">WhatsApp</a>
