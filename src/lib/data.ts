@@ -21,6 +21,13 @@ export const personalInfo = {
   ],
   experience: [
     {
+      company: "Muzică fără Bariere",
+      role: "Frontend Developer",
+      period: "2026",
+      url: "https://muzicafarabariere.vercel.app/",
+      description: "Designed and developed a sleek, modern presentation website for a musician's live performance act. Built with Next.js and Tailwind CSS, the platform features a visually engaging UI to showcase the 'Rockanele' concept, event packages, and integrates direct WhatsApp booking.",
+    },
+    {
       company: "VibeSniper CRM",
       role: "Lead Architect & Developer",
       period: "2026",
@@ -47,13 +54,6 @@ export const personalInfo = {
       period: "2026",
       url: "https://crunchbase-outreach.vercel.app",
       description: "An intelligent outreach platform integrating Crunchbase data to target high-tier decision makers. Features automated lead scoring, personalized message drafting for Founders/CTOs, and a research-centric UI for deep business intelligence.",
-    },
-    {
-      company: "Muzică fără Bariere",
-      role: "Frontend Developer",
-      period: "2026",
-      url: "https://muzicafarabariere.vercel.app/",
-      description: "Designed and developed a sleek, modern presentation website for a musician's live performance act. Built with Next.js and Tailwind CSS, the platform features a visually engaging UI to showcase the 'Rockanele' concept, event packages, and integrates direct WhatsApp booking.",
     },
     {
       company: "ShutterConnect",
