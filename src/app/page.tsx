@@ -25,20 +25,15 @@ export default function Home() {
       </div>
       
       <footer className="py-20 border-t border-white/5 bg-background/50 backdrop-blur-md relative z-10">
-        <div className="container-custom flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col gap-4 items-center md:items-start">
+        <div className="container-custom flex flex-col items-center text-center gap-8">
+          <div className="flex flex-col gap-4 items-center">
             <p className="text-muted-foreground text-sm font-medium">
               © {new Date().getFullYear()} Tudor Crișan. All rights reserved.
             </p>
             <VersionToggle />
           </div>
           
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-            <a href={`mailto:${personalInfo.email}`} className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Email</a>
-            <a href={personalInfo.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">WhatsApp</a>
-            <a href={personalInfo.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">LinkedIn</a>
-            <a href={personalInfo.socials.github} target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
-          </div>
+
         </div>
       </footer>
     </main>
