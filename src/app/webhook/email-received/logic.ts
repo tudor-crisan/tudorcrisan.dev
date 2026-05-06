@@ -6,6 +6,7 @@ export interface ResendEmailHeader {
 
 export interface ResendEmailData {
   id?: string;
+  email_id?: string;
   from?: string;
   to?: string[];
   subject?: string;
@@ -73,7 +74,7 @@ export function processWebhook(
 
   const textBody = [
     `Event: ${payloadType}`,
-    `Email ID: ${data.id ?? "—"}`,
+    `Email ID: ${data.id || data.email_id || "—"}`,
     `From: ${fromAddress}`,
     `To: ${(data.to ?? []).join(", ")}`,
     `Subject: ${data.subject ?? "—"}`,

@@ -123,7 +123,7 @@ export async function POST(req: NextRequest) {
   }
 
   const data = payload.data ?? {};
-  const emailId = data.id;
+  const emailId = data.email_id || data.id;
   let emailToProcess = data;
 
   // Resend 'email.received' webhooks only contain metadata. 
