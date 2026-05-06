@@ -130,9 +130,13 @@ export async function POST(req: NextRequest) {
   // We must fetch the full email to get the body, headers, and attachments.
   if (payload.type === "email.received" && emailId) {
     try {
+      // Small delay to ensure Resend has processed the inbound content fully
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       const { data: fullEmail, error: fetchError } = await resend.emails.get(emailId);
       if (!fetchError && fullEmail) {
         emailToProcess = fullEmail;
+        console.log("Successfully fetched full email body for ID:", emailId);
       } else {
         console.error("Resend API error fetching email:", fetchError);
       }
@@ -152,15 +156,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true, forwarded: false, reason: result.reason });
   }
 
+  // Use replyTo (camelCase) as required by the Resend Node.js SDK
   await resend.emails.send({
     from: "noreply@tudorcrisan.dev",
     to: "tudor.crisan.webdev@gmail.com",
-    ...(result.replyTo ? { reply_to: result.replyTo } : {}),
+    ...(result.replyTo ? { replyTo: result.replyTo } : {}),
     subject: result.subject!,
     html: result.htmlBody!,
     text: result.textBody!,
     headers: {
       "X-Resend-Forwarded": "true",
+      "Reply-To": Array.isArray(result.replyTo) ? result.replyTo.join(", ") : (result.replyTo as string),
     },
   });
 

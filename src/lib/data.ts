@@ -12,6 +12,7 @@ export const personalInfo = {
     skool: "https://www.skool.com/@tudor-friend-2124",
     whatsapp: "https://wa.me/40757754718",
     github: "https://github.com/tudor-crisan",
+    email: "mailto:contact@tudorcrisan.dev",
   },
   meetingUrl: "https://calendly.com/t2060891/30min?month=2026-04",
   skills: [
