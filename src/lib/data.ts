@@ -21,27 +21,6 @@ export const personalInfo = {
   ],
   experience: [
     {
-      company: "Muzică fără Bariere",
-      role: "Frontend Developer",
-      period: "2026",
-      url: "https://muzicafarabariere.vercel.app/",
-      description: "Designed and developed a sleek, modern presentation website for a musician's live performance act. Built with Next.js and Tailwind CSS, the platform features a visually engaging UI to showcase the 'Rockanele' concept, event packages, and integrates direct WhatsApp booking.",
-    },
-    {
-      company: "VibeSniper CRM",
-      role: "Lead Architect & Developer",
-      period: "2026",
-      url: "https://vibesniper-crm.vercel.app/pitch",
-      description: "Architected and built a high-value lead intelligence platform designed for high-stakes outreach. Integrated advanced lead scoring and 'Sniper Intelligence' modules to help users target top-tier founders and CEOs. Built with Next.js, Tailwind CSS, and Framer Motion.",
-    },
-    {
-      company: "Wholesale Systems Architect",
-      role: "Systems Consultant & Developer",
-      period: "2026",
-      url: "https://www.wholesale-systems.online/",
-      description: "Builds custom automation and software systems for high-volume wholesalers. Specialized in SMS deliverability, CRM optimization (API integrations for Podio/REsimpli), and AI lead nurturing systems to eliminate manual follow-up chaos.",
-    },
-    {
       company: "Cold Calling CRM",
       role: "Full-Stack Developer",
       period: "2026",
