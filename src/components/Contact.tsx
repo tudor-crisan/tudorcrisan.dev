@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { personalInfo } from "@/lib/data";
-import { Mail, MessageCircle, Globe, ExternalLink, User } from "lucide-react";
+import { Mail, MessageCircle, Globe, ExternalLink, User, ArrowRight } from "lucide-react";
 
 export default function Contact() {
   return (
@@ -28,20 +28,13 @@ export default function Contact() {
             <div className="flex flex-col items-center gap-10">
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                 <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="flex items-center gap-3 px-10 py-5 rounded-full bg-foreground text-background font-black text-lg transition-all hover:scale-105 active:scale-95"
-                >
-                  <Mail size={24} />
-                  Send an Email
-                </a>
-                <a
-                  href={personalInfo.socials.whatsapp}
+                  href={personalInfo.meetingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-10 py-5 rounded-full glass font-black text-lg transition-all hover:scale-105 active:scale-95"
+                  className="group flex items-center gap-3 px-10 py-5 rounded-full bg-primary text-primary-foreground font-black text-lg transition-all hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 active:scale-95 v2:v2-border-glow"
                 >
-                  <MessageCircle size={24} />
-                  WhatsApp
+                  Book a meeting
+                  <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
 

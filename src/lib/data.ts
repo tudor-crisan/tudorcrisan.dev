@@ -13,6 +13,7 @@ export const personalInfo = {
     whatsapp: "https://wa.me/40757754718",
     github: "https://github.com/tudor-crisan",
   },
+  meetingUrl: "https://calendly.com/t2060891/30min?month=2026-04",
   skills: [
     { category: "Core", items: ["React", "Next.js", "Vue.js (Vue 2/3)", "TypeScript", "JavaScript (ES6+)"] },
     { category: "Styling", items: ["Tailwind CSS", "SASS/SCSS", "Styled Components", "CSS Modules"] },
