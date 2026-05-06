@@ -36,13 +36,6 @@ export const personalInfo = {
       description: "An intelligent outreach platform integrating Crunchbase data to target high-tier decision makers. Features automated lead scoring, personalized message drafting for Founders/CTOs, and a research-centric UI for deep business intelligence.",
     },
     {
-      company: "ShutterConnect",
-      role: "Lead Architect & Developer",
-      period: "2025",
-      url: "https://app.megashoot.ro",
-      description: "A comprehensive management system for professional photographers. Streamlines the entire workflow from shoot scheduling and client communication to digital asset delivery, featuring a high-performance React dashboard and automated client portals.",
-    },
-    {
       company: "Contact Companies",
       role: "Lead Developer",
       period: "2025",

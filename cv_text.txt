@@ -21,10 +21,6 @@ Personal project – CAEN Search Prototype [2025]
 (React / Next.js / Tailwind CSS)
 Demonstration link: https://caen-prototype.vercel.app
 
-ShutterConnect Management System [2025]
-(React / Vite / Tailwind CSS)
-Demonstration link: https://app.megashoot.ro
-
 Senior Frontend Developer Expertise [2024] (Vue.js) – www.kartra.com
 (According to public data, Kartra serves around 60,000 users)
 
