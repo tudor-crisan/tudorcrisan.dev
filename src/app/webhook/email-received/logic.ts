@@ -53,13 +53,15 @@ export function processWebhook(
     return { forwarded: false, reason: "Loop prevention: already forwarded" };
   }
 
-  // Determine reply_to
+  // Determine reply_to: prefer the original reply_to, fall back to from
   const replyToValue =
     data.reply_to && data.reply_to.length > 0
       ? data.reply_to.length === 1
         ? data.reply_to[0]
         : data.reply_to
       : fromAddress || undefined;
+
+  console.log(`Processing email from: ${fromAddress}, setting Reply-To:`, replyToValue);
 
   const subject = data.subject
     ? `Fwd: ${data.subject}`

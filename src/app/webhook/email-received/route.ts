@@ -122,9 +122,28 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
+  const data = payload.data ?? {};
+  const emailId = data.id;
+  let emailToProcess = data;
+
+  // Resend 'email.received' webhooks only contain metadata. 
+  // We must fetch the full email to get the body, headers, and attachments.
+  if (payload.type === "email.received" && emailId) {
+    try {
+      const { data: fullEmail, error: fetchError } = await resend.emails.get(emailId);
+      if (!fetchError && fullEmail) {
+        emailToProcess = fullEmail;
+      } else {
+        console.error("Resend API error fetching email:", fetchError);
+      }
+    } catch (err) {
+      console.error("Exception fetching full email:", err);
+    }
+  }
+
   const result = processWebhook(
     payload.type,
-    payload.data ?? {},
+    emailToProcess,
     "tudor.crisan.webdev@gmail.com",
     "noreply@tudorcrisan.dev"
   );
