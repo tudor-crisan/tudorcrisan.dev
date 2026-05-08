@@ -5,14 +5,12 @@ export const personalInfo = {
   yearsOfExperience: 20,
   location: "Alba Iulia, Romania",
   bio: "Software developer and consultant with 20 years of professional experience in web application development. Currently focused on React, Next.js, and Tailwind, delivering functional prototypes quickly. Previous experience in Vue.js and AngularJS projects, developing frontend for complex and scalable platforms.",
-  email: "contact@tudorcrisan.dev",
   socials: {
     linkedin: "https://www.linkedin.com/in/tudor-crisan-0b0ab5404/",
     facebook: "https://www.facebook.com/profile.php?id=61570750953404",
     skool: "https://www.skool.com/@tudor-friend-2124",
     whatsapp: "https://wa.me/40757754718",
     github: "https://github.com/tudor-crisan",
-    email: "mailto:contact@tudorcrisan.dev",
   },
   meetingUrl: "https://calendly.com/t2060891/30min?month=2026-04",
   skills: [
