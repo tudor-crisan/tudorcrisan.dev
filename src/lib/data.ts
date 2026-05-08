@@ -22,34 +22,7 @@ export const personalInfo = {
     { category: "Tools & Backend", items: ["Node.js", "REST APIs", "Git", "Vercel", "MongoDB", "Resend", "Antigravity IDE"] },
   ],
   experience: [
-    {
-      company: "Cold Calling CRM",
-      role: "Full-Stack Developer",
-      period: "2026",
-      url: "https://coldcalling-crm.vercel.app",
-      description: "Developed a specialized bilingual CRM optimized for high-speed cold calling operations. Features real-time lead pipeline management, automated status tracking, and performance analytics built with Next.js and Tailwind CSS.",
-    },
-    {
-      company: "CTO Outreach Dashboard",
-      role: "Lead Developer",
-      period: "2026",
-      url: "https://crunchbase-outreach.vercel.app",
-      description: "An intelligent outreach platform integrating Crunchbase data to target high-tier decision makers. Features automated lead scoring, personalized message drafting for Founders/CTOs, and a research-centric UI for deep business intelligence.",
-    },
-    {
-      company: "Contact Companies",
-      role: "Lead Developer",
-      period: "2025",
-      url: "https://contact-companies.vercel.app",
-      description: "Engineered a localized directory platform mapping regional businesses by CAEN classification to streamline outreach. Implemented a system to facilitate direct communication by generating and submitting personalized messages through integrated website contact forms.",
-    },
-    {
-      company: "CAEN Prototype",
-      role: "Lead Architect & Developer",
-      period: "2025",
-      url: "https://caen-prototype.vercel.app",
-      description: "Developed an intelligent search and discovery platform for Romanian CAEN codes, designed to simplify business registration and classification processes. Built with Next.js and Tailwind CSS, featuring high-speed filtering and a modern UX for navigating complex economic activity data.",
-    },
+
     {
       company: "Kartra.com",
       role: "Senior Frontend Developer (Vue3)",
