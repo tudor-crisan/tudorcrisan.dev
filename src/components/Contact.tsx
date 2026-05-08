@@ -40,9 +40,7 @@ export default function Contact() {
 
             </div>
 
-            <p className="mt-16 text-sm font-bold text-muted-foreground uppercase tracking-widest">
-              Based in {personalInfo.location} • Available Worldwide
-            </p>
+
           </motion.div>
         </div>
       </div>

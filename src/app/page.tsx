@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
-import VersionToggle from "@/components/VersionToggle";
 import { personalInfo } from "@/lib/data";
 
 export default function Home() {
@@ -30,7 +29,6 @@ export default function Home() {
             <p className="text-muted-foreground text-sm font-medium">
               © {new Date().getFullYear()} Tudor Crișan. All rights reserved.
             </p>
-            <VersionToggle />
           </div>
           
 
