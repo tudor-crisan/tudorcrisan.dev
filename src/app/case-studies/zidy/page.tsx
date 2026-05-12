@@ -61,9 +61,19 @@ export default function ZidyCaseStudy() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass mb-8 border-primary/30">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Technical Transformation Case Study</span>
+            <div className="flex flex-wrap items-center gap-4 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border-primary/30">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Technical Transformation Case Study</span>
+              </div>
+              <a 
+                href="/zidy-audio.mp3" 
+                target="_blank" 
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border-secondary/30 hover:bg-secondary/10 transition-colors"
+              >
+                <MessageSquare size={12} className="text-secondary" />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">Listen to Case Study</span>
+              </a>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
               Building the <span className="text-primary-gradient">Engine</span> that scaled <span className="v2-glow">Zidy.</span>
