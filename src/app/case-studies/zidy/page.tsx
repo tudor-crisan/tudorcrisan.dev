@@ -66,17 +66,17 @@ export default function ZidyCaseStudy() {
               <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Technical Transformation Case Study</span>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
-              Scaling <span className="text-primary-gradient">Zidy</span> from Chaos to <span className="v2-glow">$50k MRR.</span>
+              Building the <span className="text-primary-gradient">Engine</span> that scaled <span className="v2-glow">Zidy.</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed mb-12">
-              How I stepped in as a strategic technical operator to rebuild infrastructure, stabilize engineering, and transform a struggling startup into a scalable AI powerhouse.
+              How I started as a Frontend Developer and evolved into a full-time Technical Consultant, building the product and team that enabled Zidy to reach $50k MRR.
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: "Revenue Growth", value: "$50k/mo", icon: TrendingUp },
-                { label: "Role", value: "Strategic Consultant", icon: Users },
-                { label: "Timeline", value: "8 Months", icon: Zap },
+                { label: "Revenue Milestone", value: "$50k/mo", icon: TrendingUp },
+                { label: "Final Role", value: "Technical Consultant", icon: Users },
+                { label: "Value Growth", value: "2x Comp", icon: Zap },
                 { label: "Stack", value: "Vue3 / TS / AWS", icon: Code2 },
               ].map((stat, i) => (
                 <div key={i} className="glass p-6 rounded-2xl border-primary/10">
@@ -181,27 +181,30 @@ export default function ZidyCaseStudy() {
         </div>
       </section>
 
-      {/* My Role - Strategic Operator */}
+      {/* My Role - Technical Consultant */}
       <section className="py-24 overflow-hidden">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row gap-16 items-center">
             <motion.div {...fadeIn} className="flex-1">
-              <h2 className="text-3xl font-black tracking-tighter uppercase mb-6 text-primary">My Mandate</h2>
+              <h2 className="text-3xl font-black tracking-tighter uppercase mb-6 text-primary">The Progression</h2>
               <h3 className="text-4xl md:text-5xl font-black tracking-tighter mb-8 leading-tight">
-                Beyond Coding: <br />
-                <span className="text-gradient">Strategic Technical Operation.</span>
+                From Developer to <br />
+                <span className="text-gradient">Technical Consultant.</span>
               </h3>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                My role quickly expanded from Senior Developer to Strategic Consultant. I wasn't just shipping features; I was re-engineering the company's technical soul.
+                I started at Zidy as a Frontend Developer at $5,000/month. As I began rebuilding the product architecture and solving core technical bottlenecks, my role quickly expanded. 
+              </p>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Within months, I transitioned to a full-time Technical Consultant at $10,000/month, taking responsibility for building the technical team and defining the product roadmap.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  "Architected Frontend Scalability",
-                  "Optimized Backend Workflows",
-                  "Recruited Executive Leadership",
-                  "Established CI/CD Protocols",
-                  "Advisory on Product Roadmap",
-                  "Growth & Execution Consulting"
+                  "Architected Core Product",
+                  "Built Technical Team",
+                  "Full-Stack Leadership",
+                  "Product Strategy & Execution",
+                  "Scaling Technical Processes",
+                  "Technical Hiring & Onboarding"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-sm font-bold">
                     <Zap size={14} className="text-primary" />
@@ -249,14 +252,14 @@ export default function ZidyCaseStudy() {
             </motion.div>
             <motion.div {...fadeIn} transition={{ delay: 0.2 }} className="glass p-10 rounded-[3rem] border-secondary/10">
               <h3 className="text-2xl font-black tracking-tight mb-6 flex items-center gap-3">
-                <Users className="text-secondary" /> Leadership & Hiring
+                <Users className="text-secondary" /> Building the Team
               </h3>
               <div className="space-y-6 text-muted-foreground">
                 <p>
-                  Recognizing that long-term stability required executive-level engineering focus, I leveraged my network to **recruit and onboard two successive CTOs**.
+                  As the product matured, I took charge of **recruiting and onboarding the technical team**. I brought in the talent necessary to maintain and expand the platform.
                 </p>
                 <p>
-                  I transitioned from a solo operator to a **strategic technical consultant**, bridging the gap between the founders' vision and the engineering team's execution capabilities.
+                  While the CEO focused on scaling revenue through marketing and ads, I ensured the **product engine was powerful enough to handle the growth** and deliver on the promise to 2,000+ businesses.
                 </p>
               </div>
             </motion.div>
@@ -326,11 +329,11 @@ export default function ZidyCaseStudy() {
               </thead>
               <tbody className="text-lg">
                 {[
-                  { area: "Architecture", before: "Fragile Monolith", after: "Scalable Vue3 Micro-services" },
-                  { area: "Team Stability", before: "Lack of Leadership", after: "Established CTO Leadership" },
-                  { area: "MRR", before: "Stagnant / Low", after: "$50,000+" },
-                  { area: "Client Capacity", before: "Manual Onboarding", after: "Automated AI-Driven Growth" },
-                  { area: "Code Quality", before: "High Technical Debt", after: "Standardized CI/CD & Testing" }
+                  { area: "Architecture", before: "Fragile Prototypes", after: "Scalable Vue3 Production Engine" },
+                  { area: "Team", before: "Solo / Weak Devs", after: "Vetted Technical Team" },
+                  { area: "User Capacity", before: "Manual Handling", after: "2,000+ Active Businesses" },
+                  { area: "Personal Role", before: "Frontend Developer", after: "Technical Consultant" },
+                  { area: "Compensation", before: "$5,000 / mo", after: "$10,000 / mo" }
                 ].map((row, i) => (
                   <tr key={i} className="hover:bg-white/5 transition-colors">
                     <td className="p-8 font-bold border-b border-white/5">{row.area}</td>
@@ -355,12 +358,12 @@ export default function ZidyCaseStudy() {
           >
             <MessageSquare size={60} className="text-primary mx-auto mb-10 opacity-50" />
             <blockquote className="text-3xl md:text-4xl font-medium italic tracking-tight leading-snug mb-10">
-              "Technical leadership is not about how many lines of code you write; it's about building the infrastructure that allows a business to survive its own growth."
+              "Building a scalable SaaS isn't just about the code; it's about building a product engine that handles growth as fast as the CEO can sell it."
             </blockquote>
             <div className="flex flex-col items-center">
               <div className="w-16 h-1 w-12 bg-primary mb-4" />
               <div className="text-xl font-black tracking-tighter">Tudor Crișan</div>
-              <div className="text-sm uppercase tracking-widest text-muted-foreground font-bold">Strategic Technical Operator</div>
+              <div className="text-sm uppercase tracking-widest text-muted-foreground font-bold">Technical Consultant & Product Builder</div>
             </div>
           </motion.div>
         </div>
@@ -371,11 +374,11 @@ export default function ZidyCaseStudy() {
         <div className="container-custom text-center">
           <motion.div {...fadeIn}>
             <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-10">
-              Need a technical <br />
-              <span className="text-primary-gradient">transformation?</span>
+              Need technical <br />
+              <span className="text-primary-gradient">execution?</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-16">
-              I help founders stabilize their infrastructure, build high-performing engineering teams, and execute technical roadmaps that scale.
+              I help founders build the product engine and technical team required to scale. Let's discuss your roadmap and how to turn your vision into a high-performance SaaS.
             </p>
             
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">

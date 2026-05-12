@@ -24,10 +24,10 @@ export const personalInfo = {
     },
     {
       company: "Zidy.com",
-      role: "Strategic Technical Consultant & Lead Developer",
+      role: "Technical Consultant & Lead Developer",
       period: "Oct 2022 – May 2023",
       url: "https://www.zidy.com",
-      description: "Stepped in as a strategic operator to stabilize a struggling technical foundation. Rebuilt the frontend architecture (Vue 3, TS), optimized backend infrastructure for scalability, and recruited executive engineering leadership (CTOs). Transformed the product into a high-performance SaaS that reached $50k MRR and serves 2,000+ local businesses.",
+      description: "Started as a Frontend Developer and transitioned to a full-time Technical Consultant as the role expanded to technical leadership and product strategy. Built the core product and brought in the technical team, establishing the foundation that allowed the CEO to scale the business to $50k MRR. Focused on technical excellence and product-led growth.",
     },
     {
       company: "EvobitsIT",
