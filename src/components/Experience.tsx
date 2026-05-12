@@ -69,7 +69,7 @@ export default function Experience() {
                       </a>
                       {exp.company === "Zidy.com" && (
                         <a 
-                          href="/case-studies/zidy"
+                          href="https://www.zidy.fun"
                           className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-secondary hover:opacity-70 transition-all group"
                         >
                           View Case Study

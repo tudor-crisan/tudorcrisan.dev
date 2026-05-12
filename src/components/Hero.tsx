@@ -50,7 +50,7 @@ export default function Hero() {
             className="flex flex-wrap items-center gap-6"
           >
             <a
-              href="/case-studies/zidy"
+              href="https://www.zidy.fun"
               className="group flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold transition-all hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 active:scale-95 v2:v2-border-glow"
             >
               View Case Study
