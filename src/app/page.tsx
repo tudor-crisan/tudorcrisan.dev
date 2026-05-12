@@ -23,17 +23,7 @@ export default function Home() {
         <Contact />
       </div>
       
-      <footer className="py-20 border-t border-white/5 bg-background/50 backdrop-blur-md relative z-10">
-        <div className="container-custom flex flex-col items-center text-center gap-8">
-          <div className="flex flex-col gap-4 items-center">
-            <p className="text-muted-foreground text-sm font-medium">
-              © {new Date().getFullYear()} Tudor Crișan. All rights reserved.
-            </p>
-          </div>
-          
 
-        </div>
-      </footer>
     </main>
   );
 }

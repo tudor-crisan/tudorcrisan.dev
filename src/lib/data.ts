@@ -24,10 +24,10 @@ export const personalInfo = {
     },
     {
       company: "Zidy.com",
-      role: "Senior Frontend Developer (Vue3, TypeScript, Pinia)",
+      role: "Strategic Technical Consultant & Lead Developer",
       period: "Oct 2022 – May 2023",
       url: "https://www.zidy.com",
-      description: "Built the frontend for an AI-powered business growth platform that automates lead conversion and review gathering via SMS and Voice 24/7. Developed a scalable dashboard used by over 2,000 businesses to track performance and manage customer conversations in real-time.",
+      description: "Stepped in as a strategic operator to stabilize a struggling technical foundation. Rebuilt the frontend architecture (Vue 3, TS), optimized backend infrastructure for scalability, and recruited executive engineering leadership (CTOs). Transformed the product into a high-performance SaaS that reached $50k MRR and serves 2,000+ local businesses.",
     },
     {
       company: "EvobitsIT",

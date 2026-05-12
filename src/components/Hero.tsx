@@ -50,12 +50,10 @@ export default function Hero() {
             className="flex flex-wrap items-center gap-6"
           >
             <a
-              href={personalInfo.meetingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/case-studies/zidy"
               className="group flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold transition-all hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 active:scale-95 v2:v2-border-glow"
             >
-              Book a meeting
+              View Case Study
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a

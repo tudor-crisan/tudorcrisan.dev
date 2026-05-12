@@ -28,12 +28,10 @@ export default function Contact() {
             <div className="flex flex-col items-center gap-10">
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                 <a
-                  href={personalInfo.meetingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/case-studies/zidy"
                   className="group flex items-center gap-3 px-10 py-5 rounded-full bg-primary text-primary-foreground font-black text-lg transition-all hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 active:scale-95 v2:v2-border-glow"
                 >
-                  Book a meeting
+                  View Case Study
                   <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
