@@ -4,7 +4,7 @@ export const personalInfo = {
   title: "Software Developer and Consultant",
   yearsOfExperience: 20,
   location: "Alba Iulia, Romania",
-  bio: "Software developer and consultant with 20 years of professional experience in web application development. Currently focused on React, Next.js, and Tailwind, delivering functional prototypes quickly. Previous experience in Vue.js and AngularJS projects, developing frontend for complex and scalable platforms.",
+  bio: "Software developer and consultant with 20 years of professional experience in web application development.",
   socials: {},
   meetingUrl: "https://calendly.com/t2060891/30min?month=2026-04",
   skills: [
