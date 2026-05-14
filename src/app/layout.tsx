@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   },
 };
 
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -49,9 +52,15 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} v2 scroll-smooth`} suppressHydrationWarning>
       <body className="bg-background text-foreground antialiased selection:bg-accent/30">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          {/* Global Background Elements */}
           <div className="fixed inset-0 -z-10 bg-grid opacity-40 dark:opacity-20" />
-          <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]" />
+          <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.05),transparent_50%)]" />
+          <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.05),transparent_50%)]" />
+          
+          <Navbar />
           {children}
+          <Footer />
+          
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>
