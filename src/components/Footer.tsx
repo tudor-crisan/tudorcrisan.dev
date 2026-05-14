@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="py-12 border-t border-border/40">
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
           <div className="flex flex-col items-center md:items-start gap-2">
             <Link href="/" className="flex items-center gap-2 group">
               <span className="text-lg font-black tracking-tighter text-gradient">TC.</span>
@@ -32,13 +32,16 @@ export default function Footer() {
             <Link href="/#contact" className="hover:text-foreground transition-colors">
               Contact
             </Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">
-              Terms
-            </Link>
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
-              Privacy
-            </Link>
           </div>
+        </div>
+
+        <div className="flex justify-center md:justify-start gap-6 pt-8 border-t border-border/10 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/50">
+          <Link href="/terms" className="hover:text-primary transition-colors">
+            Terms
+          </Link>
+          <Link href="/privacy" className="hover:text-primary transition-colors">
+            Privacy
+          </Link>
         </div>
       </div>
     </footer>
