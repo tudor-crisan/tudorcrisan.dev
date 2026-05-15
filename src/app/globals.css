@@ -129,6 +129,24 @@
   .v2-border-glow {
     box-shadow: 0 0 15px hsl(var(--primary) / 0.1), inset 0 0 15px hsl(var(--primary) / 0.05);
   }
+
+  .cta-glow-button {
+    @apply relative overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95;
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.2), inset 0 0 20px hsl(var(--primary) / 0.05);
+  }
+
+  .cta-glow-button:hover {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.5), inset 0 0 30px hsl(var(--primary) / 0.15);
+  }
+
+  .cta-glow-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full transition-transform duration-1000;
+  }
+
+  .cta-glow-button:hover::before {
+    @apply translate-x-full;
+  }
 }
 
 html {
