@@ -33,7 +33,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-foreground mb-4">3. Professional Services</h2>
               <p>
-                Any engagement for software development or consulting services will be governed by a separate, specific agreement 
+                Any engagement for professional consulting or transformation advisory services will be governed by a separate, specific agreement 
                 outlining scope, timelines, and compensation. The information on this website is for informational purposes only 
                 and does not constitute a binding contract for services.
               </p>

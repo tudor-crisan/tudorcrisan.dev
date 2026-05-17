@@ -1,10 +1,10 @@
 export const personalInfo = {
   name: "Tudor Crișan",
   fullName: "Todorescu-Crișan Tudor",
-  title: "Software Developer and Consultant",
+  title: "Transformation Consultant & Strategy Advisor",
   yearsOfExperience: 20,
   location: "Alba Iulia, Romania",
-  bio: "Software developer and consultant with 20 years of professional experience in web application development.",
+  bio: "High-impact consultant solving painful, urgent, and expensive business bottlenecks. I bridge the gap between your current situation and desired outcome—rapidly, seamlessly, and safely.",
   socials: {},
   meetingUrl: "https://calendly.com/t2060891/30min?month=2026-04",
   skills: [

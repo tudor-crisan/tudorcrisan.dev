@@ -22,7 +22,7 @@ export default function Hero() {
             >
               <Zap size={14} className="text-primary" />
               <span className="text-[10px] font-bold uppercase tracking-widest">
-                Proprietary Software Development
+                Transformation Advisory &amp; Consulting
               </span>
             </motion.div>
 
@@ -54,10 +54,10 @@ export default function Hero() {
               className="flex flex-wrap items-center gap-6"
             >
               <a
-                href="https://www.zidy.fun"
+                href="#problems"
                 className="group flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold cta-glow-button"
               >
-                View Case Study
+                View Transformations
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a
@@ -66,7 +66,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="px-8 py-4 rounded-full glass font-bold transition-all hover:bg-white/10 active:scale-95 v2:border-primary/30 cta-glow-button"
               >
-                Book a Call
+                Book a Consultation
               </a>
             </motion.div>
           </div>

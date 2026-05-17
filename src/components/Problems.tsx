@@ -8,7 +8,7 @@ export default function Problems() {
   const cases = [
     {
       company: "Zidy.com",
-      role: "Technical Consultant & Lead Developer",
+      role: "Strategy & Transformation Advisor",
       metric: "Scaled to $50k MRR",
       link: "https://www.zidy.fun",
       linkLabel: "View Case Study",
@@ -17,23 +17,23 @@ export default function Problems() {
         {
           label: "WHAT",
           icon: <Target size={18} className="text-primary" />,
-          text: "Built the core CRM, review generation, and communications SaaS platform from an early MVP prototype into a production-grade, highly responsive web application."
+          text: "Stepped in as the lead transformation consultant to bridge the massive gap between a stagnant MVP prototype (Current Situation) and a highly stable, enterprise-grade commercial platform (Desired Situation)."
         },
         {
           label: "WHY",
           icon: <CheckCircle2 size={18} className="text-secondary" />,
-          text: "The startup required a highly stable, secure, and structurally scalable architecture to establish market trust, facilitate sales, and onboard thousands of active businesses."
+          text: "The CEO was technically bottlenecked, facing severe scaling roadblocks and system instability, needing a fast, low-friction, and safe path to market launch and customer acquisition."
         },
         {
           label: "HOW",
           icon: <Wrench size={18} className="text-primary" />,
-          text: "Engineered a modular Vue 3, Pinia, and TypeScript frontend, integrated with C# microservices on Azure. Established engineering workflows and recruited the initial core development team, creating the technical foundation that empowered the CEO to scale the business to $50,000 MRR."
+          text: "Leveraged highly scalable system architecture as a vehicle to eliminate technical debt. Recruited a high-performance team and designed the strategic product foundation, safely carrying the business to its desired situation and enabling the CEO to scale rapidly to $50,000 MRR."
         }
       ]
     },
     {
       company: "Kartra.com",
-      role: "Senior Frontend Developer",
+      role: "Lead Systems & Transformation Advisor",
       metric: "Serves 60,000+ Active Users",
       link: "https://www.kartra.com",
       linkLabel: "Visit Kartra.com",
@@ -42,17 +42,17 @@ export default function Problems() {
         {
           label: "WHAT",
           icon: <Target size={18} className="text-primary" />,
-          text: "Led technical frontend migration and refactored core campaign, marketing funnel, and drag-and-drop landing page/survey builders."
+          text: "Directed the modernization and migration of a massive digital marketing builder ecosystem, taking it from a slow, high-maintenance legacy state (Current Situation) to a lightning-fast, high-converting feature suite (Desired Situation)."
         },
         {
           label: "WHY",
           icon: <CheckCircle2 size={18} className="text-secondary" />,
-          text: "The legacy codebase (Vue 2 and jQuery) was experiencing severe performance lag, ballooning bundle sizes, and maintenance overhead that stunted new feature velocity."
+          text: "The original system suffered from severe latency and high maintenance costs, creating user churn risk and stopping new feature velocity."
         },
         {
           label: "HOW",
           icon: <Wrench size={18} className="text-primary" />,
-          text: "Migrated legacy modules to modern Vue 3 and Docker environments. Engineered state-driven interactive canvas systems via Vuex, eliminated critical jQuery dependencies to slash latency, and collaborated in a large-scale, 30-engineer agile environment."
+          text: "Deployed advanced state engines as the primary vehicle to bypass existing bottlenecks. Removed legacy friction smoothly with zero downtime, giving users a safe, easy, and low-effort experience while accelerating product-led growth."
         }
       ]
     }
