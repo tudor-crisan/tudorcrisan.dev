@@ -17,17 +17,17 @@ export default function Problems() {
         {
           label: "WHAT",
           icon: <Target size={18} className="text-primary" />,
-          text: "Stepped in as the lead transformation consultant to bridge the massive gap between a stagnant MVP prototype (Current Situation) and a highly stable, enterprise-grade commercial platform (Desired Situation)."
+          text: "Stepped in to rescue the founder from a fragile, crashing MVP prototype (Current Situation) and transformed it into a reliable, enterprise-grade commercial engine (Desired Situation)."
         },
         {
           label: "WHY",
           icon: <CheckCircle2 size={18} className="text-secondary" />,
-          text: "The CEO was technically bottlenecked, facing severe scaling roadblocks and system instability, needing a fast, low-friction, and safe path to market launch and customer acquisition."
+          text: "The CEO was bleeding money, burning endless hours micromanaging developers, and losing critical sales because the product kept freezing during high-stakes demos."
         },
         {
           label: "HOW",
           icon: <Wrench size={18} className="text-primary" />,
-          text: "Leveraged highly scalable system architecture as a vehicle to eliminate technical debt. Recruited a high-performance team and designed the strategic product foundation, safely carrying the business to its desired situation and enabling the CEO to scale rapidly to $50,000 MRR."
+          text: "Took the entire technical weight off the CEO's shoulders. Leveraged system architecture as the vehicle, hired a competent development team to handle the execution, and established a bulletproof operational setup—allowing the CEO to focus 100% on growth and scale the business safely to $50,000 MRR."
         }
       ]
     },
@@ -42,17 +42,17 @@ export default function Problems() {
         {
           label: "WHAT",
           icon: <Target size={18} className="text-primary" />,
-          text: "Directed the modernization and migration of a massive digital marketing builder ecosystem, taking it from a slow, high-maintenance legacy state (Current Situation) to a lightning-fast, high-converting feature suite (Desired Situation)."
+          text: "Modernized a massive multi-million dollar digital product suite, taking a sluggish, legacy drag-and-drop builder (Current Situation) and turning it into a lightning-fast, high-converting asset (Desired Situation)."
         },
         {
           label: "WHY",
           icon: <CheckCircle2 size={18} className="text-secondary" />,
-          text: "The original system suffered from severe latency and high maintenance costs, creating user churn risk and stopping new feature velocity."
+          text: "Angry customers were threatening to churn, development velocity had ground to a halt, and the existing team was stuck saying 'it's too complex' while competitor market share expanded."
         },
         {
           label: "HOW",
           icon: <Wrench size={18} className="text-primary" />,
-          text: "Deployed advanced state engines as the primary vehicle to bypass existing bottlenecks. Removed legacy friction smoothly with zero downtime, giving users a safe, easy, and low-effort experience while accelerating product-led growth."
+          text: "Deployed high-performance state engines as the primary vehicle to bypass bottlenecks. Removed legacy drag and drop friction smoothly with zero system downtime, giving users a safe, easy, and low-effort experience while securing the platform's multi-million dollar revenue stream."
         }
       ]
     }
