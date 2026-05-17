@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tudor Crișan | Strategic Teleprompter & Reels Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;900&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #030712;
+      --card-bg: rgba(255, 255, 255, 0.02);
+      --card-border: rgba(255, 255, 255, 0.05);
+      --primary: #00e5ff;
+      --secondary: #ffaa00;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sidebar-width: 320px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 99px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      border-right: 1px solid var(--card-border);
+      background-color: rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-col: column;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .sidebar-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 24px;
+      color: #fff;
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, var(--primary), #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .sidebar-menu {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .menu-section-title {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin: 20px 0 10px 8px;
+    }
+
+    .menu-item {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .menu-item:hover, .menu-item.active {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.04);
+      transform: translateX(4px);
+    }
+
+    .menu-item.active {
+      border-left: 3px solid var(--primary);
+      border-radius: 4px 12px 12px 4px;
+      background: linear-gradient(to right, rgba(0, 229, 255, 0.05), transparent);
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+    }
+
+    /* Controls Panel */
+    .controls-panel {
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .panel-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .utility-buttons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: #00b8cc;
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+    }
+
+    /* Reader Area */
+    .reader-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 60px 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .script-container {
+      width: 100%;
+      max-w: 720px;
+    }
+
+    /* Teleprompter Mode Styles */
+    body.teleprompter-mode .sidebar {
+      display: none;
+    }
+    
+    body.teleprompter-mode .reader-area {
+      padding: 100px 24px;
+      background-color: #000;
+    }
+
+    body.teleprompter-mode .script-container {
+      max-width: 900px;
+      text-align: center;
+    }
+
+    body.teleprompter-mode .segment {
+      margin-bottom: 80px;
+      padding: 40px;
+      background: transparent;
+      border: none;
+    }
+
+    body.teleprompter-mode .segment-label {
+      font-size: 16px;
+      letter-spacing: 4px;
+      margin-bottom: 24px;
+    }
+
+    body.teleprompter-mode .segment-content {
+      font-size: 42px !important;
+      line-height: 1.5;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Standard Segment Card Styling */
+    .script-card {
+      display: none;
+    }
+
+    .script-card.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .segment {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 24px;
+      transition: all 0.3s;
+    }
+
+    .segment:hover {
+      border-color: rgba(0, 229, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .segment-label {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .label-hook { background: rgba(0, 229, 255, 0.1); color: var(--primary); }
+    .label-what { background: rgba(139, 92, 246, 0.1); color: #a78bfa; }
+    .label-why { background: rgba(239, 68, 68, 0.1); color: #f87171; }
+    .label-how { background: rgba(16, 185, 129, 0.1); color: #34d399; }
+    .label-cta { background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px dashed rgba(245, 158, 11, 0.3); }
+
+    .segment-content {
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .cta-link {
+      color: var(--primary);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--primary);
+      font-weight: 700;
+    }
+
+    /* Font Size Controls */
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 4px;
+      border-radius: 99px;
+      border: 1px solid var(--card-border);
+    }
+
+    .font-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-weight: 900;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .font-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">TC. <span>REELS</span></div>
+      <div class="sidebar-title">Teleprompter Console</div>
+    </div>
+    
+    <div class="sidebar-menu">
+      <div class="menu-section-title">Portfolio & Brand</div>
+      <button class="menu-item active" onclick="loadScript(1)">1. Tech Bottlenecks</button>
+      <button class="menu-item" onclick="loadScript(2)">2. Expensive Problems</button>
+      <button class="menu-item" onclick="loadScript(3)">3. Decoupling Chaos</button>
+      <button class="menu-item" onclick="loadScript(4)">4. Micromanagement</button>
+      <button class="menu-item" onclick="loadScript(5)">5. Legacy (Kartra)</button>
+      <button class="menu-item" onclick="loadScript(6)">6. 20-Year Advantage</button>
+      
+      <div class="menu-section-title">Zidy Case Study</div>
+      <button class="menu-item" onclick="loadScript(7)">7. Zidy $50k MRR</button>
+      <button class="menu-item" onclick="loadScript(8)">8. $1k/mo Premium</button>
+      <button class="menu-item" onclick="loadScript(9)">9. Rebuilding B2B</button>
+      <button class="menu-item" onclick="loadScript(10)">10. Dev to Consultant</button>
+      <button class="menu-item" onclick="loadScript(11)">11. Recruiting Blueprint</button>
+      <button class="menu-item" onclick="loadScript(12)">12. Eliminating Bugs</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="controls-panel">
+      <div class="panel-title" id="active-title">Script 1: Releasing CEOs from Tech Bottlenecks</div>
+      
+      <div class="utility-buttons">
+        <!-- Font Sizers -->
+        <div class="font-controls">
+          <button class="font-btn" onclick="adjustFont(-2)">A-</button>
+          <button class="font-btn" onclick="adjustFont(2)">A+</button>
+        </div>
+
+        <button class="btn" id="prompter-toggle" onclick="togglePrompter()">Teleprompter Mode</button>
+      </div>
+    </div>
+
+    <div class="reader-area" id="scroll-container">
+      <div class="script-container" id="script-target">
+        
+        <!-- Script 1 -->
+        <div class="script-card active" id="script-1">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">Are you a founder burning endless hours micromanaging developers just to keep your product from crashing?</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">I rescue CEOs and founders from painful development bottlenecks, fragile systems, and missed deadlines.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">Founders are bleeding cash, burning operational hours micromanaging technical execution, and losing high-stakes enterprise sales because their early-stage prototype freezes during critical product demonstrations.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">I assume 100% of the technical overhead. I refactor architecture for high scalability, manage systemic risks, and align engineering execution with raw business growth—allowing you to focus entirely on scaling.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">If you are ready to transition your product from a fragile prototype to a high-converting asset, book a consultation at <span class="cta-link">https://calendly.com/t2060891/30min</span>.</div>
+          </div>
+        </div>
+
+        <!-- Script 2 -->
+        <div class="script-card" id="script-2">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">If your business bottlenecks aren't painful, urgent, or expensive, they aren't worth solving.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">I resolve only the most critical, expensive operational and systems bottlenecks.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">Generic technical upgrades do not drive revenue. Unstable architectures, constant downtime, and developer delays directly block scaling, destroy user retention, and burn developer payroll without delivering value.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">I audit the system, isolate the high-impact engineering bottlenecks, deploy targeted state management engines, and optimize codebases for high throughput and speed.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Solve your critical systems failures today. Let's diagnose the issue. Schedule a call at <span class="cta-link">https://calendly.com/t2060891/30min</span>.</div>
+          </div>
+        </div>
+
+        <!-- Script 3 -->
+        <div class="script-card" id="script-3">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">Every founder has a Current Situation, a Desired Situation, and a massive gap in between. Here is how you bridge it.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">I act as the high-impact partner who takes you from operational gridlock to rapid scaling—fast, easily, and safely.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">Early-stage product setups are fragile. When user or transaction volume climbs, the system buckles, developers claim "it's complex," and growth stalls out completely.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">I step in, remove the architectural friction, build an autonomous team to execute, and deploy high-performance digital systems as the vehicle to secure your desired outcome.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Take the fast, low-effort route to your scaling goals. Visit <span class="cta-link">https://calendly.com/t2060891/30min</span>.</div>
+          </div>
+        </div>
+
+        <!-- Script 4 -->
+        <div class="script-card" id="script-4">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">If you are a CEO spending more than two hours a day talking to your developers, you have a massive operational bottleneck.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">I eliminate founder micromanagement by building self-sustaining teams and highly autonomous systems.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">Your job is to close deals, raise capital, and scale MRR. When you are forced to direct daily developer tasks, your focus is split, and strategic growth halts.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">I establish robust technical governance, standardize operational workflows, recruit highly capable execution talent, and implement automated delivery systems to guarantee stability without your micromanagement.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Reclaim your operational focus. Transition to an autonomous growth engine. Visit <span class="cta-link">https://calendly.com/t2060891/30min</span>.</div>
+          </div>
+        </div>
+
+        <!-- Script 5 -->
+        <div class="script-card" id="script-5">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">How do you modernize a legacy digital platform serving 60,000 active users with zero downtime and zero customer churn?</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">Modernizing complex, multi-million dollar digital ecosystems safely.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">A sluggish, legacy interface frustrates users, drives up churn risk, and stops your team from shipping new features—making you lose ground to competitors.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">We deployed advanced state engines as the primary vehicle to bypass existing bottlenecks, removing legacy friction smoothly with zero downtime and securing a massive SaaS revenue stream.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Protect and modernize your digital assets safely. Book a consultation at <span class="cta-link">https://calendly.com/t2060891/30min</span>.</div>
+          </div>
+        </div>
+
+        <!-- Script 6 -->
+        <div class="script-card" id="script-6">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">SaaS growth is not about writing code—it is about managing risk and bridging the gap to your desired business outcomes.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">20 years of technical consultation and high-impact operational execution.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">Without veteran guidance, development teams build systems that solve immediate tasks but create massive operational debt, leading to catastrophic crashes during scaling.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">I leverage a deep, 20-year technical foundation to design architectures that are resilient, scalable, and optimized for business outcomes from day one.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Partner with a veteran strategy advisor to guide your technical roadmap. Book a consultation at <span class="cta-link">https://calendly.com/t2060891/30min</span>.</div>
+          </div>
+        </div>
+
+        <!-- Script 7 -->
+        <div class="script-card" id="script-7">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">How we turned a fragile B2B prototype into a stable $50k monthly recurring revenue engine.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">Overhauling Zidy's operations to support high-velocity scaling and enterprise-grade workloads.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">The original prototype was highly unstable, causing frequent service interruptions and preventing the CEO from closing high-ticket demos for brick-and-mortar clients.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">I took the entire technical weight off the CEO's shoulders. Leveraged system architecture as the vehicle, hired a competent development team to handle execution, and established a bulletproof operational setup—allowing the CEO to focus 100% on growth and scale the business safely to $50,000 MRR.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Read the complete Zidy transformation story at zidy.fun or book directly at <span class="cta-link">https://calendly.com/t2060891/30min</span>.</div>
+          </div>
+        </div>
+
+        <!-- Script 8 -->
+        <div class="script-card" id="script-8">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">How does a B2B platform command a premium $1,000/month price point per client?</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">Building high-impact technical engines that directly solve expensive, urgent problems for brick-and-mortar businesses.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">If your platform only provides generic features, you compete on price. When you solve a painful, urgent problem—like automating SMS and Voice lead recovery—you deliver immediate, measurable ROI.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">By engineering highly resilient, automated communication systems that ensure no customer lead is ever lost, creating massive, undeniable commercial value.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Learn how to engineer premium SaaS value. Read the breakdown at zidy.fun.</div>
+          </div>
+        </div>
+
+        <!-- Script 9 -->
+        <div class="script-card" id="script-9">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">What happens when your early-stage prototype suddenly has to support 2,000 active businesses?</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">Hardening and scaling a high-traffic B2B operational system.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">Prototypes built for single users fail under concurrent load, leading to database deadlocks, slow API responses, and high churn risk.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">I refactored the legacy architecture into a modular, component-driven engine and integrated C# microservices, safely reducing system errors by 70% without interrupting daily operations.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Scale your system safely without buckling under the load. Read the case study at zidy.fun.</div>
+          </div>
+        </div>
+
+        <!-- Script 10 -->
+        <div class="script-card" id="script-10">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">How do you double your value and compensation from $5,000 to $10,000 a month in a single startup?</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">Evolving from a task-focused executor to a high-impact Technical Consultant.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">Executing tasks has a ceiling. Resolving systemic bottlenecks, recruiting the engineering team, and aligning the technical product roadmap with the CEO's growth metrics provides unlimited value.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">By taking full ownership of Zidy's technical engine, designing the system architecture, and building the team that enabled $50k MRR, scaling my contract from $5k/mo to $10k/mo.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">See the exact career and technical roadmap at zidy.fun.</div>
+          </div>
+        </div>
+
+        <!-- Script 11 -->
+        <div class="script-card" id="script-11">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">SaaS founders: Stop trying to hire developers based on resume keywords alone.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">Building and vetting high-performance engineering teams that require zero micromanagement.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">Poor hiring leads to high developer churn, low-quality code, and wasted capital. Founders need a standardized process to vet actual engineering capability.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">I established rigorous technical vetting, standardized code review protocols, and built a high-performing technical team at Zidy, allowing the CEO to focus 100% on sales and marketing.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Build a self-sustaining dev team. Read how we structured Zidy's engineering department at zidy.fun.</div>
+          </div>
+        </div>
+
+        <!-- Script 12 -->
+        <div class="script-card" id="script-12">
+          <div class="segment">
+            <div class="segment-label label-hook">Hook</div>
+            <div class="segment-content">How do you reduce operational bugs and system errors by 70% in less than 90 days?</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-what">What</div>
+            <div class="segment-content">Implementing rigorous technical governance and modern delivery pipelines.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-why">Why</div>
+            <div class="segment-content">Unstable releases destroy customer trust and force developers to waste 80% of their time writing hotfixes rather than building new features.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-how">How</div>
+            <div class="segment-content">I introduced TypeScript for compile-time safety, modular state management, structured code reviews, and automated deployment pipelines to enforce absolute quality gates.</div>
+          </div>
+          <div class="segment">
+            <div class="segment-label label-cta">CTA</div>
+            <div class="segment-content">Stop debugging in production. Optimize your software delivery pipeline. Learn how at zidy.fun.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentFontSize = 18;
+    const titles = [
+      "",
+      "Script 1: Releasing CEOs from Tech Bottlenecks",
+      "Script 2: Painful, Urgent, and Expensive Problems",
+      "Script 3: Bridging the Gap from Current to Desired Situation",
+      "Script 4: The True Cost of Micromanagement",
+      "Script 5: Protecting Multi-Million Dollar Assets (Kartra)",
+      "Script 6: The 20-Year Strategic Advantage",
+      "Script 7: The Zidy $50,000 MRR Transformation",
+      "Script 8: Designing the $1,000/Month Premium Value",
+      "Script 9: Scaling Safely for 2,000+ Businesses",
+      "Script 10: Evolving from Execution to Strategy",
+      "Script 11: The Technical Team Recruiting Blueprint",
+      "Script 12: Eliminating 70% of Technical Friction"
+    ];
+
+    function loadScript(id) {
+      // Manage active states of menu buttons
+      const buttons = document.querySelectorAll('.menu-item');
+      buttons.forEach((btn, idx) => {
+        btn.classList.toggle('active', (idx + 1) === id);
+      });
+
+      // Manage active script cards
+      const cards = document.querySelectorAll('.script-card');
+      cards.forEach((card, idx) => {
+        card.classList.toggle('active', (idx + 1) === id);
+      });
+
+      // Update title header
+      document.getElementById('active-title').innerText = titles[id];
+
+      // Scroll reader area to top smoothly
+      document.getElementById('scroll-container').scrollTop = 0;
+    }
+
+    function togglePrompter() {
+      const isPrompter = document.body.classList.toggle('teleprompter-mode');
+      const toggleBtn = document.getElementById('prompter-toggle');
+      if (isPrompter) {
+        toggleBtn.innerText = "Exit Prompter";
+        toggleBtn.classList.add('btn-primary');
+        adjustFont(20 - currentFontSize); // Auto scale font up for easy presentation reading
+      } else {
+        toggleBtn.innerText = "Teleprompter Mode";
+        toggleBtn.classList.remove('btn-primary');
+        adjustFont(18 - currentFontSize); // Restore standard reader font size
+      }
+    }
+
+    function adjustFont(delta) {
+      currentFontSize = Math.max(12, Math.min(60, currentFontSize + delta));
+      const contents = document.querySelectorAll('.segment-content');
+      contents.forEach(el => {
+        el.style.fontSize = currentFontSize + 'px';
+      });
+    }
+  </script>
+</body>
+</html>
