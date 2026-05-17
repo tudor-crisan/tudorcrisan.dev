@@ -6,7 +6,7 @@ export const personalInfo = {
   location: "Alba Iulia, Romania",
   bio: "I rescue CEOs and Founders from dev bottlenecks, fragile prototypes, and missed deadlines. I take the technical weight off your shoulders, taking you from your current situation to your desired business growth—fast, safely, and with zero micromanagement.",
   socials: {},
-  meetingUrl: "https://calendly.com/t2060891/30min?month=2026-04",
+  meetingUrl: "https://calendly.com/t2060891/30min",
   skills: [
     { category: "Core", items: ["React", "Next.js", "Vue.js (Vue 2/3)", "TypeScript", "JavaScript (ES6+)"] },
     { category: "Styling", items: ["Tailwind CSS", "SASS/SCSS", "Styled Components", "CSS Modules"] },
