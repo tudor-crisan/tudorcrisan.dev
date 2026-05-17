@@ -9,7 +9,7 @@ import { ThemeToggle } from "./ThemeToggle";
 const navLinks = [
   { name: "Home", href: "/#home", external: false },
   { name: "Problems", href: "/#problems", external: false },
-  { name: "Blog / Reels", href: "/blog", external: false },
+  { name: "BLOG", href: "/blog", external: false },
   { name: "Case Study", href: "https://www.zidy.fun", external: true },
   { name: "Book a Call", href: personalInfo.meetingUrl, external: true, highlight: true }
 ];
