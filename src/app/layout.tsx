@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "Tudor Crișan",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image-transformation.png",
         width: 1200,
         height: 630,
         alt: "Transformation & High-Impact Consulting | Tudor Crișan",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tudor Crișan | Transformation & High-Impact Consulting",
     description: "High-impact consultant solving painful, urgent, and expensive business bottlenecks. Bridging the gap between your current situation and desired outcome—rapidly, easily, and safely.",
-    images: ["/og-image.png"],
+    images: ["/og-image-transformation.png"],
   },
 };
 

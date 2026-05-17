@@ -13,9 +13,6 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-start gap-2">
             <Link href="/" className="flex items-center gap-2 group">
               <span className="text-lg font-black tracking-tighter text-gradient">TC.</span>
-              <span className="flex items-center px-1.5 py-0.5 rounded-sm bg-primary/20 text-[8px] font-black uppercase tracking-tighter text-primary border border-primary/20 v2-glow">
-                VIBE
-              </span>
             </Link>
             <p className="text-sm text-muted-foreground">
               © {currentYear} {personalInfo.name}. All rights reserved.
