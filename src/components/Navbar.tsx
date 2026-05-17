@@ -7,8 +7,9 @@ import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
-  { name: "Home", href: "#home", external: false },
-  { name: "Problems", href: "#problems", external: false },
+  { name: "Home", href: "/#home", external: false },
+  { name: "Problems", href: "/#problems", external: false },
+  { name: "Blog / Reels", href: "/blog", external: false },
   { name: "Case Study", href: "https://www.zidy.fun", external: true },
   { name: "Book a Call", href: personalInfo.meetingUrl, external: true, highlight: true }
 ];
@@ -32,7 +33,7 @@ export default function Navbar() {
           ${scrolled ? "glass shadow-2xl shadow-primary/10" : "bg-transparent"}
         `}
       >
-        <a href="#home" className="flex items-center gap-2 group">
+        <a href="/#home" className="flex items-center gap-2 group">
           <span className="text-lg font-black tracking-tighter text-gradient">TC.</span>
         </a>
 
