@@ -18,7 +18,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-[0.95] mb-8"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-[0.95] mb-8 mt-12"
             >
               Solving <span className="text-primary-gradient v2:v2-glow">painful</span>, <br />
               <span className="text-primary-gradient v2:v2-glow">urgent</span> &amp; <br />
