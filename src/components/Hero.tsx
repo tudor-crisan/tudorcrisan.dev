@@ -14,18 +14,6 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Text and Actions Column */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass mb-8"
-            >
-              <Zap size={14} className="text-primary" />
-              <span className="text-[10px] font-bold uppercase tracking-widest">
-                Transformation Advisory &amp; Consulting
-              </span>
-            </motion.div>
-
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -72,10 +60,23 @@ export default function Hero() {
           </div>
 
           {/* Profile Picture Column */}
-          <div className="lg:col-span-5 flex justify-center items-center relative">
+          <div className="lg:col-span-5 flex flex-col justify-center items-center relative gap-6">
             {/* Outer Neon Glow Layer */}
             <div className="absolute -inset-4 bg-gradient-to-tr from-primary to-secondary rounded-[2.5rem] opacity-30 blur-2xl animate-pulse pointer-events-none" />
             
+            {/* Label shifted above the image card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass border border-primary/20 relative z-10 select-none shadow-[0_0_15px_rgba(0,229,255,0.15)]"
+            >
+              <Zap size={14} className="text-primary animate-pulse" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-white/95">
+                Transformation Advisory &amp; Consulting
+              </span>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
