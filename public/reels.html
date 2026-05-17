@@ -49,13 +49,44 @@
       background: var(--primary);
     }
 
+    /* Mobile Header styling */
+    .mobile-header {
+      display: none;
+      height: 70px;
+      padding: 0 24px;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--card-border);
+      background-color: rgba(3, 7, 18, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 101;
+      width: 100%;
+    }
+
+    .menu-toggle-btn {
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .menu-toggle-btn:hover {
+      color: var(--primary);
+    }
+
     /* Sidebar */
     .sidebar {
       width: var(--sidebar-width);
       border-right: 1px solid var(--card-border);
       background-color: rgba(0, 0, 0, 0.3);
       display: flex;
-      flex-col: column;
       flex-direction: column;
       height: 100%;
     }
@@ -211,7 +242,7 @@
 
     .script-container {
       width: 100%;
-      max-w: 720px;
+      max-width: 720px;
     }
 
     /* Teleprompter Mode Styles */
@@ -336,9 +367,100 @@
       background: rgba(255, 255, 255, 0.1);
       color: var(--primary);
     }
+
+    /* Mobile Responsive Overrides */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .mobile-header {
+        display: flex;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        bottom: 0;
+        z-index: 100;
+        width: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background-color: #030712;
+        border-right: none;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        height: calc(100vh - 70px);
+      }
+
+      .controls-panel {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 16px 20px;
+      }
+
+      .panel-title {
+        font-size: 15px;
+        line-height: 1.3;
+      }
+
+      .utility-buttons {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .reader-area {
+        padding: 24px 16px;
+      }
+
+      .segment {
+        padding: 20px;
+        border-radius: 16px;
+      }
+
+      .segment-content {
+        font-size: 15px;
+      }
+
+      body.teleprompter-mode .mobile-header {
+        display: none;
+      }
+
+      body.teleprompter-mode .main-content {
+        height: 100vh;
+      }
+
+      body.teleprompter-mode .reader-area {
+        padding: 60px 16px;
+      }
+
+      body.teleprompter-mode .segment-content {
+        font-size: 26px !important;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Mobile Header -->
+  <div class="mobile-header">
+    <div class="logo">TC. <span>REELS</span></div>
+    <button class="menu-toggle-btn" onclick="toggleSidebar()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
 
   <!-- Sidebar -->
   <div class="sidebar">
@@ -695,6 +817,11 @@
       "Script 12: Eliminating 70% of Technical Friction"
     ];
 
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('open');
+    }
+
     function loadScript(id) {
       // Manage active states of menu buttons
       const buttons = document.querySelectorAll('.menu-item');
@@ -713,6 +840,12 @@
 
       // Scroll reader area to top smoothly
       document.getElementById('scroll-container').scrollTop = 0;
+
+      // Auto close sidebar on mobile
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+      }
     }
 
     function togglePrompter() {
@@ -721,11 +854,11 @@
       if (isPrompter) {
         toggleBtn.innerText = "Exit Prompter";
         toggleBtn.classList.add('btn-primary');
-        adjustFont(20 - currentFontSize); // Auto scale font up for easy presentation reading
+        adjustFont(document.documentElement.clientWidth <= 768 ? 8 : 20 - currentFontSize); 
       } else {
         toggleBtn.innerText = "Teleprompter Mode";
         toggleBtn.classList.remove('btn-primary');
-        adjustFont(18 - currentFontSize); // Restore standard reader font size
+        adjustFont(18 - currentFontSize); 
       }
     }
 

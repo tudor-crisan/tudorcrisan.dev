@@ -64,19 +64,6 @@ export default function Hero() {
             {/* Outer Neon Glow Layer */}
             <div className="absolute -inset-4 bg-gradient-to-tr from-primary to-secondary rounded-[2.5rem] opacity-30 blur-2xl animate-pulse pointer-events-none" />
             
-            {/* Label shifted above the image card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass border border-primary/20 relative z-10 select-none shadow-[0_0_15px_rgba(0,229,255,0.15)]"
-            >
-              <Zap size={14} className="text-primary animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-white/95">
-                Transformation Advisory &amp; Consulting
-              </span>
-            </motion.div>
-
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -89,6 +76,19 @@ export default function Hero() {
                 alt="Tudor Crișan"
                 className="w-full h-auto object-cover rounded-[1.8rem] aspect-[4/5] shadow-2xl"
               />
+            </motion.div>
+
+            {/* Label shifted under the image card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass border border-primary/20 relative z-10 select-none shadow-[0_0_15px_rgba(0,229,255,0.15)]"
+            >
+              <Zap size={14} className="text-primary animate-pulse" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-white/95">
+                Transformation Advisory &amp; Consulting
+              </span>
             </motion.div>
           </div>
         </div>
