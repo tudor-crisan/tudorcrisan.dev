@@ -33,8 +33,9 @@ export default function Hero() {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-[0.95] mb-8"
             >
               Solving <span className="text-primary-gradient v2:v2-glow">painful</span>, <br />
-              <span className="text-primary-gradient v2:v2-glow">urgent</span> and <br />
-              <span className="text-primary-gradient v2:v2-glow">expensive</span> problems.
+              <span className="text-primary-gradient v2:v2-glow">urgent</span> &amp; <br />
+              <span className="text-primary-gradient v2:v2-glow">expensive</span> problems,<br />
+              <span className="text-muted-foreground/85 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight block mt-4">since 2007</span>
             </motion.h1>
 
             <motion.p
