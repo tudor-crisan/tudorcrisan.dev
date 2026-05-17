@@ -4,7 +4,7 @@ export const personalInfo = {
   title: "Transformation Consultant & Strategy Advisor",
   yearsOfExperience: 20,
   location: "Alba Iulia, Romania",
-  bio: "I rescue CEOs and Founders from dev bottlenecks, fragile prototypes, and missed deadlines. I take the technical weight off your shoulders, taking you from your current situation to your desired business growth—fast, safely, and with zero micromanagement.",
+  bio: "I rescue founders from developer bottlenecks, fragile prototypes, and operational gridlock—taking you to your desired business growth fast, safely, and with zero micromanagement.",
   socials: {},
   meetingUrl: "https://calendly.com/t2060891/30min",
   skills: [

@@ -41,6 +41,12 @@ export default function BlogIndex() {
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 pt-32 pb-24 relative overflow-hidden">
       {/* Background Mesh */}
       <div className="fixed inset-0 bg-mesh opacity-50 -z-10" />
+
+      {/* Pulsating Cool Background Decorative Elements */}
+      <div className="fixed top-1/2 right-0 -translate-y-1/2 w-full max-w-2xl h-full opacity-20 pointer-events-none select-none -z-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute top-1/3 left-2/3 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-secondary blur-[100px] rounded-full opacity-50" />
+      </div>
       
       <div className="container-custom relative z-10">
         {/* Hero Area */}
