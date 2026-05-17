@@ -23,15 +23,25 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-8 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-            <Link href="/#experience" className="hover:text-foreground transition-colors">
-              Experience
+            <Link href="/#problems" className="hover:text-foreground transition-colors">
+              Problems Solved
             </Link>
-            <Link href="/#skills" className="hover:text-foreground transition-colors">
-              Skills
-            </Link>
-            <Link href="/#contact" className="hover:text-foreground transition-colors">
-              Contact
-            </Link>
+            <a 
+              href="https://www.zidy.fun" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-foreground transition-colors"
+            >
+              Case Study
+            </a>
+            <a 
+              href={personalInfo.meetingUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-primary transition-colors text-primary font-black"
+            >
+              Book a Call
+            </a>
           </div>
         </div>
 

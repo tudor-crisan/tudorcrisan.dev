@@ -7,10 +7,10 @@ import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "Experience", href: "#experience" },
-  { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "#home", external: false },
+  { name: "Problems", href: "#problems", external: false },
+  { name: "Case Study", href: "https://www.zidy.fun", external: true },
+  { name: "Book a Call", href: personalInfo.meetingUrl, external: true, highlight: true }
 ];
 
 export default function Navbar() {
@@ -27,7 +27,7 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-6 pointer-events-none">
       <nav
         className={`
-          flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full 
+          flex items-center justify-between w-full max-w-3xl px-6 py-3 rounded-full 
           transition-all duration-500 pointer-events-auto
           ${scrolled ? "glass shadow-2xl shadow-primary/10" : "bg-transparent"}
         `}
@@ -40,12 +40,20 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8 pointer-events-auto">
+        <div className="hidden md:flex items-center gap-6 pointer-events-auto">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+              className={`
+                text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center
+                ${link.highlight 
+                  ? "px-4 py-2 rounded-full bg-primary text-primary-foreground cta-glow-button hover:scale-105 active:scale-95" 
+                  : "text-muted-foreground hover:text-foreground"
+                }
+              `}
             >
               {link.name}
             </a>
@@ -77,8 +85,16 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-xl font-bold tracking-tight text-foreground"
+                className={`
+                  text-xl font-bold tracking-tight transition-all duration-300
+                  ${link.highlight 
+                    ? "px-6 py-3 rounded-full bg-primary text-primary-foreground text-center cta-glow-button block" 
+                    : "text-foreground hover:text-primary"
+                  }
+                `}
               >
                 {link.name}
               </a>
