@@ -103,15 +103,6 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         className="fixed inset-0 bg-black text-white z-[99999] overflow-hidden flex flex-col justify-center items-center cursor-pointer select-none font-sans"
         style={{ backgroundColor: "#000000" }}
       >
-        {/* Startup Instruction Overlay (Fades Out) */}
-        {showInstructions && (
-          <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full text-sm font-bold tracking-wider uppercase text-white/90 animate-pulse pointer-events-none transition-opacity duration-1000 z-50">
-            {mode === "scroll" 
-              ? "Tapping pauses / plays • Refresh page to exit" 
-              : "Tapping advances script • Refresh page to exit"}
-          </div>
-        )}
-
         {/* Mode 1: Smooth Scrolling View */}
         {mode === "scroll" && (
           <div
@@ -126,7 +117,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
             {/* Top spacing to let text scroll up */}
             <div className="h-[25vh]" />
             <div 
-              className="font-black leading-tight tracking-tight whitespace-pre-line text-white/90 transition-all duration-300"
+              className="font-black leading-tight tracking-tight whitespace-pre-line text-white transition-all duration-300"
               style={{ fontSize: `${fontSize}px` }}
             >
               {activeScript.fullText}
@@ -139,12 +130,6 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         {/* Mode 2: Step-by-Step Viewer (Hook, Body, CTA) */}
         {mode === "step" && (
           <div className="w-full max-w-5xl px-8 text-center flex flex-col justify-center items-center min-h-[60vh]">
-            {currentStep !== "done" && (
-              <span className="text-xs font-black uppercase tracking-widest text-primary mb-6 bg-primary/10 px-4 py-1.5 rounded-full border border-primary/20">
-                {currentStep}
-              </span>
-            )}
-            
             <div 
               className="font-black leading-snug tracking-tight text-white transition-all duration-500 max-w-4xl"
               style={{ fontSize: `${fontSize * 1.1}px` }}

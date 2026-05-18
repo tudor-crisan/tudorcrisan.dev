@@ -246,232 +246,84 @@
     }
 
     /* Teleprompter Mode Styles */
+    body.teleprompter-mode {
+      background-color: #000000 !important;
+    }
+
     body.teleprompter-mode .sidebar {
-      display: none;
+      display: none !important;
     }
     
-    body.teleprompter-mode .reader-area {
-      padding: 240px 24px; /* Generous top/bottom padding to scroll through the central focus zone */
-      background-color: #02040a;
-      background-image: 
-        radial-gradient(at 0% 0%, hsla(185, 100%, 50%, 0.08) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, hsla(45, 100%, 50%, 0.06) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, hsla(185, 100%, 50%, 0.06) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, hsla(225, 100%, 50%, 0.06) 0px, transparent 50%);
-      position: relative;
-      overflow-y: scroll;
-      scroll-behavior: smooth;
-    }
-
-    body.teleprompter-mode .reader-area::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
-    }
-
-    body.teleprompter-mode .script-container {
-      max-width: 900px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    body.teleprompter-mode .segment {
-      margin-bottom: 120px;
-      padding: 48px;
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 32px;
-      opacity: 0.15;
-      transform: scale(0.92);
-      filter: blur(2px);
-      transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    body.teleprompter-mode .segment.focus-active {
-      opacity: 1;
-      transform: scale(1.03);
-      filter: blur(0);
-      background: rgba(0, 229, 255, 0.02);
-      border: 1px solid rgba(0, 229, 255, 0.12);
-      box-shadow: 0 0 50px rgba(0, 229, 255, 0.06), inset 0 0 20px rgba(0, 229, 255, 0.03);
-    }
-
-    body.teleprompter-mode .segment.focus-active:has(.label-cta) {
-      background: rgba(255, 170, 0, 0.02);
-      border-color: rgba(255, 170, 0, 0.12);
-      box-shadow: 0 0 50px rgba(255, 170, 0, 0.06), inset 0 0 20px rgba(255, 170, 0, 0.03);
-    }
-
-    body.teleprompter-mode .segment-label {
-      font-size: 14px;
-      letter-spacing: 4px;
-      margin-bottom: 24px;
-      transition: all 0.3s;
-    }
-
-    body.teleprompter-mode .segment.focus-active .segment-label {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0, 229, 255, 0.25);
-    }
-
-    body.teleprompter-mode .segment.focus-active:has(.label-cta) .segment-label {
-      box-shadow: 0 0 20px rgba(255, 170, 0, 0.25);
-    }
-
-    body.teleprompter-mode .segment-content {
-      font-size: 44px !important;
-      line-height: 1.5;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.3);
-      transition: all 0.5s;
-    }
-
-    body.teleprompter-mode .segment.focus-active .segment-content {
-      color: #ffffff;
-      text-shadow: 
-        0 0 12px rgba(255, 255, 255, 0.7), 
-        0 0 24px rgba(0, 229, 255, 0.55),
-        0 0 40px rgba(0, 229, 255, 0.3);
-    }
-
-    body.teleprompter-mode .segment.focus-active:has(.label-cta) .segment-content {
-      color: #ffffff;
-      text-shadow: 
-        0 0 12px rgba(255, 255, 255, 0.7), 
-        0 0 24px rgba(255, 170, 0, 0.55),
-        0 0 40px rgba(255, 170, 0, 0.3);
-    }
-
-    body.teleprompter-mode .segment.focus-active .cta-link {
-      color: var(--secondary);
-      font-weight: 900;
-      text-decoration: underline;
-      text-shadow: 0 0 15px rgba(255, 170, 0, 0.85);
-    }
-
-    /* HUD Viewport Overlay Styling */
-    .hud-overlay {
-      position: absolute;
-      top: 90px; /* Sits below the controls panel */
-      left: 0;
-      right: 0;
-      bottom: 0;
-      pointer-events: none;
-      display: none;
-      z-index: 10;
-      border: 1px solid rgba(0, 229, 255, 0.12);
-      margin: 30px;
-      border-radius: 24px;
-      box-shadow: inset 0 0 40px rgba(0, 229, 255, 0.03);
-      overflow: hidden;
+    body.teleprompter-mode .controls-panel {
+      display: none !important;
     }
 
     body.teleprompter-mode .hud-overlay {
-      display: block;
+      display: none !important;
+    }
+    
+    body.teleprompter-mode .reader-area {
+      padding: 40vh 24px !important;
+      background-color: #000000 !important;
+      background-image: none !important;
+      overflow-y: scroll !important;
+      scroll-behavior: smooth !important;
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 99999 !important;
     }
 
-    /* HUD Corner Guides */
-    .hud-corner {
-      position: absolute;
-      width: 28px;
-      height: 28px;
-      border-color: rgba(0, 229, 255, 0.4);
-      border-style: solid;
-    }
-    .hud-corner.top-left { top: 30px; left: 30px; border-width: 4px 0 0 4px; }
-    .hud-corner.top-right { top: 30px; right: 30px; border-width: 4px 4px 0 0; }
-    .hud-corner.bottom-left { bottom: 30px; left: 30px; border-width: 0 0 4px 4px; }
-    .hud-corner.bottom-right { bottom: 30px; right: 30px; border-width: 0 4px 4px 0; }
-
-    /* HUD Header */
-    .hud-header {
-      position: absolute;
-      top: 34px;
-      left: 80px;
-      right: 80px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'Outfit', sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: rgba(255, 255, 255, 0.4);
-      font-weight: 800;
+    body.teleprompter-mode .reader-area::before {
+      display: none !important;
     }
 
-    .hud-tag {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--secondary);
-      text-shadow: 0 0 10px rgba(255, 170, 0, 0.4);
+    body.teleprompter-mode .script-container {
+      max-width: 800px !important;
+      margin: 0 auto !important;
+      text-align: center !important;
     }
 
-    .hud-dot {
-      width: 10px;
-      height: 10px;
-      background-color: var(--secondary);
-      border-radius: 50%;
+    body.teleprompter-mode .segment {
+      margin-bottom: 80px !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
     }
 
-    .pulsing {
-      animation: pulseRed 1s infinite alternate;
+    body.teleprompter-mode .segment-label {
+      display: none !important;
     }
 
-    @keyframes pulseRed {
-      from { transform: scale(0.85); opacity: 0.6; box-shadow: 0 0 0 rgba(255, 170, 0, 0); }
-      to { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px var(--secondary); }
+    body.teleprompter-mode .segment-content {
+      color: #ffffff !important;
+      font-size: 56px !important;
+      line-height: 1.5 !important;
+      font-weight: 900 !important;
+      text-shadow: none !important;
+      opacity: 1 !important;
     }
 
-    .hud-watermark {
-      color: rgba(255, 255, 255, 0.5);
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    body.teleprompter-mode .segment.focus-active .segment-content {
+      color: #ffffff !important;
+      text-shadow: none !important;
+      opacity: 1 !important;
     }
 
-    .hud-timer {
-      color: var(--primary);
-      text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
-      font-variant-numeric: tabular-nums;
+    body.teleprompter-mode .segment.focus-active:has(.label-cta) .segment-content {
+      color: #ffffff !important;
+      text-shadow: none !important;
+      opacity: 1 !important;
     }
 
-    /* Laser Guide Line */
-    .hud-laser-guide {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0.9;
-    }
-
-    .laser-line {
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary) 20%, var(--primary) 80%, transparent);
-      box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
-    }
-
-    .laser-label {
-      margin-top: 10px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--primary);
-      text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
-      font-weight: 900;
-      text-transform: uppercase;
+    body.teleprompter-mode .segment.focus-active .cta-link {
+      color: #ffffff !important;
+      text-decoration: underline !important;
+      text-shadow: none !important;
     }
 
     /* Standard Segment Card Styling */
@@ -759,16 +611,11 @@
       <div class="panel-title" id="active-title">Script 1: Burning hours on developers?</div>
       
       <div class="utility-buttons">
-        <!-- Teleprompter Controls (Only visible in prompter mode) -->
-        <div class="prompter-controls" id="prompter-controls">
-          <button class="btn" id="hud-toggle" onclick="toggleHUD()">HUD: ON</button>
-          <button class="btn" id="scroll-play" onclick="toggleScroll()">PLAY</button>
-          
-          <div class="speed-control">
-            <span class="speed-label">SPEED:</span>
-            <input type="range" id="scroll-speed" min="1" max="10" value="3" class="speed-slider" oninput="updateSpeed(this.value)">
-            <span class="speed-val" id="speed-val">3x</span>
-          </div>
+        <!-- Speed Control -->
+        <div class="speed-control">
+          <span class="speed-label">SPEED:</span>
+          <input type="range" id="scroll-speed" min="1" max="10" value="3" class="speed-slider" oninput="updateSpeed(this.value)">
+          <span class="speed-val" id="speed-val">3x</span>
         </div>
 
         <!-- Font Sizers -->
@@ -781,24 +628,7 @@
       </div>
     </div>
 
-    <!-- High-Tech HUD Viewport Overlay -->
-    <div class="hud-overlay" id="hud-overlay">
-      <div class="hud-corner top-left"></div>
-      <div class="hud-corner top-right"></div>
-      <div class="hud-corner bottom-left"></div>
-      <div class="hud-corner bottom-right"></div>
-      
-      <div class="hud-header">
-        <div class="hud-tag"><span class="hud-dot pulsing"></span> REC MODE</div>
-        <div class="hud-watermark">TUDOR CRIȘAN // STRATEGIC ADVISOR</div>
-        <div class="hud-timer" id="hud-timer">00:00:00</div>
-      </div>
-      
-      <div class="hud-laser-guide">
-        <div class="laser-line"></div>
-        <div class="laser-label">READING FOCUS ZONE</div>
-      </div>
-    </div>
+
 
     <div class="reader-area" id="scroll-container">
       <div class="script-container" id="script-target">
@@ -1055,58 +885,40 @@
       if (isPrompter) {
         toggleBtn.innerText = "Exit Prompter";
         toggleBtn.classList.add('btn-primary');
-        adjustFont(document.documentElement.clientWidth <= 768 ? 8 : 20 - currentFontSize);
         
-        // Initial scroll center check
-        setTimeout(checkScrollFocus, 100);
+        // Go fullscreen
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        }
         
-        // Sits in play timer start or just on startup
-        startHUDTimer();
+        // Reset scroll position
+        const scrollContainer = document.getElementById('scroll-container');
+        scrollContainer.scrollTop = 0;
+        
+        // Start auto-scroll after a short delay
+        setTimeout(() => {
+          isScrolling = true;
+          startScrollLoop();
+        }, 1500);
       } else {
         toggleBtn.innerText = "Teleprompter Mode";
         toggleBtn.classList.remove('btn-primary');
-        adjustFont(18 - currentFontSize);
-        
-        // Reset scroll variables and animations
         if (isScrolling) toggleScroll();
-        stopHUDTimer();
-        
-        // Clear active focus classes
-        const segments = document.querySelectorAll('.segment');
-        segments.forEach(segment => segment.classList.remove('focus-active'));
       }
     }
 
     function adjustFont(delta) {
-      currentFontSize = Math.max(12, Math.min(60, currentFontSize + delta));
+      currentFontSize = Math.max(12, Math.min(80, currentFontSize + delta));
       const contents = document.querySelectorAll('.segment-content');
       contents.forEach(el => {
         el.style.fontSize = currentFontSize + 'px';
       });
     }
 
-    // Advanced Teleprompter Autoscroll & Focus Engine
+    // Auto-Scroll Engine
     let isScrolling = false;
     let scrollSpeed = 3;
     let scrollInterval = null;
-    let isHUDActive = true;
-    let hudTimerInterval = null;
-    let hudSeconds = 0;
-
-    function toggleHUD() {
-      isHUDActive = !isHUDActive;
-      const hud = document.getElementById('hud-overlay');
-      const toggleBtn = document.getElementById('hud-toggle');
-      if (isHUDActive) {
-        hud.style.display = 'block';
-        toggleBtn.innerText = "HUD: ON";
-        toggleBtn.classList.remove('btn-muted');
-      } else {
-        hud.style.display = 'none';
-        toggleBtn.innerText = "HUD: OFF";
-        toggleBtn.classList.add('btn-muted');
-      }
-    }
 
     function updateSpeed(val) {
       scrollSpeed = parseInt(val);
@@ -1115,14 +927,9 @@
 
     function toggleScroll() {
       isScrolling = !isScrolling;
-      const playBtn = document.getElementById('scroll-play');
       if (isScrolling) {
-        playBtn.innerText = "PAUSE";
-        playBtn.classList.add('btn-primary');
         startScrollLoop();
       } else {
-        playBtn.innerText = "PLAY";
-        playBtn.classList.remove('btn-primary');
         stopScrollLoop();
       }
     }
@@ -1146,62 +953,12 @@
       }
     }
 
-    // Real-Time Viewport Recording Timer
-    function startHUDTimer() {
-      hudSeconds = 0;
-      document.getElementById('hud-timer').innerText = "00:00:00";
-      if (hudTimerInterval) clearInterval(hudTimerInterval);
-      
-      hudTimerInterval = setInterval(() => {
-        hudSeconds++;
-        const hrs = Math.floor(hudSeconds / 3600).toString().padStart(2, '0');
-        const mins = Math.floor((hudSeconds % 3600) / 60).toString().padStart(2, '0');
-        const secs = (hudSeconds % 60).toString().padStart(2, '0');
-        document.getElementById('hud-timer').innerText = `${hrs}:${mins}:${secs}`;
-      }, 1000);
-    }
-
-    function stopHUDTimer() {
-      if (hudTimerInterval) {
-        clearInterval(hudTimerInterval);
-        hudTimerInterval = null;
+    // Click anywhere on screen to play/pause in teleprompter mode
+    document.getElementById('scroll-container').addEventListener('click', (e) => {
+      if (document.body.classList.contains('teleprompter-mode')) {
+        toggleScroll();
       }
-    }
-
-    // Scroll Focus Position Checking Logic
-    const readerArea = document.getElementById('scroll-container');
-    
-    function checkScrollFocus() {
-      if (!document.body.classList.contains('teleprompter-mode')) return;
-      
-      const segments = document.querySelectorAll('.script-card.active .segment');
-      const readerHeight = readerArea.clientHeight;
-      const centerY = readerArea.getBoundingClientRect().top + readerHeight / 2;
-      
-      let closestSegment = null;
-      let closestDistance = Infinity;
-      
-      segments.forEach(segment => {
-        const rect = segment.getBoundingClientRect();
-        const segmentCenterY = rect.top + rect.height / 2;
-        const distance = Math.abs(segmentCenterY - centerY);
-        
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestSegment = segment;
-        }
-      });
-      
-      segments.forEach(segment => {
-        if (segment === closestSegment) {
-          segment.classList.add('focus-active');
-        } else {
-          segment.classList.remove('focus-active');
-        }
-      });
-    }
-
-    readerArea.addEventListener('scroll', checkScrollFocus);
+    });
 
     // Global Key Bindings for Quick Recording Operations
     document.addEventListener('keydown', (e) => {
@@ -1221,10 +978,6 @@
           const nextSpeed = Math.max(1, scrollSpeed - 1);
           updateSpeed(nextSpeed);
           document.getElementById('scroll-speed').value = nextSpeed;
-        }
-        if (e.code === 'KeyH') {
-          e.preventDefault();
-          toggleHUD();
         }
       }
     });
