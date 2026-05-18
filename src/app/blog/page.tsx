@@ -76,7 +76,7 @@ export default function BlogIndex() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-medium"
           >
-            Direct strategy blueprints on risk governance, technical team building, SaaS modernization, and releasing founders from execution gridlock.
+            Real blueprints on how to stop babysitting your developers, secure your codebase, and scale your SaaS without the tech headaches.
           </motion.p>
         </div>
 
