@@ -268,7 +268,8 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
           </div>
         ) : (
           /* Prompter Sandbox & Settings Control Center */
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Control Panel */}
             <div className="glass rounded-[2rem] border-white/5 p-8 bg-black/30 flex flex-col gap-8 h-fit">
               <div className="flex items-center gap-2 border-b border-white/5 pb-4">
@@ -345,13 +346,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                 </div>
               )}
 
-              {/* Enter Fullscreen Button */}
-              <button
-                onClick={enterFullscreen}
-                className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-primary text-primary-foreground font-black text-sm uppercase tracking-wider hover:shadow-[0_0_30px_rgba(0,229,255,0.2)] transition-all cta-glow-button mt-4"
-              >
-                <Maximize size={16} /> Enter Fullscreen Recorder
-              </button>
+              {/* Enter Fullscreen Button Removed from Sidebar */}
             </div>
 
             {/* Live Interactive Sandbox Preview */}
@@ -453,7 +448,18 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
               </div>
             </div>
           </div>
-        )}
+
+          {/* Launch Teleprompter Mode CTA Button */}
+          <div className="mt-12 flex justify-center w-full">
+            <button
+              onClick={enterFullscreen}
+              className="w-full max-w-xl py-5 rounded-full bg-gradient-to-r from-primary to-[#00b8cc] text-black font-black text-lg uppercase tracking-widest hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(0,229,255,0.6)] active:scale-[0.97] transition-all cursor-pointer border-none shadow-[0_0_20px_rgba(0,229,255,0.25)] flex items-center justify-center gap-2 outline-none font-sans"
+            >
+              Lezzz GOOO!!
+            </button>
+          </div>
+        </>
+      )}
       </div>
     </div>
   );

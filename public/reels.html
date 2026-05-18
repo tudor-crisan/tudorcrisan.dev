@@ -262,6 +262,50 @@
       display: none !important;
     }
 
+    /* Launch Teleprompter CTA Button Styles */
+    .launch-cta-container {
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.2);
+      border-top: 1px solid var(--card-border);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    body.teleprompter-mode .launch-cta-container {
+      display: none !important;
+    }
+
+    .btn-launch-teal {
+      width: 100%;
+      max-width: 600px;
+      padding: 18px 36px;
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #00e5ff, #00b8cc);
+      color: #030712 !important;
+      border: none;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.35), inset 0 0 10px rgba(255, 255, 255, 0.2);
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .btn-launch-teal:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.75), inset 0 0 15px rgba(255, 255, 255, 0.35);
+      background: linear-gradient(135deg, #00f0ff, #00c8dd);
+    }
+
+    .btn-launch-teal:active {
+      transform: scale(0.97);
+    }
+
     /* Word-by-Word Teleprompter RSVP Overlay */
     .rsvp-player {
       display: none;
@@ -622,8 +666,6 @@
           <button class="font-btn" onclick="adjustFont(-2)">A-</button>
           <button class="font-btn" onclick="adjustFont(2)">A+</button>
         </div>
-
-        <button class="btn" id="prompter-toggle" onclick="togglePrompter()">Teleprompter Mode</button>
       </div>
     </div>
 
@@ -829,6 +871,11 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- Launch Teleprompter Mode CTA Button -->
+    <div class="launch-cta-container">
+      <button class="btn btn-launch-teal" id="prompter-toggle" onclick="togglePrompter()">Lezzz GOOO!!</button>
     </div>
   </div>
 
