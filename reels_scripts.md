@@ -16,7 +16,7 @@ This document contains 12 highly structured, high-impact scripts optimized for t
 * **[HOW]**  
   I assume 100% of the technical overhead. I refactor architecture for high scalability, manage systemic risks, and align engineering execution with raw business growth—allowing you to focus entirely on scaling.
 * **[CTA]**  
-  If you are ready to transition your product from a fragile prototype to a high-converting asset, book a consultation at `https://calendly.com/t2060891/30min`.
+  If you are ready to transition your product from a fragile prototype to a high-converting asset, book a consultation at `https://book.stripe.com/14AcMYaxf3iv7rs5vT04806`.
 
 ---
 
@@ -30,7 +30,7 @@ This document contains 12 highly structured, high-impact scripts optimized for t
 * **[HOW]**  
   I audit the system, isolate the high-impact engineering bottlenecks, deploy targeted state management engines, and optimize codebases for high throughput and speed.
 * **[CTA]**  
-  Solve your critical systems failures today. Let's diagnose the issue. Schedule a call at `https://calendly.com/t2060891/30min`.
+  Solve your critical systems failures today. Let's diagnose the issue. Schedule a call at `https://book.stripe.com/14AcMYaxf3iv7rs5vT04806`.
 
 ---
 
@@ -44,7 +44,7 @@ This document contains 12 highly structured, high-impact scripts optimized for t
 * **[HOW]**  
   I step in, remove the architectural friction, build an autonomous team to execute, and deploy high-performance digital systems as the vehicle to secure your desired outcome.
 * **[CTA]**  
-  Take the fast, low-effort route to your scaling goals. Visit `https://calendly.com/t2060891/30min`.
+  Take the fast, low-effort route to your scaling goals. Visit `https://book.stripe.com/14AcMYaxf3iv7rs5vT04806`.
 
 ---
 
@@ -58,7 +58,7 @@ This document contains 12 highly structured, high-impact scripts optimized for t
 * **[HOW]**  
   I establish robust technical governance, standardize operational workflows, recruit highly capable execution talent, and implement automated delivery systems to guarantee stability without your micromanagement.
 * **[CTA]**  
-  Reclaim your operational focus. Transition to an autonomous growth engine. Visit `https://calendly.com/t2060891/30min`.
+  Reclaim your operational focus. Transition to an autonomous growth engine. Visit `https://book.stripe.com/14AcMYaxf3iv7rs5vT04806`.
 
 ---
 
@@ -72,7 +72,7 @@ This document contains 12 highly structured, high-impact scripts optimized for t
 * **[HOW]**  
   We deployed advanced state engines as the primary vehicle to bypass existing bottlenecks, removing legacy friction smoothly with zero downtime and securing a massive SaaS revenue stream.
 * **[CTA]**  
-  Protect and modernize your digital assets safely. Book a consultation at `https://calendly.com/t2060891/30min`.
+  Protect and modernize your digital assets safely. Book a consultation at `https://book.stripe.com/14AcMYaxf3iv7rs5vT04806`.
 
 ---
 
@@ -86,7 +86,7 @@ This document contains 12 highly structured, high-impact scripts optimized for t
 * **[HOW]**  
   I leverage a deep, 20-year technical foundation to design architectures that are resilient, scalable, and optimized for business outcomes from day one.
 * **[CTA]**  
-  Partner with a veteran strategy advisor to guide your technical roadmap. Book a consultation at `https://calendly.com/t2060891/30min`.
+  Partner with a veteran strategy advisor to guide your technical roadmap. Book a consultation at `https://book.stripe.com/14AcMYaxf3iv7rs5vT04806`.
 
 ---
 
@@ -102,7 +102,7 @@ This document contains 12 highly structured, high-impact scripts optimized for t
 * **[HOW]**  
   I took the entire technical weight off the CEO's shoulders. Leveraged system architecture as the vehicle, hired a competent development team to handle execution, and established a bulletproof operational setup—allowing the CEO to focus 100% on growth and scale the business safely to $50,000 MRR.
 * **[CTA]**  
-  Read the complete Zidy transformation story at `zidy.fun` or book directly at `https://calendly.com/t2060891/30min`.
+  Read the complete Zidy transformation story at `zidy.fun` or book directly at `https://book.stripe.com/14AcMYaxf3iv7rs5vT04806`.
 
 ---
 
