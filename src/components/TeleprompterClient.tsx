@@ -41,6 +41,9 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [customText, setCustomText] = useState("");
+  const [customTitle, setCustomTitle] = useState("");
+  const [isEditingCustom, setIsEditingCustom] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const activeWordRef = useRef<HTMLSpanElement | null>(null);
@@ -121,28 +124,67 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
     }
   }, [isFullscreen, activeScript, mode]);
 
-  // Spacebar and Arrow Up/Down keyboard shortcuts for RSVP playback
+  // Rich Studio Keyboard Shortcuts for RSVP playback
   useEffect(() => {
     if (!isFullscreen || !activeScript) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Spacebar: Play/Pause
       if (e.code === "Space") {
         e.preventDefault();
         setIsPlaying((prev) => !prev);
       }
+      // ArrowRight: Step one word forward, pause playback
+      if (e.code === "ArrowRight") {
+        e.preventDefault();
+        setIsPlaying(false);
+        setCurrentWordIndex((prev) => Math.min(rsvpWords.length - 1, prev + 1));
+      }
+      // ArrowLeft: Step one word backward, pause playback
+      if (e.code === "ArrowLeft") {
+        e.preventDefault();
+        setIsPlaying(false);
+        setCurrentWordIndex((prev) => Math.max(0, prev - 1));
+      }
+      // ArrowUp: Adjust Font Size larger
       if (e.code === "ArrowUp") {
+        e.preventDefault();
+        setFontSize((prev) => Math.min(60, prev + 2));
+      }
+      // ArrowDown: Adjust Font Size smaller
+      if (e.code === "ArrowDown") {
+        e.preventDefault();
+        setFontSize((prev) => Math.max(16, prev - 2));
+      }
+      // [ : Decrease prompter speed
+      if (e.code === "BracketLeft") {
+        e.preventDefault();
+        setSpeed((prev) => Math.max(1, prev - 1));
+      }
+      // ] : Increase prompter speed
+      if (e.code === "BracketRight") {
         e.preventDefault();
         setSpeed((prev) => Math.min(10, prev + 1));
       }
-      if (e.code === "ArrowDown") {
+      // Key R: Reset prompter to start
+      if (e.code === "KeyR") {
         e.preventDefault();
-        setSpeed((prev) => Math.max(1, prev - 1));
+        resetScript();
+      }
+      // Escape: Exit fullscreen studio prompter
+      if (e.code === "Escape") {
+        e.preventDefault();
+        setIsFullscreen(false);
+        setIsPlaying(false);
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        }
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isFullscreen, activeScript]);
+  }, [isFullscreen, activeScript, rsvpWords]);
 
   const enterFullscreen = () => {
     setIsFullscreen(true);
@@ -185,6 +227,37 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
     }
   };
 
+  const handleLaunchCustom = () => {
+    if (!customText.trim()) return;
+    const wordCount = customText.trim().split(/\s+/).length;
+    const estSec = Math.round((wordCount / 155) * 60);
+    
+    const tempScript: Script = {
+      id: 99,
+      title: customTitle.trim() || "Custom Studio Script",
+      duration: `${estSec}s`,
+      hook: "Custom Hook",
+      body: customText,
+      cta: "Custom CTA",
+      fullText: customText
+    };
+    setActiveScript(tempScript);
+    resetScript();
+  };
+
+  // Sync native fullscreen exits with React state
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isCurrentlyFullscreen = !!document.fullscreenElement;
+      setIsFullscreen(isCurrentlyFullscreen);
+      if (!isCurrentlyFullscreen) {
+        setIsPlaying(false);
+      }
+    };
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
+
   // If in fullscreen recorder mode, render the pitch-black OLED teleprompter
   if (isFullscreen && activeScript) {
     return (
@@ -208,6 +281,30 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-[0.08]">
           <div className="absolute top-[30%] left-[20%] w-[280px] h-[280px] rounded-full bg-[#00e5ff] blur-[80px] animate-pulse-slow" />
           <div className="absolute bottom-[25%] right-[20%] w-[220px] h-[220px] rounded-full bg-[#ffaa00] blur-[80px] animate-pulse-slow" style={{ animationDelay: "2s" }} />
+        </div>
+
+        {/* High-End Visual Focus Guide Band */}
+        {mode === "scroll" && (
+          <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[76px] bg-white/[0.015] border-y border-white/[0.03] pointer-events-none z-0 flex items-center justify-between px-12 select-none">
+            <span className="text-[7px] font-black tracking-[0.25em] text-primary opacity-25 uppercase">Focus Zone</span>
+            <span className="text-[7px] font-black tracking-[0.25em] text-primary opacity-25 uppercase">Focus Zone</span>
+          </div>
+        )}
+
+        {/* Floating Presenter Hotkey Guide Overlay */}
+        <div 
+          onClick={(e) => e.stopPropagation()}
+          className={`absolute top-6 right-6 p-4 rounded-2xl bg-black/45 border border-white/5 backdrop-blur-md flex flex-col gap-2 z-50 text-[10px] tracking-wide text-muted-foreground select-none transition-all duration-500 hover:opacity-100 hover:scale-100 ${
+            isPlaying ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
+          }`}
+        >
+          <span className="font-black text-white uppercase text-[8px] tracking-widest border-b border-white/5 pb-1 mb-1 block">Studio Hotkeys</span>
+          <div className="flex justify-between gap-6"><span>Space</span> <span className="font-bold text-primary">Play/Pause</span></div>
+          <div className="flex justify-between gap-6"><span>← / →</span> <span className="font-bold text-primary">Scrub Word</span></div>
+          <div className="flex justify-between gap-6"><span>[ / ]</span> <span className="font-bold text-primary">Speed Adj</span></div>
+          <div className="flex justify-between gap-6"><span>↑ / ↓</span> <span className="font-bold text-primary">Font Size</span></div>
+          <div className="flex justify-between gap-6"><span>R Key</span> <span className="font-bold text-primary">Reset Script</span></div>
+          <div className="flex justify-between gap-6"><span>Esc</span> <span className="font-bold text-primary">Exit Studio</span></div>
         </div>
 
         {/* Mode 1: Sentence-based RSVP View */}
@@ -494,42 +591,124 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
           </div>
         )}
 
-        {/* Dashboard: Script Selector Grid */}
+        {/* Dashboard: Script Selector Grid or Custom Workspace Editor */}
         {!activeScript ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {scripts.map((script) => (
+          isEditingCustom ? (
+            <div className="glass rounded-[2rem] border-white/5 p-8 bg-black/40 flex flex-col gap-6 w-full max-w-4xl mx-auto">
+              <div className="flex items-center justify-between border-b border-white/5 pb-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
+                  <h3 className="text-lg font-black text-white">Custom Script Workspace</h3>
+                </div>
+                <button
+                  onClick={() => setIsEditingCustom(false)}
+                  className="text-xs font-black uppercase tracking-wider text-muted-foreground hover:text-white transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">Script Title</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Scaling bottlenecks in SaaS systems"
+                  value={customTitle}
+                  onChange={(e) => setCustomTitle(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white font-bold placeholder-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-all font-sans"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">Script Text (RSVP Reader Format)</label>
+                <textarea
+                  placeholder="Write or paste your script content here. The speech coach pacing engine will automatically adjust focus intervals on punctuation and power words..."
+                  rows={8}
+                  value={customText}
+                  onChange={(e) => setCustomText(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm text-white leading-relaxed placeholder-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-all font-sans"
+                />
+              </div>
+
+              <div className="flex items-center justify-between border-t border-white/5 pt-6 mt-2">
+                <span className="text-[10px] font-bold text-muted-foreground uppercase">
+                  {customText.trim() ? `${customText.trim().split(/\s+/).length} Words` : "0 Words"} • Est. {customText.trim() ? Math.round((customText.trim().split(/\s+/).length / 155) * 60) : 0}s Duration
+                </span>
+                <button
+                  onClick={handleLaunchCustom}
+                  disabled={!customText.trim()}
+                  className="px-6 py-3 rounded-full bg-primary text-black font-black text-xs uppercase tracking-widest hover:scale-[1.03] active:scale-[0.97] disabled:opacity-40 disabled:pointer-events-none transition-all cursor-pointer shadow-[0_0_20px_rgba(0,229,255,0.2)] border-none"
+                >
+                  Launch Prompter
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Custom script draft card */}
               <div
-                key={script.id}
                 onClick={() => {
-                  setActiveScript(script);
-                  resetScript();
+                  setIsEditingCustom(true);
                 }}
-                className="glass rounded-3xl border-white/5 p-6 hover:border-primary/20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,229,255,0.03)] cursor-pointer group bg-black/10 flex flex-col justify-between min-h-[220px]"
+                className="glass rounded-3xl border border-dashed border-primary/30 p-6 hover:border-primary/60 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,229,255,0.04)] cursor-pointer group bg-primary/[0.01] flex flex-col justify-between min-h-[220px]"
               >
                 <div>
                   <div className="flex justify-between items-start gap-4 mb-4">
                     <span className="text-[10px] font-black bg-primary/10 border border-primary/20 text-primary px-2.5 py-1 rounded-full uppercase tracking-wider">
-                      Script {script.id}
+                      Interactive Workspace
                     </span>
-                    <span className="text-[10px] font-bold text-muted-foreground/80 bg-white/5 px-2 py-1 rounded-full">
-                      {script.duration}
+                    <span className="text-[10px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full animate-pulse">
+                      Studio Draft
                     </span>
                   </div>
-                  <h3 className="text-xl font-black tracking-tight text-white/90 group-hover:text-primary transition-colors line-clamp-2 mb-3">
-                    {script.title}
+                  <h3 className="text-xl font-black tracking-tight text-white/90 group-hover:text-primary transition-colors mb-3">
+                    Draft a Custom Script
                   </h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
-                    {script.hook}
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Type, paste, or rewrite your custom video script instantly to launch it in OLED teleprompter mode.
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span>Open Prompter</span>
-                  <Play size={12} />
+                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-primary">
+                  <span>Open Draft Workspace</span>
+                  <Play size={12} className="group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
-            ))}
-          </div>
+
+              {scripts.map((script) => (
+                <div
+                  key={script.id}
+                  onClick={() => {
+                    setActiveScript(script);
+                    resetScript();
+                  }}
+                  className="glass rounded-3xl border-white/5 p-6 hover:border-primary/20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,229,255,0.03)] cursor-pointer group bg-black/10 flex flex-col justify-between min-h-[220px]"
+                >
+                  <div>
+                    <div className="flex justify-between items-start gap-4 mb-4">
+                      <span className="text-[10px] font-black bg-primary/10 border border-primary/20 text-primary px-2.5 py-1 rounded-full uppercase tracking-wider">
+                        Script {script.id}
+                      </span>
+                      <span className="text-[10px] font-bold text-muted-foreground/80 bg-white/5 px-2 py-1 rounded-full">
+                        {script.duration}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-black tracking-tight text-white/90 group-hover:text-primary transition-colors line-clamp-2 mb-3">
+                      {script.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                      {script.hook}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span>Open Prompter</span>
+                    <Play size={12} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )
         ) : (
           /* Prompter Sandbox & Settings Control Center */
           <>
