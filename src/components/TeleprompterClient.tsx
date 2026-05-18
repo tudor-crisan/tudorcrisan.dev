@@ -35,7 +35,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
   const [activeScript, setActiveScript] = useState<Script | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(3);
-  const [fontSize, setFontSize] = useState(38); // in pixels
+  const [fontSize, setFontSize] = useState(32); // in pixels
   const [mode, setMode] = useState<"scroll" | "step">("scroll");
   const [currentStep, setCurrentStep] = useState<"hook" | "body" | "cta" | "done">("hook");
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -245,14 +245,6 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                             color: "#ffffff",
                             textShadow: "0 0 20px rgba(255, 255, 255, 0.80)",
                           }
-                      : isPower
-                      ? {
-                          background: "linear-gradient(135deg, #00e5ff 30%, #ffaa00 90%)",
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                          backgroundClip: "text",
-                          filter: "drop-shadow(0 0 8px rgba(0, 229, 255, 0.25))",
-                        }
                       : {
                           color: "#ffffff",
                         }),
@@ -419,8 +411,8 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                 </div>
                 <input
                   type="range"
-                  min="24"
-                  max="80"
+                  min="16"
+                  max="60"
                   value={fontSize}
                   onChange={(e) => setFontSize(parseInt(e.target.value))}
                   className="w-full accent-primary bg-black/30 h-1.5 rounded-lg appearance-none cursor-pointer"
