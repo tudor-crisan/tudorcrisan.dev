@@ -313,60 +313,136 @@
       inset: 0;
       background-color: #000000;
       z-index: 999999;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       user-select: none;
       font-family: 'Outfit', sans-serif;
+      overflow: hidden;
     }
 
     body.teleprompter-mode .rsvp-player {
       display: flex;
     }
 
-    .word-active {
-      font-size: 84px;
-      font-weight: 900;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: -2px;
-      line-height: 1.1;
-      background: linear-gradient(135deg, #00e5ff 20%, #ffaa00 50%, #00e5ff 80%);
+    /* Scrollable Text Viewport for RSVP sentences */
+    .rsvp-text-viewport {
+      width: 100%;
+      max-width: 1100px;
+      height: 75vh;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+      padding: 35vh 40px; /* high top/bottom padding to allow perfect centering scroll */
+      box-sizing: border-box;
+      gap: 16px 20px;
+      z-index: 10;
+      scroll-behavior: smooth;
+    }
+
+    .rsvp-text-viewport::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Individual RSVP word token span */
+    .rsvp-word {
+      display: inline-block;
+      font-size: 64px; /* giant premium typography */
+      line-height: 1.2;
+      font-weight: 700;
+      transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+      opacity: 0.85;
+      letter-spacing: -1px;
+    }
+
+    /* Regular non-power words are white */
+    .rsvp-word.reg-word {
+      color: #ffffff;
+    }
+
+    /* Predefined power words get the gorgeous teal/gold gradient */
+    .rsvp-word.power-word {
+      background: linear-gradient(135deg, #00e5ff 30%, #ffaa00 90%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-fill-color: transparent;
-      filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.7)) drop-shadow(0 0 35px rgba(255, 170, 0, 0.5));
-      max-width: 90%;
-      word-wrap: break-word;
-      transition: all 0.05s ease;
+      font-weight: 900;
+      filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.3));
     }
 
-    .word-active.pop-anim {
-      animation: wordPop 0.08s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    /* Words that are already read are dimmed and slightly blurred */
+    .rsvp-word.word-past {
+      opacity: 0.12 !important;
+      transform: scale(0.94);
+      filter: blur(1px);
     }
 
-    @keyframes wordPop {
+    /* Active highlighted word */
+    .rsvp-word.word-active {
+      opacity: 1.0 !important;
+      transform: scale(1.16);
+      font-weight: 900;
+    }
+
+    .rsvp-word.word-active.reg-word {
+      text-shadow: 0 0 25px rgba(255, 255, 255, 0.85);
+    }
+
+    .rsvp-word.word-active.power-word {
+      filter: drop-shadow(0 0 18px rgba(0, 229, 255, 0.95)) drop-shadow(0 0 35px rgba(255, 170, 0, 0.7));
+    }
+
+    /* Background glow movement spheres */
+    .teleprompter-bg-glow {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.14; /* extremely subtle organic mesh */
+    }
+
+    .glow-sphere {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+    }
+
+    .sphere-cyan {
+      top: 25%;
+      left: 15%;
+      width: 480px;
+      height: 480px;
+      background-color: #00e5ff;
+      animation: pulse-slow 9s infinite ease-in-out alternate;
+    }
+
+    .sphere-gold {
+      bottom: 20%;
+      right: 15%;
+      width: 380px;
+      height: 380px;
+      background-color: #ffaa00;
+      animation: pulse-slow 13s infinite ease-in-out alternate;
+    }
+
+    @keyframes pulse-slow {
       0% {
-        transform: scale(0.85);
-        opacity: 0.5;
+        transform: scale(0.85) translate(0, 0);
+        opacity: 0.4;
+      }
+      50% {
+        transform: scale(1.12) translate(40px, -30px);
+        opacity: 0.7;
       }
       100% {
-        transform: scale(1);
-        opacity: 1;
+        transform: scale(0.92) translate(-30px, 40px);
+        opacity: 0.5;
       }
-    }
-
-    .word-next {
-      font-size: 26px;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.15);
-      margin-top: 60px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      max-width: 80%;
-      text-align: center;
     }
 
     /* Standard Segment Card Styling */
@@ -671,8 +747,14 @@
 
     <!-- Word-by-Word Teleprompter RSVP Overlay -->
     <div class="rsvp-player" id="rsvp-player">
-      <div class="word-active pop-anim" id="rsvp-word">WORD</div>
-      <div class="word-next" id="rsvp-next">next</div>
+      <!-- Animated background glow spheres matching home hero section -->
+      <div class="teleprompter-bg-glow">
+        <div class="glow-sphere sphere-cyan"></div>
+        <div class="glow-sphere sphere-gold"></div>
+      </div>
+      
+      <!-- Scrollable sentence container -->
+      <div class="rsvp-text-viewport" id="rsvp-viewport"></div>
     </div>
 
     <div class="reader-area" id="scroll-container">
@@ -934,6 +1016,21 @@
     let isScrolling = false;
     let scrollSpeed = 3;
 
+    // Power words set for high-impact visual representation
+    const powerWordsSet = new Set([
+      'founder', 'founders', 'developer', 'developers', 'systems', 'system', 'people', 
+      'problem', 'problems', 'ceos', 'ceo', 'bottlenecks', 'bottleneck', 'needle', 
+      'deals', 'raising', 'capital', 'revenue', 'scaling', 'scale', 'product', 
+      'release', 'disaster', 'zidy', 'zidy.fun', 'mrr', 'businesses', 'broken', 
+      'prototype', 'consultant', 'vetting', 'babysitting', 'outcome', 'outcomes', 
+      'strategy', 'execution', 'bugs', 'quality', 'delivery', 'firefighting', 'hours'
+    ]);
+
+    function isPowerWord(word) {
+      const clean = word.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()—?]/g,"");
+      return powerWordsSet.has(clean);
+    }
+
     function prepareRSVPWords() {
       const activeCard = document.querySelector('.script-card.active');
       if (!activeCard) return;
@@ -944,9 +1041,22 @@
         fullText += " " + seg.innerText;
       });
       
-      // Clean and split words
       rsvpWords = fullText.trim().split(/\s+/).filter(w => w.length > 0);
       currentWordIndex = 0;
+
+      // Render all words into the viewport
+      const viewport = document.getElementById('rsvp-viewport');
+      viewport.innerHTML = ''; // clear previous
+
+      rsvpWords.forEach((word, idx) => {
+        const isPower = isPowerWord(word);
+        const span = document.createElement('span');
+        span.id = `word-${idx}`;
+        span.className = `rsvp-word ${isPower ? 'power-word' : 'reg-word'}`;
+        span.innerText = word;
+        span.style.fontSize = currentFontSize + 'px';
+        viewport.appendChild(span);
+      });
     }
 
     function togglePrompter() {
@@ -962,15 +1072,11 @@
           document.documentElement.requestFullscreen().catch(() => {});
         }
         
-        // Prepare words
+        // Prepare words and render them
         prepareRSVPWords();
         
-        // Initial setup
-        const wordEl = document.getElementById('rsvp-word');
-        const nextEl = document.getElementById('rsvp-next');
-        wordEl.innerText = rsvpWords[0] || "";
-        nextEl.innerText = rsvpWords[1] || "";
-        wordEl.style.fontSize = currentFontSize + 'px';
+        // Setup initial highlight state
+        highlightActiveWord();
         
         // Start auto-scroll after a short delay
         setTimeout(() => {
@@ -984,12 +1090,29 @@
       }
     }
 
+    function highlightActiveWord() {
+      rsvpWords.forEach((_, idx) => {
+        const el = document.getElementById(`word-${idx}`);
+        if (!el) return;
+
+        el.className = el.className.replace(/\b(word-past|word-active)\b/g, '').trim();
+
+        if (idx < currentWordIndex) {
+          el.classList.add('word-past');
+        } else if (idx === currentWordIndex) {
+          el.classList.add('word-active');
+          // Smooth scroll active word to center of the viewport
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
     function adjustFont(delta) {
-      currentFontSize = Math.max(24, Math.min(140, currentFontSize + delta));
-      const wordEl = document.getElementById('rsvp-word');
-      if (wordEl) {
-        wordEl.style.fontSize = currentFontSize + 'px';
-      }
+      currentFontSize = Math.max(24, Math.min(100, currentFontSize + delta));
+      const words = document.querySelectorAll('.rsvp-word');
+      words.forEach(el => {
+        el.style.fontSize = currentFontSize + 'px';
+      });
     }
 
     function updateSpeed(val) {
@@ -1017,28 +1140,17 @@
       const wpm = 160 + (scrollSpeed * 45);
       const intervalMs = (60 / wpm) * 1000;
       
-      const wordEl = document.getElementById('rsvp-word');
-      const nextEl = document.getElementById('rsvp-next');
-      
       rsvpInterval = setInterval(() => {
         if (!isScrolling) return;
         
         currentWordIndex++;
         if (currentWordIndex >= rsvpWords.length) {
           stopRSVP();
-          wordEl.innerText = "FINISHED";
-          nextEl.innerText = "Tap to restart or reload page";
           isScrolling = false;
           return;
         }
         
-        wordEl.innerText = rsvpWords[currentWordIndex];
-        nextEl.innerText = rsvpWords[currentWordIndex + 1] || "";
-        
-        // Trigger CSS pop animation
-        wordEl.classList.remove('pop-anim');
-        void wordEl.offsetWidth; // trigger reflow
-        wordEl.classList.add('pop-anim');
+        highlightActiveWord();
       }, intervalMs);
     }
 

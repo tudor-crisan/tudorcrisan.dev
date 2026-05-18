@@ -17,6 +17,20 @@ interface TeleprompterClientProps {
   scripts: Script[];
 }
 
+const powerWordsSet = new Set([
+  'founder', 'founders', 'developer', 'developers', 'systems', 'system', 'people', 
+  'problem', 'problems', 'ceos', 'ceo', 'bottlenecks', 'bottleneck', 'needle', 
+  'deals', 'raising', 'capital', 'revenue', 'scaling', 'scale', 'product', 
+  'release', 'disaster', 'zidy', 'zidy.fun', 'mrr', 'businesses', 'broken', 
+  'prototype', 'consultant', 'vetting', 'babysitting', 'outcome', 'outcomes', 
+  'strategy', 'execution', 'bugs', 'quality', 'delivery', 'firefighting', 'hours'
+]);
+
+function isPowerWord(word: string) {
+  const clean = word.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()—?]/g,"");
+  return powerWordsSet.has(clean);
+}
+
 export default function TeleprompterClient({ scripts }: TeleprompterClientProps) {
   const [activeScript, setActiveScript] = useState<Script | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -29,6 +43,14 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const activeWordRef = useRef<HTMLSpanElement | null>(null);
+
+  // Smooth scroll active word to center of screen when currentWordIndex changes
+  useEffect(() => {
+    if (activeWordRef.current) {
+      activeWordRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [currentWordIndex]);
 
   // Split script words dynamically
   const rsvpWords = React.useMemo(() => {
@@ -141,28 +163,65 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         className="fixed inset-0 bg-black text-white z-[99999] overflow-hidden flex flex-col justify-center items-center cursor-pointer select-none font-sans"
         style={{ backgroundColor: "#000000" }}
       >
-        {/* Mode 1: Word-by-Word RSVP View */}
+        {/* Animated background glow spheres matching home hero section */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-14">
+          <div className="absolute top-[25%] left-[15%] w-[480px] h-[480px] rounded-full bg-[#00e5ff] blur-[120px] animate-pulse-slow" />
+          <div className="absolute bottom-[20%] right-[15%] w-[380px] h-[380px] rounded-full bg-[#ffaa00] blur-[120px] animate-pulse-slow" style={{ animationDelay: "2s" }} />
+        </div>
+
+        {/* Mode 1: Sentence-based RSVP View */}
         {mode === "scroll" && (
-          <div className="w-full max-w-5xl px-8 text-center flex flex-col justify-center items-center min-h-[60vh] select-none">
-            <div 
-              key={currentWordIndex}
-              className="word-pop-animation font-black leading-tight tracking-tight text-center uppercase transition-all duration-300 max-w-4xl"
-              style={{ 
-                fontSize: `${fontSize}px`,
-                letterSpacing: "-2px",
-                background: "linear-gradient(135deg, #00e5ff 20%, #ffaa00 50%, #00e5ff 80%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                filter: "drop-shadow(0 0 15px rgba(0, 229, 255, 0.7)) drop-shadow(0 0 35px rgba(255, 170, 0, 0.5))",
-              }}
-            >
-              {rsvpWords[currentWordIndex] || "FINISHED"}
-            </div>
-            
-            <div className="text-2xl font-bold uppercase tracking-wider text-white/15 mt-16 max-w-2xl text-center select-none">
-              {rsvpWords[currentWordIndex + 1] || "Tap to restart"}
-            </div>
+          <div className="w-full max-w-5xl h-[75vh] overflow-y-auto px-8 py-[35vh] flex flex-wrap content-center justify-center gap-x-5 gap-y-4 scroll-behavior-smooth scrollbar-none select-none scroll-smooth relative z-10">
+            {rsvpWords.map((word, idx) => {
+              const isPower = isPowerWord(word);
+              const isActive = idx === currentWordIndex;
+              const isPast = idx < currentWordIndex;
+
+              return (
+                <span
+                  key={idx}
+                  ref={isActive ? activeWordRef : null}
+                  className={`inline-block font-sans transition-all duration-300 ${
+                    isActive
+                      ? "scale-[1.16] opacity-100 font-black"
+                      : isPast
+                      ? "scale-[0.94] opacity-[0.12] blur-[1px]"
+                      : "opacity-[0.85] font-bold"
+                  }`}
+                  style={{
+                    fontSize: `${fontSize}px`,
+                    letterSpacing: "-1px",
+                    lineHeight: "1.2",
+                    ...(isActive
+                      ? isPower
+                        ? {
+                            background: "linear-gradient(135deg, #00e5ff 30%, #ffaa00 90%)",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                            backgroundClip: "text",
+                            filter: "drop-shadow(0 0 18px rgba(0, 229, 255, 0.95)) drop-shadow(0 0 35px rgba(255, 170, 0, 0.7))",
+                          }
+                        : {
+                            color: "#ffffff",
+                            textShadow: "0 0 25px rgba(255, 255, 255, 0.85)",
+                          }
+                      : isPower
+                      ? {
+                          background: "linear-gradient(135deg, #00e5ff 30%, #ffaa00 90%)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                          backgroundClip: "text",
+                          filter: "drop-shadow(0 0 10px rgba(0, 229, 255, 0.3))",
+                        }
+                      : {
+                          color: "#ffffff",
+                        }),
+                  }}
+                >
+                  {word}
+                </span>
+              );
+            })}
           </div>
         )}
 
