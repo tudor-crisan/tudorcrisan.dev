@@ -258,72 +258,71 @@
       display: none !important;
     }
 
-    body.teleprompter-mode .hud-overlay {
-      display: none !important;
-    }
-    
     body.teleprompter-mode .reader-area {
-      padding: 40vh 24px !important;
-      background-color: #000000 !important;
-      background-image: none !important;
-      overflow-y: scroll !important;
-      scroll-behavior: smooth !important;
-      position: fixed !important;
-      inset: 0 !important;
-      z-index: 99999 !important;
-    }
-
-    body.teleprompter-mode .reader-area::before {
       display: none !important;
     }
 
-    body.teleprompter-mode .script-container {
-      max-width: 800px !important;
-      margin: 0 auto !important;
-      text-align: center !important;
+    /* Word-by-Word Teleprompter RSVP Overlay */
+    .rsvp-player {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: #000000;
+      z-index: 999999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      font-family: 'Outfit', sans-serif;
     }
 
-    body.teleprompter-mode .segment {
-      margin-bottom: 80px !important;
-      padding: 0 !important;
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      opacity: 1 !important;
-      transform: none !important;
-      filter: none !important;
-      transition: none !important;
+    body.teleprompter-mode .rsvp-player {
+      display: flex;
     }
 
-    body.teleprompter-mode .segment-label {
-      display: none !important;
+    .word-active {
+      font-size: 84px;
+      font-weight: 900;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #00e5ff 20%, #ffaa00 50%, #00e5ff 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.7)) drop-shadow(0 0 35px rgba(255, 170, 0, 0.5));
+      max-width: 90%;
+      word-wrap: break-word;
+      transition: all 0.05s ease;
     }
 
-    body.teleprompter-mode .segment-content {
-      color: #ffffff !important;
-      font-size: 56px !important;
-      line-height: 1.5 !important;
-      font-weight: 900 !important;
-      text-shadow: none !important;
-      opacity: 1 !important;
+    .word-active.pop-anim {
+      animation: wordPop 0.08s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
     }
 
-    body.teleprompter-mode .segment.focus-active .segment-content {
-      color: #ffffff !important;
-      text-shadow: none !important;
-      opacity: 1 !important;
+    @keyframes wordPop {
+      0% {
+        transform: scale(0.85);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
-    body.teleprompter-mode .segment.focus-active:has(.label-cta) .segment-content {
-      color: #ffffff !important;
-      text-shadow: none !important;
-      opacity: 1 !important;
-    }
-
-    body.teleprompter-mode .segment.focus-active .cta-link {
-      color: #ffffff !important;
-      text-decoration: underline !important;
-      text-shadow: none !important;
+    .word-next {
+      font-size: 26px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.15);
+      margin-top: 60px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      max-width: 80%;
+      text-align: center;
     }
 
     /* Standard Segment Card Styling */
@@ -628,7 +627,11 @@
       </div>
     </div>
 
-
+    <!-- Word-by-Word Teleprompter RSVP Overlay -->
+    <div class="rsvp-player" id="rsvp-player">
+      <div class="word-active pop-anim" id="rsvp-word">WORD</div>
+      <div class="word-next" id="rsvp-next">next</div>
+    </div>
 
     <div class="reader-area" id="scroll-container">
       <div class="script-container" id="script-target">
@@ -830,7 +833,7 @@
   </div>
 
   <script>
-    let currentFontSize = 18;
+    let currentFontSize = 80;
     const titles = [
       "",
       "Script 1: Burning hours on developers?",
@@ -878,6 +881,27 @@
       }
     }
 
+    let rsvpWords = [];
+    let currentWordIndex = 0;
+    let rsvpInterval = null;
+    let isScrolling = false;
+    let scrollSpeed = 3;
+
+    function prepareRSVPWords() {
+      const activeCard = document.querySelector('.script-card.active');
+      if (!activeCard) return;
+      
+      const segments = activeCard.querySelectorAll('.segment-content');
+      let fullText = "";
+      segments.forEach(seg => {
+        fullText += " " + seg.innerText;
+      });
+      
+      // Clean and split words
+      rsvpWords = fullText.trim().split(/\s+/).filter(w => w.length > 0);
+      currentWordIndex = 0;
+    }
+
     function togglePrompter() {
       const isPrompter = document.body.classList.toggle('teleprompter-mode');
       const toggleBtn = document.getElementById('prompter-toggle');
@@ -891,14 +915,20 @@
           document.documentElement.requestFullscreen().catch(() => {});
         }
         
-        // Reset scroll position
-        const scrollContainer = document.getElementById('scroll-container');
-        scrollContainer.scrollTop = 0;
+        // Prepare words
+        prepareRSVPWords();
+        
+        // Initial setup
+        const wordEl = document.getElementById('rsvp-word');
+        const nextEl = document.getElementById('rsvp-next');
+        wordEl.innerText = rsvpWords[0] || "";
+        nextEl.innerText = rsvpWords[1] || "";
+        wordEl.style.fontSize = currentFontSize + 'px';
         
         // Start auto-scroll after a short delay
         setTimeout(() => {
           isScrolling = true;
-          startScrollLoop();
+          startRSVP();
         }, 1500);
       } else {
         toggleBtn.innerText = "Teleprompter Mode";
@@ -908,53 +938,72 @@
     }
 
     function adjustFont(delta) {
-      currentFontSize = Math.max(12, Math.min(80, currentFontSize + delta));
-      const contents = document.querySelectorAll('.segment-content');
-      contents.forEach(el => {
-        el.style.fontSize = currentFontSize + 'px';
-      });
+      currentFontSize = Math.max(24, Math.min(140, currentFontSize + delta));
+      const wordEl = document.getElementById('rsvp-word');
+      if (wordEl) {
+        wordEl.style.fontSize = currentFontSize + 'px';
+      }
     }
-
-    // Auto-Scroll Engine
-    let isScrolling = false;
-    let scrollSpeed = 3;
-    let scrollInterval = null;
 
     function updateSpeed(val) {
       scrollSpeed = parseInt(val);
       document.getElementById('speed-val').innerText = val + 'x';
+      if (isScrolling) {
+        stopRSVP();
+        startRSVP();
+      }
     }
 
     function toggleScroll() {
       isScrolling = !isScrolling;
       if (isScrolling) {
-        startScrollLoop();
+        startRSVP();
       } else {
-        stopScrollLoop();
+        stopRSVP();
       }
     }
 
-    function startScrollLoop() {
-      if (scrollInterval) cancelAnimationFrame(scrollInterval);
-      const scrollContainer = document.getElementById('scroll-container');
+    function startRSVP() {
+      if (rsvpInterval) clearInterval(rsvpInterval);
       
-      function scrollStep() {
+      // WPM formula: 160 + (scrollSpeed * 45)
+      const wpm = 160 + (scrollSpeed * 45);
+      const intervalMs = (60 / wpm) * 1000;
+      
+      const wordEl = document.getElementById('rsvp-word');
+      const nextEl = document.getElementById('rsvp-next');
+      
+      rsvpInterval = setInterval(() => {
         if (!isScrolling) return;
-        scrollContainer.scrollTop += (scrollSpeed * 0.45);
-        scrollInterval = requestAnimationFrame(scrollStep);
-      }
-      scrollInterval = requestAnimationFrame(scrollStep);
+        
+        currentWordIndex++;
+        if (currentWordIndex >= rsvpWords.length) {
+          stopRSVP();
+          wordEl.innerText = "FINISHED";
+          nextEl.innerText = "Tap to restart or reload page";
+          isScrolling = false;
+          return;
+        }
+        
+        wordEl.innerText = rsvpWords[currentWordIndex];
+        nextEl.innerText = rsvpWords[currentWordIndex + 1] || "";
+        
+        // Trigger CSS pop animation
+        wordEl.classList.remove('pop-anim');
+        void wordEl.offsetWidth; // trigger reflow
+        wordEl.classList.add('pop-anim');
+      }, intervalMs);
     }
 
-    function stopScrollLoop() {
-      if (scrollInterval) {
-        cancelAnimationFrame(scrollInterval);
-        scrollInterval = null;
+    function stopRSVP() {
+      if (rsvpInterval) {
+        clearInterval(rsvpInterval);
+        rsvpInterval = null;
       }
     }
 
     // Click anywhere on screen to play/pause in teleprompter mode
-    document.getElementById('scroll-container').addEventListener('click', (e) => {
+    document.getElementById('rsvp-player').addEventListener('click', (e) => {
       if (document.body.classList.contains('teleprompter-mode')) {
         toggleScroll();
       }

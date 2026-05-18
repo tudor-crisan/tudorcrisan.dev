@@ -21,31 +21,42 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
   const [activeScript, setActiveScript] = useState<Script | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(3);
-  const [fontSize, setFontSize] = useState(48); // in pixels
+  const [fontSize, setFontSize] = useState(80); // in pixels
   const [mode, setMode] = useState<"scroll" | "step">("scroll");
   const [currentStep, setCurrentStep] = useState<"hook" | "body" | "cta" | "done">("hook");
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Smooth Auto-Scrolling logic via requestAnimationFrame
+  // Split script words dynamically
+  const rsvpWords = React.useMemo(() => {
+    if (!activeScript) return [];
+    return activeScript.fullText.trim().split(/\s+/).filter(w => w.length > 0);
+  }, [activeScript]);
+
+  // Word-by-Word RSVP Playback Loop
   useEffect(() => {
-    if (mode !== "scroll" || !isPlaying || !isFullscreen) return;
+    if (!isPlaying || !isFullscreen || !activeScript || rsvpWords.length === 0) return;
 
-    let animationFrameId: number;
-    const scroll = () => {
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.scrollTop += speed * 0.4;
-      }
-      animationFrameId = requestAnimationFrame(scroll);
-    };
+    // WPM = 160 + speed * 45
+    const wpm = 160 + speed * 45;
+    const intervalMs = (60 / wpm) * 1000;
 
-    animationFrameId = requestAnimationFrame(scroll);
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [isPlaying, speed, mode, isFullscreen]);
+    const timer = setInterval(() => {
+      setCurrentWordIndex((prev) => {
+        const next = prev + 1;
+        if (next >= rsvpWords.length) {
+          setIsPlaying(false);
+          return prev;
+        }
+        return next;
+      });
+    }, intervalMs);
+
+    return () => clearInterval(timer);
+  }, [isPlaying, isFullscreen, speed, activeScript, rsvpWords]);
 
   // Handle Fullscreen UI instructions fade-out
   useEffect(() => {
@@ -58,9 +69,36 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
     }
   }, [isFullscreen, activeScript, mode]);
 
+  // Spacebar and Arrow Up/Down keyboard shortcuts for RSVP playback
+  useEffect(() => {
+    if (!isFullscreen || !activeScript) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        setIsPlaying((prev) => !prev);
+      }
+      if (e.code === "ArrowUp") {
+        e.preventDefault();
+        setSpeed((prev) => Math.min(10, prev + 1));
+      }
+      if (e.code === "ArrowDown") {
+        e.preventDefault();
+        setSpeed((prev) => Math.max(1, prev - 1));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isFullscreen, activeScript]);
+
   const enterFullscreen = () => {
     setIsFullscreen(true);
-    setIsPlaying(true);
+    setCurrentWordIndex(0);
+    // Give a short delay for preparation
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 1500);
     // Request native browser fullscreen if supported
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().catch(() => {});
@@ -68,7 +106,6 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
   };
 
   const handleScreenTouch = (e: React.MouseEvent | React.TouchEvent) => {
-    // Avoid triggering when tapping controls in dashboard mode
     if (!isFullscreen) return;
 
     if (mode === "scroll") {
@@ -89,6 +126,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
 
   const resetScript = () => {
     setIsPlaying(false);
+    setCurrentWordIndex(0);
     setCurrentStep("hook");
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = 0;
@@ -103,27 +141,28 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         className="fixed inset-0 bg-black text-white z-[99999] overflow-hidden flex flex-col justify-center items-center cursor-pointer select-none font-sans"
         style={{ backgroundColor: "#000000" }}
       >
-        {/* Mode 1: Smooth Scrolling View */}
+        {/* Mode 1: Word-by-Word RSVP View */}
         {mode === "scroll" && (
-          <div
-            ref={scrollContainerRef}
-            className="w-full max-w-4xl h-[70vh] overflow-y-auto px-6 py-32 text-center scrollbar-none"
-            style={{
-              scrollBehavior: "smooth",
-              maskImage: "linear-gradient(to bottom, transparent 0%, white 25%, white 75%, transparent 100%)",
-              WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, white 25%, white 75%, transparent 100%)"
-            }}
-          >
-            {/* Top spacing to let text scroll up */}
-            <div className="h-[25vh]" />
+          <div className="w-full max-w-5xl px-8 text-center flex flex-col justify-center items-center min-h-[60vh] select-none">
             <div 
-              className="font-black leading-tight tracking-tight whitespace-pre-line text-white transition-all duration-300"
-              style={{ fontSize: `${fontSize}px` }}
+              key={currentWordIndex}
+              className="word-pop-animation font-black leading-tight tracking-tight text-center uppercase transition-all duration-300 max-w-4xl"
+              style={{ 
+                fontSize: `${fontSize}px`,
+                letterSpacing: "-2px",
+                background: "linear-gradient(135deg, #00e5ff 20%, #ffaa00 50%, #00e5ff 80%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                filter: "drop-shadow(0 0 15px rgba(0, 229, 255, 0.7)) drop-shadow(0 0 35px rgba(255, 170, 0, 0.5))",
+              }}
             >
-              {activeScript.fullText}
+              {rsvpWords[currentWordIndex] || "FINISHED"}
             </div>
-            {/* Bottom spacing */}
-            <div className="h-[40vh]" />
+            
+            <div className="text-2xl font-bold uppercase tracking-wider text-white/15 mt-16 max-w-2xl text-center select-none">
+              {rsvpWords[currentWordIndex + 1] || "Tap to restart"}
+            </div>
           </div>
         )}
 
