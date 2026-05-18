@@ -267,7 +267,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         style={{ backgroundColor: "#000000" }}
       >
         {/* Top visual timeline progress bar */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-white/[0.03] z-50 pointer-events-none">
+        <div className={`absolute top-0 left-0 right-0 h-1 bg-white/[0.03] z-50 pointer-events-none transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100"}`}>
           <div 
             className="h-full bg-gradient-to-r from-primary to-[#00b8cc] transition-all duration-300 shadow-[0_0_12px_rgba(0,229,255,0.6)]"
             style={{ width: `${rsvpWords.length > 0 ? (currentWordIndex / rsvpWords.length) * 100 : 0}%` }}
@@ -275,26 +275,26 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         </div>
 
         {/* Replicated Tudor Profile Photo Glow - Scaled down for perfect black edge boundaries */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-gradient-to-tr from-primary to-secondary rounded-[2.5rem] opacity-[0.12] blur-3xl animate-pulse pointer-events-none z-0" />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-gradient-to-tr from-primary to-secondary rounded-[2.5rem] blur-3xl pointer-events-none z-0 transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-[0.12] animate-pulse"}`} />
 
         {/* Animated background glow spheres matching home hero section */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-[0.08]">
+        <div className={`absolute inset-0 overflow-hidden pointer-events-none z-0 transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-[0.08]"}`}>
           <div className="absolute top-[30%] left-[20%] w-[280px] h-[280px] rounded-full bg-[#00e5ff] blur-[80px] animate-pulse-slow" />
           <div className="absolute bottom-[25%] right-[20%] w-[220px] h-[220px] rounded-full bg-[#ffaa00] blur-[80px] animate-pulse-slow" style={{ animationDelay: "2s" }} />
         </div>
 
         {/* High-End Visual Focus Guide Band */}
         {mode === "scroll" && (
-          <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[76px] bg-white/[0.015] border-y border-white/[0.03] pointer-events-none z-0 flex items-center justify-between px-12 select-none">
+          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[76px] bg-white/[0.015] border-y border-white/[0.03] pointer-events-none z-0 flex items-center justify-between px-12 select-none transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100"}`}>
             <span className="text-[7px] font-black tracking-[0.25em] text-primary opacity-25 uppercase">Focus Zone</span>
             <span className="text-[7px] font-black tracking-[0.25em] text-primary opacity-25 uppercase">Focus Zone</span>
           </div>
         )}
 
-        {/* Floating Presenter Hotkey Guide Overlay */}
+        {/* Floating Presenter Hotkey Guide Overlay - Desktop Only, Hidden when Playing */}
         <div 
           onClick={(e) => e.stopPropagation()}
-          className={`absolute top-6 right-6 p-4 rounded-2xl bg-black/45 border border-white/5 backdrop-blur-md flex flex-col gap-2 z-50 text-[10px] tracking-wide text-muted-foreground select-none transition-all duration-500 hover:opacity-100 hover:scale-100 ${
+          className={`absolute top-6 right-6 p-4 rounded-2xl bg-black/45 border border-white/5 backdrop-blur-md flex-col gap-2 z-50 text-[10px] tracking-wide text-muted-foreground select-none transition-all duration-500 hover:opacity-100 hover:scale-100 hidden md:flex ${
             isPlaying ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
           }`}
         >
@@ -385,10 +385,10 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
           </div>
         )}
 
-        {/* Audio Visualizer Bar HUD (Simulated Pacing Indicator) */}
+        {/* Audio Visualizer Bar HUD (Simulated Pacing Indicator) - Completely hidden when playing */}
         <div 
-          className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex items-end gap-1 h-8 opacity-40 pointer-events-none z-10 transition-opacity duration-500 ${
-            isPlaying ? "opacity-30" : "opacity-15"
+          className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex items-end gap-1 h-8 pointer-events-none z-10 transition-all duration-500 ${
+            isPlaying ? "opacity-0 translate-y-4 pointer-events-none" : "opacity-15 translate-y-0"
           }`}
         >
           {Array.from({ length: 18 }).map((_, i) => {
@@ -410,13 +410,13 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
           })}
         </div>
 
-        {/* Floating HUD Controller Capsule */}
+        {/* Floating HUD Controller Capsule - Slides down out of screen cleanly when playing */}
         <div 
           onClick={(e) => e.stopPropagation()}
-          className={`fixed bottom-24 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full bg-black/40 border border-white/10 backdrop-blur-lg flex items-center gap-6 z-50 select-none transition-all duration-500 hover:opacity-100 hover:scale-100 ${
+          className={`fixed left-1/2 -translate-x-1/2 px-6 py-3 rounded-full bg-black/40 border border-white/10 backdrop-blur-lg flex items-center gap-6 z-50 select-none transition-all duration-500 ${
             isPlaying 
-              ? "opacity-0 scale-95 pointer-events-none hover:pointer-events-auto hover:opacity-100 hover:scale-100" 
-              : "opacity-100 scale-100"
+              ? "bottom-12 opacity-0 translate-y-12 pointer-events-none" 
+              : "bottom-24 opacity-100 translate-y-0"
           }`}
         >
           {/* Back/Close Button */}
