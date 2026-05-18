@@ -430,17 +430,34 @@
       animation: pulse-slow 13s infinite ease-in-out alternate;
     }
 
+    /* Tudor's Profile Photo Outer Neon Glow Layer replicated */
+    .profile-glow-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 650px;
+      height: 650px;
+      background: linear-gradient(135deg, #00e5ff, #ffaa00);
+      border-radius: 2.5rem;
+      filter: blur(110px);
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: 2;
+      animation: pulse-slow 7s infinite ease-in-out alternate;
+    }
+
     @keyframes pulse-slow {
       0% {
-        transform: scale(0.85) translate(0, 0);
+        transform: scale(0.85) translate(-50%, -50%) rotate(0deg);
         opacity: 0.4;
       }
       50% {
-        transform: scale(1.12) translate(40px, -30px);
+        transform: scale(1.12) translate(-45%, -55%) rotate(180deg);
         opacity: 0.7;
       }
       100% {
-        transform: scale(0.92) translate(-30px, 40px);
+        transform: scale(0.92) translate(-55%, -45%) rotate(360deg);
         opacity: 0.5;
       }
     }
@@ -747,6 +764,9 @@
 
     <!-- Word-by-Word Teleprompter RSVP Overlay -->
     <div class="rsvp-player" id="rsvp-player">
+      <!-- Animated home hero profile glow background replicated -->
+      <div class="profile-glow-bg"></div>
+
       <!-- Animated background glow spheres matching home hero section -->
       <div class="teleprompter-bg-glow">
         <div class="glow-sphere sphere-cyan"></div>
@@ -1050,11 +1070,20 @@
 
       rsvpWords.forEach((word, idx) => {
         const isPower = isPowerWord(word);
+        const isCapitalized = /^[A-Z]/.test(word) && idx > 0;
+        
+        let scaleFactor = 1.0;
+        if (isPower) scaleFactor = 1.25;
+        else if (isCapitalized) scaleFactor = 1.1;
+
         const span = document.createElement('span');
         span.id = `word-${idx}`;
         span.className = `rsvp-word ${isPower ? 'power-word' : 'reg-word'}`;
         span.innerText = word;
-        span.style.fontSize = currentFontSize + 'px';
+        
+        // Dynamic individual word font size based on word type
+        const wordFontSize = Math.round(currentFontSize * scaleFactor);
+        span.style.fontSize = wordFontSize + 'px';
         viewport.appendChild(span);
       });
     }
@@ -1109,9 +1138,19 @@
 
     function adjustFont(delta) {
       currentFontSize = Math.max(24, Math.min(100, currentFontSize + delta));
-      const words = document.querySelectorAll('.rsvp-word');
-      words.forEach(el => {
-        el.style.fontSize = currentFontSize + 'px';
+      rsvpWords.forEach((word, idx) => {
+        const el = document.getElementById(`word-${idx}`);
+        if (!el) return;
+        
+        const isPower = isPowerWord(word);
+        const isCapitalized = /^[A-Z]/.test(word) && idx > 0;
+        
+        let scaleFactor = 1.0;
+        if (isPower) scaleFactor = 1.25;
+        else if (isCapitalized) scaleFactor = 1.1;
+        
+        const wordFontSize = Math.round(currentFontSize * scaleFactor);
+        el.style.fontSize = wordFontSize + 'px';
       });
     }
 
@@ -1134,29 +1173,60 @@
     }
 
     function startRSVP() {
-      if (rsvpInterval) clearInterval(rsvpInterval);
-      
-      // WPM formula: 160 + (scrollSpeed * 45)
-      const wpm = 160 + (scrollSpeed * 45);
-      const intervalMs = (60 / wpm) * 1000;
-      
-      rsvpInterval = setInterval(() => {
-        if (!isScrolling) return;
-        
+      if (rsvpInterval) clearTimeout(rsvpInterval);
+      runRSVPLoop();
+    }
+
+    function runRSVPLoop() {
+      if (!isScrolling) return;
+
+      highlightActiveWord();
+
+      // WPM formula: 80 + (scrollSpeed * 25)
+      const wpm = 80 + (scrollSpeed * 25);
+      const baseIntervalMs = (60 / wpm) * 1000;
+
+      // Calculate dynamic interval for the CURRENT active word
+      const activeWord = rsvpWords[currentWordIndex];
+      let intervalMs = baseIntervalMs;
+
+      if (activeWord) {
+        // Pause on sentence endings: . ? !
+        if (/[.?!]/.test(activeWord)) {
+          intervalMs += 450; // generous breathing pause
+        }
+        // Pause on clauses: , : ; —
+        else if (/[,:;—]/.test(activeWord)) {
+          intervalMs += 220; // short clause break pause
+        }
+
+        // Pause on power words to allow emphasis
+        if (isPowerWord(activeWord)) {
+          intervalMs *= 1.25; // extend duration by 25%
+        }
+
+        // Faster pace on ultra-short articles/conjunctions
+        const cleanWord = activeWord.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()—?]/g,"");
+        if (cleanWord.length <= 3 && ['a', 'an', 'the', 'of', 'to', 'in', 'is', 'it', 'on', 'at', 'by'].includes(cleanWord)) {
+          intervalMs *= 0.75; // speed up by 25%
+        }
+      }
+
+      // Proceed to next word after this custom dynamic duration
+      rsvpInterval = setTimeout(() => {
         currentWordIndex++;
         if (currentWordIndex >= rsvpWords.length) {
           stopRSVP();
           isScrolling = false;
           return;
         }
-        
-        highlightActiveWord();
+        runRSVPLoop();
       }, intervalMs);
     }
 
     function stopRSVP() {
       if (rsvpInterval) {
-        clearInterval(rsvpInterval);
+        clearTimeout(rsvpInterval);
         rsvpInterval = null;
       }
     }

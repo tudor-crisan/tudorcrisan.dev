@@ -58,27 +58,57 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
     return activeScript.fullText.trim().split(/\s+/).filter(w => w.length > 0);
   }, [activeScript]);
 
-  // Word-by-Word RSVP Playback Loop
+  // Word-by-Word RSVP Playback Loop with Dynamic speech pacing and slower base WPM
   useEffect(() => {
     if (!isPlaying || !isFullscreen || !activeScript || rsvpWords.length === 0) return;
 
-    // WPM = 160 + speed * 45
-    const wpm = 160 + speed * 45;
-    const intervalMs = (60 / wpm) * 1000;
+    let timeoutId: NodeJS.Timeout;
 
-    const timer = setInterval(() => {
-      setCurrentWordIndex((prev) => {
-        const next = prev + 1;
-        if (next >= rsvpWords.length) {
-          setIsPlaying(false);
-          return prev;
+    const runLoop = (index: number) => {
+      // WPM = 80 + speed * 25 (half of previous speed by default)
+      const wpm = 80 + speed * 25;
+      const baseIntervalMs = (60 / wpm) * 1000;
+
+      const activeWord = rsvpWords[index];
+      let intervalMs = baseIntervalMs;
+
+      if (activeWord) {
+        // Pause on sentence endings: . ? !
+        if (/[.?!]/.test(activeWord)) {
+          intervalMs += 450; // generous breathing pause
         }
-        return next;
-      });
-    }, intervalMs);
+        // Pause on clauses: , : ; —
+        else if (/[,:;—]/.test(activeWord)) {
+          intervalMs += 220; // clause phrasing pause
+        }
 
-    return () => clearInterval(timer);
-  }, [isPlaying, isFullscreen, speed, activeScript, rsvpWords]);
+        // Pause on power words to allow emphasis
+        if (isPowerWord(activeWord)) {
+          intervalMs *= 1.25; // extend duration by 25%
+        }
+
+        // Faster pace on ultra-short articles/conjunctions
+        const cleanWord = activeWord.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()—?]/g,"");
+        if (cleanWord.length <= 3 && ["a", "an", "the", "of", "to", "in", "is", "it", "on", "at", "by"].includes(cleanWord)) {
+          intervalMs *= 0.75; // speed up by 25%
+        }
+      }
+
+      timeoutId = setTimeout(() => {
+        const nextIndex = index + 1;
+        if (nextIndex >= rsvpWords.length) {
+          setIsPlaying(false);
+          return;
+        }
+        setCurrentWordIndex(nextIndex);
+        runLoop(nextIndex);
+      }, intervalMs);
+    };
+
+    runLoop(currentWordIndex);
+
+    return () => clearTimeout(timeoutId);
+  }, [isPlaying, isFullscreen, speed, activeScript, rsvpWords, currentWordIndex]);
 
   // Handle Fullscreen UI instructions fade-out
   useEffect(() => {
@@ -163,6 +193,9 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         className="fixed inset-0 bg-black text-white z-[99999] overflow-hidden flex flex-col justify-center items-center cursor-pointer select-none font-sans"
         style={{ backgroundColor: "#000000" }}
       >
+        {/* Replicated Home Hero Profile Card Outer Neon Glow Background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-tr from-primary to-secondary rounded-[2.5rem] opacity-30 blur-2xl animate-pulse pointer-events-none z-0" />
+
         {/* Animated background glow spheres matching home hero section */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-14">
           <div className="absolute top-[25%] left-[15%] w-[480px] h-[480px] rounded-full bg-[#00e5ff] blur-[120px] animate-pulse-slow" />
@@ -174,8 +207,15 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
           <div className="w-full max-w-5xl h-[75vh] overflow-y-auto px-8 py-[35vh] flex flex-wrap content-center justify-center gap-x-5 gap-y-4 scroll-behavior-smooth scrollbar-none select-none scroll-smooth relative z-10">
             {rsvpWords.map((word, idx) => {
               const isPower = isPowerWord(word);
+              const isCapitalized = /^[A-Z]/.test(word) && idx > 0;
               const isActive = idx === currentWordIndex;
               const isPast = idx < currentWordIndex;
+
+              let scaleFactor = 1.0;
+              if (isPower) scaleFactor = 1.25;
+              else if (isCapitalized) scaleFactor = 1.1;
+
+              const wordFontSize = Math.round(fontSize * scaleFactor);
 
               return (
                 <span
@@ -189,7 +229,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                       : "opacity-[0.85] font-bold"
                   }`}
                   style={{
-                    fontSize: `${fontSize}px`,
+                    fontSize: `${wordFontSize}px`,
                     letterSpacing: "-1px",
                     lineHeight: "1.2",
                     ...(isActive
