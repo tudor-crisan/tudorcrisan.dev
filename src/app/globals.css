@@ -277,3 +277,12 @@ html.v2[data-theme='dark'] {
   animation: pulse-slow 10s infinite ease-in-out alternate;
 }
 
+@keyframes bounce-bar {
+  0% {
+    height: 6px;
+  }
+  100% {
+    height: 30px;
+  }
+}
+

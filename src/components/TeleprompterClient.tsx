@@ -193,6 +193,14 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         className="fixed inset-0 bg-black text-white z-[99999] overflow-hidden flex flex-col justify-center items-center cursor-pointer select-none font-sans"
         style={{ backgroundColor: "#000000" }}
       >
+        {/* Top visual timeline progress bar */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-white/[0.03] z-50 pointer-events-none">
+          <div 
+            className="h-full bg-gradient-to-r from-primary to-[#00b8cc] transition-all duration-300 shadow-[0_0_12px_rgba(0,229,255,0.6)]"
+            style={{ width: `${rsvpWords.length > 0 ? (currentWordIndex / rsvpWords.length) * 100 : 0}%` }}
+          />
+        </div>
+
         {/* Replicated Tudor Profile Photo Glow - Scaled down for perfect black edge boundaries */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-gradient-to-tr from-primary to-secondary rounded-[2.5rem] opacity-[0.12] blur-3xl animate-pulse pointer-events-none z-0" />
 
@@ -204,7 +212,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
 
         {/* Mode 1: Sentence-based RSVP View */}
         {mode === "scroll" && (
-          <div className="w-full max-w-[900px] h-[75vh] overflow-y-auto px-24 py-[35vh] flex flex-wrap content-center justify-center gap-x-4 gap-y-3 scroll-behavior-smooth scrollbar-none select-none scroll-smooth relative z-10">
+          <div className="w-full max-w-[900px] h-[75vh] overflow-y-auto px-24 py-[35vh] flex flex-wrap content-center justify-center gap-x-4 gap-y-5 scroll-behavior-smooth scrollbar-none select-none scroll-smooth relative z-10">
             {rsvpWords.map((word, idx) => {
               const isPower = isPowerWord(word);
               const isCapitalized = /^[A-Z]/.test(word) && idx > 0;
@@ -223,7 +231,9 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                   ref={isActive ? activeWordRef : null}
                   className={`inline-block font-sans transition-all duration-300 ${
                     isActive
-                      ? "scale-[1.35] opacity-100 font-black"
+                      ? isPower
+                        ? "scale-[1.35] opacity-100 font-black bg-gradient-to-tr from-[#00e5ff]/5 to-[#ffaa00]/5 border border-[#00e5ff]/35 px-4 py-1.5 rounded-2xl -mx-2 shadow-[0_0_15px_rgba(0,229,255,0.05)]"
+                        : "scale-[1.35] opacity-100 font-black bg-white/[0.04] border border-white/[0.08] px-4 py-1.5 rounded-2xl -mx-2 shadow-[0_0_15px_rgba(255,255,255,0.03)]"
                       : isPast
                       ? "scale-[0.85] opacity-[0.10] blur-[1.5px]"
                       : "opacity-[0.7] font-bold"
@@ -279,6 +289,140 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
             </div>
           </div>
         )}
+
+        {/* Audio Visualizer Bar HUD (Simulated Pacing Indicator) */}
+        <div 
+          className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex items-end gap-1 h-8 opacity-40 pointer-events-none z-10 transition-opacity duration-500 ${
+            isPlaying ? "opacity-30" : "opacity-15"
+          }`}
+        >
+          {Array.from({ length: 18 }).map((_, i) => {
+            const heights = [12, 16, 24, 8, 14, 18, 28, 10, 6, 20, 22, 12, 16, 24, 8, 14, 18, 10];
+            const h = heights[i % heights.length];
+            return (
+              <div
+                key={i}
+                className="w-1 rounded-t-full bg-gradient-to-t from-primary to-secondary transition-all duration-300"
+                style={{
+                  height: isPlaying ? "auto" : `${h}px`,
+                  minHeight: "4px",
+                  maxHeight: "32px",
+                  animation: isPlaying ? `bounce-bar 1.2s infinite ease-in-out alternate` : "none",
+                  animationDelay: `${i * 0.08}s`,
+                }}
+              />
+            );
+          })}
+        </div>
+
+        {/* Floating HUD Controller Capsule */}
+        <div 
+          onClick={(e) => e.stopPropagation()}
+          className={`fixed bottom-24 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full bg-black/40 border border-white/10 backdrop-blur-lg flex items-center gap-6 z-50 select-none transition-all duration-500 hover:opacity-100 hover:scale-100 ${
+            isPlaying 
+              ? "opacity-0 scale-95 pointer-events-none hover:pointer-events-auto hover:opacity-100 hover:scale-100" 
+              : "opacity-100 scale-100"
+          }`}
+        >
+          {/* Back/Close Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsFullscreen(false);
+              setIsPlaying(false);
+              if (document.exitFullscreen) {
+                document.exitFullscreen().catch(() => {});
+              }
+            }}
+            className="p-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-white transition-all"
+            title="Exit Fullscreen"
+          >
+            <ArrowLeft size={16} />
+          </button>
+
+          <div className="h-4 w-[1px] bg-white/10" />
+
+          {/* Reset Progress */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              resetScript();
+            }}
+            className="p-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-white transition-all"
+            title="Reset Script"
+          >
+            <RotateCcw size={16} />
+          </button>
+
+          {/* Play/Pause Visual indicator */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsPlaying((prev) => !prev);
+            }}
+            className={`p-2.5 rounded-full transition-all ${
+              isPlaying 
+                ? "bg-amber-500/10 text-amber-400 border border-amber-500/20" 
+                : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+            }`}
+          >
+            {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+          </button>
+
+          <div className="h-4 w-[1px] bg-white/10" />
+
+          {/* Adjust Speed Panel inside HUD */}
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">Speed</span>
+            <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-lg p-0.5">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSpeed((s) => Math.max(1, s - 1));
+                }}
+                className="w-6 h-6 rounded flex items-center justify-center text-xs font-black hover:bg-white/10 text-muted-foreground hover:text-white"
+              >
+                -
+              </button>
+              <span className="px-1.5 text-xs font-black text-white">{speed}</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSpeed((s) => Math.min(10, s + 1));
+                }}
+                className="w-6 h-6 rounded flex items-center justify-center text-xs font-black hover:bg-white/10 text-muted-foreground hover:text-white"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          {/* Adjust Font Size Panel inside HUD */}
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">Size</span>
+            <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-lg p-0.5">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFontSize((s) => Math.max(16, s - 2));
+                }}
+                className="w-6 h-6 rounded flex items-center justify-center text-xs font-black hover:bg-white/10 text-muted-foreground hover:text-white"
+              >
+                -
+              </button>
+              <span className="px-1.5 text-xs font-black text-white">{fontSize}px</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFontSize((s) => Math.min(60, s + 2));
+                }}
+                className="w-6 h-6 rounded flex items-center justify-center text-xs font-black hover:bg-white/10 text-muted-foreground hover:text-white"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -291,16 +435,47 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
       <div className="container-custom max-w-6xl relative z-10">
         {/* Main Dashboard Header */}
         {!activeScript ? (
-          <div className="mb-12">
-            <span className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 block">
-              Creator tools
-            </span>
-            <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-none">
-              Reels <span className="text-primary-gradient v2-glow">Teleprompter.</span>
-            </h1>
-            <p className="text-muted-foreground text-lg font-medium max-w-xl">
-              Select a script from your script sheet to begin recording with optimized OLED layouts.
-            </p>
+          <div className="mb-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 block">
+                CREATOR ENGINE v2.0
+              </span>
+              <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-none">
+                Reels <span className="text-primary-gradient v2-glow">Teleprompter.</span>
+              </h1>
+              <p className="text-muted-foreground text-sm font-medium max-w-lg leading-relaxed mt-2">
+                Select a high-impact script to begin recording. The prompter will run at your ideal speech pace in full dark mode.
+              </p>
+            </div>
+
+            {/* Premium Creator HUD Stats */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full lg:w-auto min-w-[320px] lg:min-w-[450px]">
+              <div className="glass p-4 rounded-2xl border-white/5 bg-black/10 flex flex-col justify-center min-w-[100px]">
+                <span className="text-[8px] font-black text-muted-foreground uppercase tracking-widest mb-1">Scripts</span>
+                <span className="text-xl font-black text-white flex items-center gap-1.5 leading-none">
+                  <span className="inline-block w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  {scripts.length}
+                </span>
+              </div>
+              <div className="glass p-4 rounded-2xl border-white/5 bg-black/10 flex flex-col justify-center min-w-[100px]">
+                <span className="text-[8px] font-black text-muted-foreground uppercase tracking-widest mb-1">Base WPM</span>
+                <span className="text-xl font-black text-white flex items-baseline gap-0.5 leading-none">
+                  155 <span className="text-[9px] text-primary font-black uppercase">WPM</span>
+                </span>
+              </div>
+              <div className="glass p-4 rounded-2xl border-white/5 bg-black/10 flex flex-col justify-center min-w-[100px]">
+                <span className="text-[8px] font-black text-muted-foreground uppercase tracking-widest mb-1">Pacing</span>
+                <span className="text-xs font-black text-emerald-400 uppercase tracking-widest leading-none">
+                  Perfect
+                </span>
+              </div>
+              <div className="glass p-4 rounded-2xl border-white/5 bg-black/15 flex flex-col justify-center min-w-[100px] border border-primary/20 shadow-[0_0_15px_rgba(0,229,255,0.05)]">
+                <span className="text-[8px] font-black text-[#00e5ff] uppercase tracking-widest mb-1">Glare Guard</span>
+                <span className="text-xs font-black text-[#00e5ff] uppercase tracking-widest leading-none">
+                  OLED safe
+                </span>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
