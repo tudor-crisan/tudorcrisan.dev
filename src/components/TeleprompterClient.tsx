@@ -55,7 +55,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
   // Split script words dynamically
   const rsvpWords = React.useMemo(() => {
     if (!activeScript) return [];
-    return activeScript.fullText.trim().split(/\s+/).filter(w => w.length > 0);
+    return activeScript.fullText.trim().split(/\s+/).filter(w => w.length > 0 && !/^[-—–•*]+$/.test(w));
   }, [activeScript]);
 
   // Word-by-Word RSVP Playback Loop with Dynamic speech pacing and slower base WPM
@@ -229,19 +229,17 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                 <span
                   key={idx}
                   ref={isActive ? activeWordRef : null}
-                  className={`inline-block font-sans transition-all duration-300 ${
+                  className={`inline-block font-sans transition-all duration-200 origin-center ${
                     isActive
-                      ? isPower
-                        ? "scale-[1.35] opacity-100 font-black bg-gradient-to-tr from-[#00e5ff]/5 to-[#ffaa00]/5 border border-[#00e5ff]/35 px-4 py-1.5 rounded-2xl -mx-2 shadow-[0_0_15px_rgba(0,229,255,0.05)]"
-                        : "scale-[1.35] opacity-100 font-black bg-white/[0.04] border border-white/[0.08] px-4 py-1.5 rounded-2xl -mx-2 shadow-[0_0_15px_rgba(255,255,255,0.03)]"
+                      ? "scale-[1.12] opacity-100 font-black"
                       : isPast
-                      ? "scale-[0.85] opacity-[0.10] blur-[1.5px]"
-                      : "opacity-[0.7] font-bold"
+                      ? "scale-[0.88] opacity-[0.10] blur-[1px]"
+                      : "scale-[1.0] opacity-[0.65] font-bold"
                   }`}
                   style={{
                     fontSize: `${wordFontSize}px`,
                     letterSpacing: "-0.5px",
-                    lineHeight: "1.25",
+                    lineHeight: "1.3",
                     ...(isActive
                       ? isPower
                         ? {
@@ -249,11 +247,11 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent",
                             backgroundClip: "text",
-                            filter: "drop-shadow(0 0 15px rgba(0, 229, 255, 0.90)) drop-shadow(0 0 25px rgba(255, 170, 0, 0.60))",
+                            filter: "drop-shadow(0 0 12px rgba(0, 229, 255, 0.85)) drop-shadow(0 0 20px rgba(255, 170, 0, 0.55))",
                           }
                         : {
                             color: "#ffffff",
-                            textShadow: "0 0 20px rgba(255, 255, 255, 0.80)",
+                            textShadow: "0 0 15px rgba(255, 255, 255, 0.80)",
                           }
                       : {
                           color: "#ffffff",

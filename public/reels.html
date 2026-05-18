@@ -352,11 +352,13 @@
     .rsvp-word {
       display: inline-block;
       font-size: 38px; /* decreased default base font size to prevent visual congestion */
-      line-height: 1.25;
+      line-height: 1.3;
       font-weight: 700;
-      transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
-      opacity: 0.7;
+      transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+      opacity: 0.65;
       letter-spacing: -0.5px;
+      transform: scale(1.0);
+      transform-origin: center;
     }
 
     /* Regular non-power words are white */
@@ -373,19 +375,19 @@
     /* Words that are already read are dimmed and slightly blurred */
     .rsvp-word.word-past {
       opacity: 0.10 !important;
-      transform: scale(0.85); /* shrink more when read to maximize optical separation */
-      filter: blur(1.5px);
+      transform: scale(0.88); /* shrink slightly via visual transform only (layout-stable) */
+      filter: blur(1px);
     }
 
-    /* Active highlighted word growing dynamically */
+    /* Active highlighted word growing dynamically via transform (layout-stable) */
     .rsvp-word.word-active {
       opacity: 1.0 !important;
-      transform: scale(1.35) !important; /* grows dynamically to pop on screen! */
+      transform: scale(1.12) !important; /* visual-only scale, completely prevents text reflow */
       font-weight: 900;
     }
 
     .rsvp-word.word-active.reg-word {
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.80);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.80);
     }
 
     /* Gradient glow appears rarely - ONLY on the single active power word when active */
@@ -394,7 +396,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.90)) drop-shadow(0 0 25px rgba(255, 170, 0, 0.60));
+      filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.85)) drop-shadow(0 0 20px rgba(255, 170, 0, 0.55));
     }
 
     /* Background glow movement spheres */
@@ -1062,7 +1064,7 @@
         fullText += " " + seg.innerText;
       });
       
-      rsvpWords = fullText.trim().split(/\s+/).filter(w => w.length > 0);
+      rsvpWords = fullText.trim().split(/\s+/).filter(w => w.length > 0 && !/^[-—–•*]+$/.test(w));
       currentWordIndex = 0;
 
       // Render all words into the viewport
