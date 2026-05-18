@@ -35,7 +35,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
   const [activeScript, setActiveScript] = useState<Script | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(3);
-  const [fontSize, setFontSize] = useState(80); // in pixels
+  const [fontSize, setFontSize] = useState(38); // in pixels
   const [mode, setMode] = useState<"scroll" | "step">("scroll");
   const [currentStep, setCurrentStep] = useState<"hook" | "body" | "cta" | "done">("hook");
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -193,18 +193,18 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
         className="fixed inset-0 bg-black text-white z-[99999] overflow-hidden flex flex-col justify-center items-center cursor-pointer select-none font-sans"
         style={{ backgroundColor: "#000000" }}
       >
-        {/* Replicated Home Hero Profile Card Outer Neon Glow Background */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-tr from-primary to-secondary rounded-[2.5rem] opacity-30 blur-2xl animate-pulse pointer-events-none z-0" />
+        {/* Replicated Tudor Profile Photo Glow - Scaled down for perfect black edge boundaries */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-gradient-to-tr from-primary to-secondary rounded-[2.5rem] opacity-[0.12] blur-3xl animate-pulse pointer-events-none z-0" />
 
         {/* Animated background glow spheres matching home hero section */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-14">
-          <div className="absolute top-[25%] left-[15%] w-[480px] h-[480px] rounded-full bg-[#00e5ff] blur-[120px] animate-pulse-slow" />
-          <div className="absolute bottom-[20%] right-[15%] w-[380px] h-[380px] rounded-full bg-[#ffaa00] blur-[120px] animate-pulse-slow" style={{ animationDelay: "2s" }} />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-[0.08]">
+          <div className="absolute top-[30%] left-[20%] w-[280px] h-[280px] rounded-full bg-[#00e5ff] blur-[80px] animate-pulse-slow" />
+          <div className="absolute bottom-[25%] right-[20%] w-[220px] h-[220px] rounded-full bg-[#ffaa00] blur-[80px] animate-pulse-slow" style={{ animationDelay: "2s" }} />
         </div>
 
         {/* Mode 1: Sentence-based RSVP View */}
         {mode === "scroll" && (
-          <div className="w-full max-w-5xl h-[75vh] overflow-y-auto px-8 py-[35vh] flex flex-wrap content-center justify-center gap-x-5 gap-y-4 scroll-behavior-smooth scrollbar-none select-none scroll-smooth relative z-10">
+          <div className="w-full max-w-[900px] h-[75vh] overflow-y-auto px-24 py-[35vh] flex flex-wrap content-center justify-center gap-x-4 gap-y-3 scroll-behavior-smooth scrollbar-none select-none scroll-smooth relative z-10">
             {rsvpWords.map((word, idx) => {
               const isPower = isPowerWord(word);
               const isCapitalized = /^[A-Z]/.test(word) && idx > 0;
@@ -223,15 +223,15 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                   ref={isActive ? activeWordRef : null}
                   className={`inline-block font-sans transition-all duration-300 ${
                     isActive
-                      ? "scale-[1.16] opacity-100 font-black"
+                      ? "scale-[1.35] opacity-100 font-black"
                       : isPast
-                      ? "scale-[0.94] opacity-[0.12] blur-[1px]"
-                      : "opacity-[0.85] font-bold"
+                      ? "scale-[0.85] opacity-[0.10] blur-[1.5px]"
+                      : "opacity-[0.7] font-bold"
                   }`}
                   style={{
                     fontSize: `${wordFontSize}px`,
-                    letterSpacing: "-1px",
-                    lineHeight: "1.2",
+                    letterSpacing: "-0.5px",
+                    lineHeight: "1.25",
                     ...(isActive
                       ? isPower
                         ? {
@@ -239,11 +239,11 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent",
                             backgroundClip: "text",
-                            filter: "drop-shadow(0 0 18px rgba(0, 229, 255, 0.95)) drop-shadow(0 0 35px rgba(255, 170, 0, 0.7))",
+                            filter: "drop-shadow(0 0 15px rgba(0, 229, 255, 0.90)) drop-shadow(0 0 25px rgba(255, 170, 0, 0.60))",
                           }
                         : {
                             color: "#ffffff",
-                            textShadow: "0 0 25px rgba(255, 255, 255, 0.85)",
+                            textShadow: "0 0 20px rgba(255, 255, 255, 0.80)",
                           }
                       : isPower
                       ? {
@@ -251,7 +251,7 @@ export default function TeleprompterClient({ scripts }: TeleprompterClientProps)
                           WebkitBackgroundClip: "text",
                           WebkitTextFillColor: "transparent",
                           backgroundClip: "text",
-                          filter: "drop-shadow(0 0 10px rgba(0, 229, 255, 0.3))",
+                          filter: "drop-shadow(0 0 8px rgba(0, 229, 255, 0.25))",
                         }
                       : {
                           color: "#ffffff",
